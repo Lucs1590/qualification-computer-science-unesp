@@ -1,0 +1,97 @@
+\newpage
+\section{Segmentação de Imagens}
+Assim, a tarefa da segmentação de imagens é treinar uma rede neural para produzir uma máscara da imagem em pixels. Isso ajuda a entender a imagem em um nível muito mais baixo, isto é, o nível de pixel. A segmentação de imagens tem muitas aplicações em imagens médicas, carros autônomos e imagens de satélite, para citar alguns.
+semantic segmentation will focus on classifying all the people as a single instance. Instance segmentation, on the other hand. will identify each of these people individually.
+- detecta com precisão, diferente de colocar apenas bounding boxes
+-- Traffic Control Systems
+-- Self Driving Cars
+-- Locating objects in satellite images
+
+
+\subsection{Métodos e Técnicas Tradicionais}
+\subsubsection{Segmentação Baseada em Regiões}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+    \item Threshold Segmentation;
+    \item Falar de otsu.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+If we want to divide the image into two regions (object and background), we define a single threshold value. This is known as the global threshold.
+If we have multiple objects along with the background, we must define multiple thresholds. These thresholds are collectively known as the local threshold.
+
+Vantagens
+Calculations are simpler
+Fast operation speed
+When the object and background have high contrast, this method performs really well
+
+Desvantagens
+When we don’t have significant grayscale difference, or there is an overlap of the grayscale pixel values, it becomes very difficult to get accurate segments.
+
+
+\subsubsection{Segmentação por Bordas}
+The edges can be considered as the discontinuous local features of an image.
+Now the question is how can we detect these edges? This is where we can make use of filters and convolutions. as quais foram exploradas na seção \ref{deep:CNN}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+    \item Citar sobel e laplacian (Olhar o livro do predini para poder citar);
+    \item Colocar imagem de exemplo (https://colab.research.google.com/drive/1pnir$_$b3kSNHaycmmKgYzf8IOdOFbtOA6?usp=sharing) no final.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Segmentação Baseada em Agrupamentos}
+Clustering is the task of dividing the population (data points) into a number of groups, such that data points in the same groups are more similar to other data points in that same group than those in other groups. These groups are known as clusters.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+    \item Citar K-means e buscar referências;
+    \item usar o que escrevi em \cite{Carneiro2021};
+    \item colocar imagem de exemplo (https://colab.research.google.com/drive/1pnir$_$b3kSNHaycmmKgYzf8IOdOFbtOA6?usp=sharing) no final.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Vantagens
+The key advantage of using k-means algorithm is that it is simple and easy to understand. We are assigning the points to the clusters which are closest to them.
+k-means works really well when we have a small dataset. It can segment the objects in the image and give impressive results.
+
+Desvantagens
+But the algorithm hits a roadblock when applied on a large dataset (more number of images).
+It looks at all the samples at every iteration, so the time taken is too high.
+
+
+\subsubsection{Método \textit{Watershed}}
+
+
+\subsubsection{Mask R-CNN}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+    \item Ler site (https://www.analyticsvidhya.com/blog/2019/07/computer-vision-implementing-mask-r-cnn-image-segmentation/) e tirar mais informações;
+    \item citar \cite{He2020};
+    \item colocar imagem do modelo (https://cdn.analyticsvidhya.com/wp-content/uploads/2019/03/Mask-R-CNN.png) no final e conferir autoria (\cite{He2020}) para citar.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+that can create a pixel-wise mask for each object in an image.
+Mask R-CNN is an extension of the popular Faster R-CNN object detection architecture.
+The Faster R-CNN method generates two things for each object in the image:
+ - Its class
+ - The bounding box coordinates
+Mask R-CNN adds a third branch to this which outputs the object mask as well.
+It also returns the mask for each proposal.
+Mask R-CNN is the current state-of-the-art for image segmentation and runs at 5 fps.
+
+
+\subsection{Considerações Finais da Seção}
+\begin{table}[!h]
+    \centering
+    \caption{Comparação entre os métodos}
+    \label{segment:table:1}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l|l|l|l}
+    \textbf{Algoritmo}                  & \textbf{Descrição} & \textbf{Vantagens} & \textbf{Desvantagens} \\ \hline
+    Segmentação Baseada em Regiões      &                    &                    &                       \\
+    Segmentação por Bordas              &                    &                    &                       \\
+    Segmentação Baseada em Agrupamentos &                    &                    &                       \\
+    Método\textit{ Watershed}           &                    &                    &                       \\
+    Mask R-CNN                          &                    &                    &                      
+    \end{tabular}}
+    
+    \vspace*{1 cm}
+    Fonte: autor.
+\end{table}

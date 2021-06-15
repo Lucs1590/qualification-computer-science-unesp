@@ -1,0 +1,244 @@
+\newpage
+\section{Segmentação Panóptica}
+A segmentação panóptica \cite{Kirillov2019a} é uma nova abordagem que caminha em busca da unificação dos métodos avançados de segmentações, sendo eles: segmentação semântica e segmentação de instancias \cite{He2020}, as quais foram descritas \textit{à priori}. Baseado nessa abordagem realiza-se a individualização de objetos e cenas, em que cada pixel das imagens passam a ter um \textit{label} de acordo com a classe do objeto em que o pixel se encontra, assim como um identificador que o diferenciará das demais instancias mapeadas.
+
+Dentre os objetos que podem ser diferenciados pela segmentação panóptica, duas categorias são nomeadas, porquanto o que as diferenciam, basicamente, é a determinação se o objeto é contável (como pessoa, carro, cachorro e afins), o qual  recebe a denominação de \textit{thing}, ou se o objeto é incontável e/ou amorfo (como céu, terrenos, paredes e semelhantes), o qual seria classificado como \textit{stuff} \cite{Kirillov2019a, Liu2019, Mohan2020}. Vale destacar que objetos pertencentes à classificação de \textit{stuff} não recebem um identificador, pelo fato de ser impossível conta-los ou distingui-los.
+
+Além disso, no trabalho desenvolvido por \cite{Kirillov2019a}, ficou claro que a rede teve dificuldades para realizar a segmentação de objetos pequenos, todavia estes resultados não são discrepantes na maioria das vezes, quando comparados as segmentações realizadas por humanos, embora os resultados humanos sejam superiores quando quantificados por métricas de \textit{Panoptic Quality} (PQ), \textit{Segmentation Quality} (SQ) e \textit{Recognition Quality} (RQ), em bases de dados que serão discorridas na seção \ref{panoptic:dataset}, como é possível observar na tabela \ref{panoptic:table:1} \cite{Kirillov2019a}.
+
+\begin{table}[!h]
+    \centering
+    \caption{\textit{Human vs. machine performance.}}
+    \label{panoptic:table:1}
+    \begin{tabular}{@{}l|lll@{}}
+    \textbf{Cityscape} & PQ   & SQ   & RQ   \\ \hline
+    human              & $69.6^{\substack{+2.5\\-2.7}}$ & $84.1^{\substack{+0.8\\-0.8}}$ &  $82.0^{\substack{+2.7\\-2.9}}$ \\
+    machine            & 61.2 & 80.9 & 74.4 \vspace*{0.3cm}\\
+    \textbf{ADE20k}    & PQ   & SQ   & RQ   \\ \hline
+    human              & $67.6^{\substack{+2.0\\-2.0}}$ & $85.7^{\substack{+0.6\\-0.6}}$ & $78.6^{\substack{+2.1\\-2.1}}$ \\
+    machine            & 35.6 & 74.4 & 43.2 \vspace*{0.3cm}\\
+    \textbf{Vistas}    & PQ   & SQ   & RQ   \\ \hline
+    human              & $57.7^{\substack{+1.9\\-2.0}}$ & $79.7^{\substack{+0.8\\-0.7}}$ & $71.6^{\substack{+2.2\\-2.3}}$ \\
+    machine            & 38.3 & 73.6 & 47.7
+    \end{tabular}
+
+    \vspace*{1 cm}
+    Fonte: retirado e adaptado de \cite{Kirillov2019a}.
+\end{table}
+
+A partir da imagem \ref{panoptic:fig:1} é possível observar as diferenciações realizadas entre as segmentações de instancias (\ref{panoptic:fig:1}\subref{panoptic:fig:1.1}), contando apenas com o encontro de objetos, a segmentação semântica (\ref{panoptic:fig:1}\subref{panoptic:fig:1.2}), compreendendo classes para cada pixel, mas não diferenciando instancias e, por fim, a segmentação panóptica (\ref{panoptic:fig:1}\subref{panoptic:fig:1.3}) abrangendo \textit{things} e \textit{stuffs}, separando cada uma das instancias, assim como determinando uma classe para cada pixel.
+
+\begin{figure}[H]
+   \caption{Segmentações modernas.}
+   \centering
+   \label{panoptic:fig:1}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=1.5in]{recursos/imagens/college_instance.png}
+        \caption{Segmentação de instancia.}
+        \label{panoptic:fig:1.1}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=1.5in]{recursos/imagens/college_semantic.png}
+        \caption{Segmentação semântica.}
+        \label{panoptic:fig:1.2}
+    \end{subfigure}%
+    ~ 
+    
+    \begin{subfigure}[t]{0.7\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{recursos/imagens/college_panoptic.png}
+        \caption{Segmentação panóptica.}
+        \label{panoptic:fig:1.3}
+    \end{subfigure}
+
+    Fonte: retirado e adaptado de \cite{Kumar2019}.
+\end{figure}
+
+Destarte, a segmentação panóptica caminha contribuindo para os avanços tecnológicos em relação ao entendimento de cenários, carros autônomos \cite{Liu2019}, além de realizar a aproximação do olhar e compreensão humana que é atingido desde a infância \cite{Mohan2020}.
+
+\subsection{Bases de dados}
+\label{panoptic:dataset}
+Mesmo com a amplitude de \textit{datasets} disponíveis para segmentação de imagens, no âmbito da segmentação panóptica faz-se necessário um cuidado para a escolha dos mesmos, visto que dentre os requisitos necessários, encontra-se a necessidade de anotação dos pixeis e uma identificação das diferentes instâncias, de modo que seja possível diferenciar \textit{things} e \textit{stuffs}.
+
+Dentre os \textit{datasets} trabalhados inicialmente por Kirillov \textit{et al.} \cite{Kirillov2019a}, vale destacar que três possuíam os requisitos necessários, concernindo ao Cityscapes \cite{Cordts2016}, ADE20k \cite{Zhou2016} e Mapillary Vistas \cite{Neuhold2017_ICCV}, mas destacando também a possibilidade de realizar um trabalho com COCO \cite{Lin2014} que havia sido anotada recentemente \cite{Kirillov2019a}.
+
+Após este trabalho, outros \textit{datasets} relacionados a segmentação panóptica foram desenvolvidos, dos quais é possível citar o trabalho de Mohan e Valada \cite{Mohan2020}, que acrescentou os \textit{datasets} KITTI \cite{Geiger2013} e Indian Driving Dataset (IDD) \cite{Varma2018} ao seu trabalho.
+
+Outra opção de \textit{datasets} consiste em uma implementação e uso de uma base de dados interna, como realizado no trabalho de Xiong \textit{et al.} \cite{Xiong2019}, que fez algo similar ao Cityscapes e obteve comportamentos parecidos quanto ao mesmo ou ao do COCO.
+
+De modo geral, a maior parte dos trabalhos realizados consistem em trabalhos com imagens de cidades, carros, metrópoles e afins, como é possível observar na figura \ref{panoptic:fig:3}. Os \textit{datasets} mais populares, logo, aqueles em que há uma preferência na escolha são COCO \cite{Caesar2016, Lin2014} e Cityscape \cite{Cordts2016}, como ocorre nos trabalhos \cite{Chen2019, DeGeus2019a, DeGeus2019, Hou2019, Liu2019, Xiong2019}. Vale frisar que as exceções quanto aos conteúdos dos \textit{datasets} também são encontradas em trabalhos de específicos ou datasets privados, como ocorre no trabalhos desenvolvido por Brünger \textit{et al.} \cite{Brunger2020}.
+
+\begin{figure}[H]
+   \caption{Imagens de \textit{datasets} de segmentação panóptica.}
+   \centering
+   \label{panoptic:fig:3}
+    \begin{subfigure}[t]{0.55\textwidth}
+        \centering
+        \includegraphics[height=1in]{recursos/imagens/kitti.jpg}
+        \caption{Imagem do KITTI \cite{Geiger2013}.}
+        \label{panoptic:fig:3.1}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=1.3in]{recursos/imagens/vistas.jpg}
+        \caption{Imagem do Mapillary Vistas \cite{Neuhold2017_ICCV}.}
+        \label{panoptic:fig:3.2}
+    \end{subfigure}%
+    ~ 
+    
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=1.3in]{recursos/imagens/cityscapes.jpg}
+        \caption{Imagem do Cityscapes \cite{Cordts2016}.}
+        \label{panoptic:fig:3.3}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=1.3in]{recursos/imagens/idd.jpg}
+        \caption{Imagem do IDD \cite{Varma2018}.}
+        \label{panoptic:fig:3.4}
+    \end{subfigure}
+
+    Fonte: retirado e adaptado de \cite{Mohan2020}.
+\end{figure}
+
+\subsection{Arquitetura}
+A arquitetura para a formação do modelo de segmentação panóptica, surgiu em um primeiro momento como proposta desenvolvida por Kirillov \textit{et al.} \cite{Kirillov2019a}, de modo que a comportava duas redes. A primeira das redes tinha o objetivo de realizar a segmentação de instancias e essa rede era a Mask R-CNN \cite{He2020}. A segunda rede, por sua vez, seria responsável pela realização da segmentação semântica, em que dentre as testadas o destaque foi para a rede PSPNet multi-scale \cite{Zhao2017}. A proposta do uso dessas redes dava forma para uma arquitetura robusta e poderosa \cite{Kirillov2019a} por trabalhar com redes consideradas estado da arte para a época.
+
+Todavia, após o termino da primeira rede para a realização de segmentação panóptica, outros trabalhos foram realizados, de modo que estes sugeriam novas configurações e levantamentos de pontos diferentes para cada individualidade das configurações adotadas.
+
+Em relação ao desenvolvedor da rede prógona, após os avanços de seus estudos, Kirilovv \textit{et al.} \cite{Kirillov2019} desenvolveu uma arquitetura que propunha a unificação de redes, sendo composta por uma rede Mask R-CNN com uma \hyperref[semantic:FCN]{FCN}, de sorte que esta unificação proporcionasse efetividade para a segmentação de instancias e leveza para a segmentação semântica, mas sem perdas em relação ao seu potencial da rede desenvolvida em seu trabalho anterior, segundo \cite{Kirillov2019}. Para realizar a junção dessas redes foi utilizado dos conceitos e estruturas de uma \textit{Feature Pyramid Network} (FPN) \cite{Lin2016}, um extrator de \textit{features} comum para quem deseja acurácia e desempenhos relevantes não só em relação a grandes objetos, mas também aos pequenos \cite{Lin2016} e assim suprindo uma das desvantagens pendentes na primeira configuração de arquitetura das redes para segmentação panóptica \cite{Kirillov2019, Kirillov2019a}. Destaca-se, ainda, que esta arquitetura com rede FPN trabalha com uma configuração \textit{top-down} com conexões laterais, de modo que torna-se possível realizar uma restauração das resoluções com valorosas informações semânticas. As representações de extração de características com estratégia \textit{bottom-up} e a adotada pela FPN - com conexões laterais - podem ser observadas na figura \ref{panoptic:fig:2}, respectivamente.
+
+\begin{figure}[H]
+   \caption{Extrações de características e FPN.}
+   \centering
+   \label{panoptic:fig:2}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=1in]{recursos/imagens/bottom-up.png}
+        \caption{Configuração \textit{bottom-up}.}
+        \label{panoptic:fig:2.1}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=1in]{recursos/imagens/FPN.png}
+        \caption{FPN.}
+        \label{panoptic:fig:2.2}
+    \end{subfigure}%
+
+    Fonte: retirado e adaptado de \cite{Lin2016}.
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Em relação a outras configurações, destacam-se trabalhos como os desenvolvidos por ...
+\begin{itemize}
+    \item Citar as arquiteturas:
+        \item \cite{Mohan2020} --> Estado da Arte
+        \item \cite{DeGeus2019a}
+        \item \cite{Xiong2019}
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Métricas}
+Em relação às métricas disponíveis para a avaliação de segmentações panópticas, vale ressaltar que em trabalhos anteriores aos desenvolvidos por Kirillov \textit{et al.} \cite{Kirillov2019a}, a realização da avaliação de \textit{things} e \textit{stuffs} era feita de modo distinto e independente (como \cite{Sun2014, Yao2012}), todavia com uma proposta que disponibilizasse o trato igualitário para os dois tipos de classificação, significado claro, além de fácil entendimento e implementação , Kirillov \textit{et al.} \cite{Kirillov2019a} elaborou o método de \textbf{\textit{Panoptic Quality} (PQ)} que mensurava a qualidade da segmentação realizada em relação ao \textit{ground truth}, que se efetivava  a partir da realização de dois requisitos: 1) encontro de segmentação e  2) calculo de PQ.
+
+A primeira das necessidades é cumprida apenas em segmentações que contam com técnicas de \textit{non-overlapping} para que seja possível encontrar uma única segmentação, como \cite{Neubeck2006}, e possuem um valor de \hyperref[semantic:IoU]{IoU} superior ou igual à 50\% da área em relação ao \textit{ground truth}, sendo esse valor adequado como parâmetro de limiar, sem que ofereça falsas segmentações e consiga trabalhar tanto com objetos grandes quanto com objetos pequenos, segundo \cite{Kirillov2019a}.
+
+Depois, a segunda das necessidades para a determinação de PQ conta com formulas que sugerem a unificação de métricas de SQ e RQ. Além disso, para a determinação dessa formula, faz-se necessário o uso de parâmetros que determinarão segmentações condizentes com o \textit{ground truth}, segmentações não encontradas em relação aos preditos e segmentações não encontradas em relação ao \textit{ground truth}, respectivamente sendo representados por verdadeiro positivo (VP), falsos positivos (FP) e falsos negativos (FN). Logo, a formula para determinação de PQ \cite{Kirillov2019a}, em que $p$ representa os preditos e $g$ representa o \textit{ground truth}, pode ser expressa por:
+
+\begin{equation}
+\label{panoptic:eq:1}
+    PQ = \frac{\sum _{(p,g) \in VP} IoU(p,g)}{|VP|+ \frac{1}{2}|FP| + \frac{1}{2}|FN|}
+\end{equation}
+
+O que remete, também, a uma multiplicação de métrica de qualidade para segmentação por métrica de qualidade para reconhecimento, quando dividida pela quantidade de classificações demarcadas como VP, podendo ser representada por uma segunda formula (\ref{panoptic:eq:2}), como sugere Kirillov \textit{et al.} \cite{Kirillov2019a}.
+
+\begin{equation}
+\label{panoptic:eq:2}
+   PQ = \underbrace{\frac{\sum _{(p,g) \in VP} IoU(p,g)}{|VP|}}_{SQ} \times \underbrace{\frac{|VP|}{|VP|+ \frac{1}{2}|FP| + \frac{1}{2}|FN|}}_{RQ}
+\end{equation}
+
+Assim, com a unificação desses parâmetros e formação da PQ, vantagens podem ser observadas quando comparada a métricas de AP (\ref{instance:AP}), por exemplo, que não podem ser utilizadas para segmentações semânticas, ou quando comparadas a métricas de IoU (\ref{semantic:IoU}) que não pode avaliar corretamente classes do tipo \textit{thing}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+ \item Falar sobre a métrica de PC (https://arxiv.org/pdf/1902.05093.pdf)
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Considerações Finais da Seção}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+    \item olhar os desafios destacados no artigo;
+    \item citar os problemas de problema de video \cite{Kim2020}.
+\end{itemize}
+
+\begin{itemize}
+    \item citar as redes em vez de colocar os nomes dos métodos;
+    \item verificar com o Prof. Denis se devo deixar nessa seção ou se devo enviar para a \ref{final:final}
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[!h]
+    \centering
+    \caption{Comparação de desempenho no \textit{dataset} COCO\cite{Lin2014}.}
+    \label{panoptic:table:2}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l|l|l|l|l|l|l|l}
+    \textbf{Métodos} &  \textbf{\textit{Backbone}}  &  \textbf{PQ} &  \textbf{PQ-\textit{Thing}}    &    \textbf{PQ-\textit{Stuff}} &  \textbf{SQ} &  \textbf{RQ} &  \textbf{PC}  \\ \hline
+    SOGNet          &  ResNet-50  \cite{He2016}     &   $43.7$     &  $50.6$                        &    $33.2$                     &  $78.7$      &   $53.5$     &   -       \\
+    UPSNet          &  ResNet-50  \cite{He2016}     &   $42.5$     &  $48.6$                        &    $33.4$                     &  -           &   -          &   -       \\
+    OANet           &  ResNet-101 \cite{He2016}     &   $41.3$     &  $50.4$                        &    $27.7$                     &  -           &   -          &   -       \\
+    OCFusion        &  ResNet-50  \cite{He2016}     &   $41.0$     &  $49.0$                        &    $29.0$                     &  $77.1$      &   $50.6$     &   -       \\
+    Panoptic FPN    &  ResNet-101 \cite{He2016}     &   $40.9$     &  $48.3$                        &    $29.7$                     &  -           &   -          &   -       \\
+    AUNet           &  ResNet-50  \cite{He2016}     &   $39.6$     &  $49.1$                        &    $25.2$                     &  -           &   -          &   -       \\
+    AdaptIS         &  ResNet-101 \cite{He2016}     &   $37.0$     &  $41.8$                        &    $29.9$                     &  -           &   -          &   -       \\
+    DeeperLab       &  Xception-71                  &   $34.3$     &  $37.5$                        &    $29.6$                     &  $77.1$      &   $43.1$     &   $56.8$ 
+    \end{tabular}}
+
+    \vspace*{1 cm}
+    Fonte: retirado e adaptado de \cite{AngLi}.
+\end{table}
+
+\begin{table}[!h]
+    \centering
+    \caption{Comparação de desemprenho no \textit{dataset} Cityscape\cite{Cordts2016}.}
+    \label{panoptic:table:3}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l|l|l|l|l|l|l|l}
+    \textbf{Métodos}  &    \textbf{\textit{Backbone}}       &  \textbf{PQ}        &  \textbf{PQ-\textit{Thing}}  &  \textbf{PQ-\textit{Stuff}}  & \textbf{SQ}  &  \textbf{RQ}      &     \textbf{PC}     \\ \hline
+    Panoptic(Merge)  &  -                  &  $61.2$       &  $66.4$             &  $54.0$                      &  $80.9$                      &  $74.4$      &  -           \\
+    AdaptIS          &  ResNet-101         &  $60.6$       &  $58.7$             &  $64.4$                      &  -                           &  -           &  -           \\
+    SOGNet           &  ResNet-50          &  $60.0$       &  $56.7$             &  $62.5$                      &  -                           &  -           &  -           \\
+    Seamless         &  ResNet-50          &  $59.8$       &  $53.4$             &  $64.5$                      &  -                           &  -           &  -           \\
+    UPSNet           &  ResNet-50          &  $59.3$       &  $54.6$             &  $62.7$                      &  $79.7$                      &  $73.0$      &  -           \\
+    TASCNet          &  ResNet-101         &  $59.2$       &  $56  $             &  $61.5$                      &  -                           &  -           &  -           \\
+    AUNet            &  ResNet-101         &  $59.0$       &  $54.8$             &  $62.1$                      &  -                           &  -           &  -           \\
+    Panoptic FPN     &  ResNet-101         &  $58.1$       &  $52.0$             &  $62.5$                      &  -                           &  -           &  -           \\
+    DeeperLab        &  Xception-71        &  $56.5$       &  -                  &  -                           &  -                           &  -           &  $75.6$      
+    \end{tabular}}
+
+    \vspace*{1 cm}
+    Fonte: retirado e adaptado de \cite{AngLi}.
+\end{table}
+
+\begin{table}[!h]
+    \centering
+    \caption{Comparação de desempenho no \textit{dataset} Mapillary\cite{Neuhold2017_ICCV}.}
+    \label{panoptic:table:4}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l|l|l|l|l|l|l|l}
+    \textbf{Métodos}  & \textbf{\textit{Backbone}}  & \textbf{PQ}  & \textbf{PQ-\textit{Thing}} & \textbf{PQ-\textit{Stuff}} &    \textbf{SQ}    &    \textbf{RQ} &    \textbf{PC}\\ \hline
+    Panoptic(Merge)  & -                           & $38.3$       & $41.8$                     & $35.7$                     & $73.6$            & $47.7$         & -         \\
+    Seamless         & ResNet-50                   & $37.2$       & $33.2$                     & $42.5$                     & -                 & -              & -         \\
+    AdaptIS          & ResNet-101                  & $33.4$       & $28.3$                     & $40.3$                     & -                 & -              & -         \\
+    TASCNet          & ResNet-101                  & $32.6$       & $31.3$                     & $34.4$                     & -                 & -              & -         \\
+    DeeperLab        & Xception-71                 & $32.0$       & -                          & -                          & -                 & -              & $55.3$    
+    \end{tabular}}
+
+    \vspace*{1 cm}
+    Fonte: retirado e adaptado de \cite{AngLi}.
+\end{table}
