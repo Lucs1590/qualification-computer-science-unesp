@@ -34,6 +34,7 @@ Assim, estando claro o conceito de segmentação de imagens, diversas técnicas 
 \subsection{Métodos e Técnicas Tradicionais}
 \label{segment:segment}
 \subsubsection{Segmentação Baseada em Regiões}
+\label{segment:region}
 
 Alguns tipos de segmentação comumente trabalham com a os valores dos pixeis, de modo que seja possível segregar áreas e regiões de interesse de regiões que não são possuem relevância. Dentre as diversas técnicas, vale destacas a técnica de \textbf{\textit{Threshold Segmentation}}, ou em português, segmentação limiar, a qual é desenvolvida e aplicada em diversos trabalhos \cite{Yanowitz1989}.
 
@@ -165,14 +166,24 @@ Now the question is how can we detect these edges? This is where we can make use
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{itemize}
     \item Citar sobel e laplacian (Olhar o livro do predini para poder citar);
-    \item Colocar imagem de exemplo (https://colab.research.google.com/drive/1pnir$_$b3kSNHaycmmKgYzf8IOdOFbtOA6?usp=sharing) no final.
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Segmentação Baseada em Agrupamentos}
-Clustering is the task of dividing the population (data points) into a number of groups, such that data points in the same groups are more similar to other data points in that same group than those in other groups. These groups are known as clusters.
 
-Posto isso, destaca-se o uso do K-means \cite{macqueen1967some, bock2008origins}, o qual é um método não supervisionado que realiza agrupamento de dados de um \textit{dataset} de acordo com as suas similaridades e em quantidades desejadas ($k$). Ou seja, o algoritmo gera um ponto inicial randômico como centroide para um determinado \textit{cluster} e depois tenta atribuir os demais dados do \textit{dataset} aos \textit{clusters} de acordo com a sua proximidade. Para isso, o algoritmo usa técnicas de distância euclidiana \cite{Mahmud2012ImprovementAverage}. Vale ressaltar que os pontos centroides são atualizados conforme as classificações que são feitas no algoritmo, e os mesmos param de atualizar quando o algoritmo cumpre seu objetivo, há poucas interações dos dados com diferentes \textit{clusters} ou através de um número fixo de interações \cite{dunham2006data}.
+Como o nome propõe, as segmentações baseadas em agrupamentos na esfera de visão computacional e processamento de imagens são compostas pela agregação de pixeis que possuem características similares em determinado espaço de características \cite{Yuheng2017ImageOverview}, no entanto a definição de agrupamento (ou \textit{clustering}) ainda não são concretas \cite{Yuheng2017ImageOverview}, haja vista que não é categorizada como segmentação por alguns autores, pois os agrupamentos são realizados em no espaço de medidas, enquanto a segmentação ocorre no domínio espacial da imagem \cite{Haralick1985}.
+
+Posto isso, destaca-se o uso do K-means \cite{macqueen1967some, bock2008origins}, o qual é um método não supervisionado que realiza agrupamento de dados de um \textit{dataset} de acordo com as suas similaridades e em quantidades desejadas ($k$). Ou seja, o algoritmo gera um ponto inicial randômico como centroide para um determinado \textit{cluster} e depois tenta atribuir os demais dados do \textit{dataset} aos \textit{clusters} de acordo com a sua proximidade. Para isso, o algoritmo usa técnicas de distância euclidiana \cite{Mahmud2012ImprovementAverage}. Vale ressaltar que os pontos centroides são atualizados conforme as classificações que são feitas no algoritmo, e os mesmos param de atualizar quando o algoritmo cumpre seu objetivo, há poucas interações dos dados com diferentes \textit{clusters} ou através de um número fixo de interações \cite{dunham2006data}, conforme representado no fluxograma da imagem \ref{segment:fig:6}, tendo que $n \in \mathbb{Z}$.
+
+\begin{figure}[H]
+    \centering
+    \caption{Fluxograma do algoritmo K-means.}
+    \includegraphics[width=1\linewidth]{recursos/imagens/image_seg/kmeans.png}
+    \label{segment:fig:6}
+
+    \vspace*{1 cm}
+    Fonte: do próprio autor.
+\end{figure}
 
 Na imagem \ref{segment:fig:5} é possível observar o uso do algoritmo K-means para agrupar as regiões da imagem, tendo que foi definido um valor de $k = 3$.
 
@@ -199,38 +210,32 @@ Na imagem \ref{segment:fig:5} é possível observar o uso do algoritmo K-means p
 \end{figure}
 
 
-\subsubsection{Método \textit{Watershed}}
+\subsubsection{Segmentação com Redes Neurais}
+\label{segment:neural}
 
-that can create a pixel-wise mask for each object in an image.
-Mask R-CNN is an extension of the popular Faster R-CNN object detection architecture.
-The Faster R-CNN method generates two things for each object in the image:
- - Its class
- - The bounding box coordinates
-Mask R-CNN adds a third branch to this which outputs the object mask as well.
-It also returns the mask for each proposal.
-Mask R-CNN is the current state-of-the-art for image segmentation and runs at 5 fps.
+As segmentações por meio de redes neurais, profundas (seção \ref{deep:deep}) ou por meio das redes convolucionais (seção \ref{deep:CNN}) regularmente são confundidas com a área de detecção de objetos \cite{Ghosh2019} pela característica de demarcação e pelo uso das \textit{bounding box}, não obstante vale destacar que para segmentações de imagens as redes mais utilizadas sã as CNNs, de modo que está consegue trabalhar com a extração das características mais importantes de determinado \textit{frame} e, em seguida, organiza-las, sendo eficiente não somente em tarefas de detecção, localização e rastreamento de objetos, mas também, como neste caso, segmentação de imagens \cite{Ghosh2019}.
+
+Métodos mais modernos que seguem essa linha serão explicados detalhadamente nas seções \ref{semantic:semantic}, \ref{instance:instance} e \ref{panoptic:panoptic}.
 
 
 \subsection{Considerações Finais da Seção}
-Na seção \ref{segment:segment} foi comentado sobre os algoritmos comumente utilizados para segmentações mais simples, chegando no nível de complexidade de técnicas de \textit{machine learning} como o K-means.
 
-Na tabela \ref{segment:table:1} é possivel visualizar as técnicas comentadas no decorrer da seção assim como uma breve descrição de seus usos, suas vantagens e desvantagens.
+Na tabela \ref{segment:table:1} é possível visualizar as técnicas comentadas no decorrer da seção assim como uma breve descrição de seus usos, suas vantagens e desvantagens.
 
-\begin{table}[!h]
+\begin{table}[!ht]
     \centering
-    \caption{Comparação entre os métodos tradicionais}
+    \caption{Comparação entre os métodos de segmentações tradicionais.}
     \label{segment:table:1}
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{l|l|l|l}
-    \textbf{Algoritmo}                  & \textbf{Descrição} & \textbf{Vantagens} & \textbf{Desvantagens} \\ \hline
-    Segmentação Baseada em Regiões      &                    & Calculations are simpler, Fast operation speed, When the object and background have high contrast, this method performs really well          & When we don’t have significant grayscale difference, or there is an overlap of the grayscale pixel values, it becomes very difficult to get accurate segments. \\
-    Segmentação por Bordas              &                    &                    &                       \\
-    Segmentação Baseada em Agrupamentos &                    & The key advantage of using k-means algorithm is that it is simple and easy to understand. We are assigning the points to the clusters which are closest to them and k-means works really well when we have a small dataset. It can segment the objects in the image and give impressive results.                                               & But the algorithm hits a roadblock when applied on a large dataset (more number of images). It looks at all the samples at every iteration, so the time taken is too high. \\
-    Método\textit{ Watershed}           &                    &                    &                                       
-    \end{tabular}}
-    
+    \begin{tabular}{p{3.8cm}|p{3.8cm}|p{3.8cm}|p{3.8cm}}
+    \textbf{Técnica}                  & \textbf{Descrição}                                                                                  & \textbf{Vantagens}                                                                                                                                                                                      & \textbf{Desvantagens}                                                                                                                                                       \\ \hline
+    Segmentação Baseada em Regiões      & Concentra-se em encontrar e agrupar valores semelhantes sendo separados por um limiar.              & \begin{tabular}[c]{@{}p{3.8cm}@{}}- Possui baixa complexidade e alto desempenho;\\ - Não requer pré-processamento;\\ - Recomendado para alto contraste entre fundo e objeto de interesse.\end{tabular}         & - Omissão de detalhes quando não há um contraste significante.                                                                                                              \\ \hline
+    Segmentação por Bordas              & Realizado com base na detecção de descontinuidade, detectando bordas e definir um limite do objeto. & - Recomendável para imagens com bons contrastes entre os objetos.                                                                                                                                       & - Perda de detalhes para imagens com muitas bordas, ruidosas ou com baixo contraste entre os objetos.                                                                       \\ \hline
+    Segmentação Baseada em Agrupamentos & Divide os pixels da imagem em k clusters homogêneos e  exclusivos obtendo, assim, as segmentações.  & \begin{tabular}[c]{@{}p{3.8cm}@{}}- Conceitos já estabelecido;\\ - Recomendado para aplicações em tempo real;\\ - Bom desempenho para pequenos datasets;\\ - Não precisa de tempo de treinamento.\end{tabular} & \begin{tabular}[c]{@{}p{3.8cm}@{}}- Pode demandar muito tempo para encontrar a minimização da função de custo;\\ - Não é adequado para agrupar clusters não convexos.\end{tabular} \\ \hline
+    Segmentação com Redes Neurais             & Normalmente relacionado a algoritmos de aprendizado profundo e CNNs.                                & \begin{tabular}[c]{@{}p{3.8cm}@{}}- Conceito já estabelecido;\\ - Abordagem simples e flexível;\\ - Disponibilizado por bibliotecas prontas em Python.\end{tabular}                                            & - O treinamento do modelo para consome muito tempo e recursos.                                                                                                              \\ \hline
+    \end{tabular}
+
     \vspace*{1 cm}
-    Fonte: autor.
+    Fonte: do próprio autor.
 \end{table}
 
-Porém como comentado por \cite{Ghosh2019} e por \cite{Minaee2021} ...
+Na seção \ref{segment:segment} foi comentado sobre os algoritmos comumente utilizados para segmentações, trabalhando desde algoritmos mais simples como o de \textit{threshold segmentation} (\ref{segment:region}) até o nível de complexidade de técnicas de redes neurais artificias \ref{segment:neural}. Porém como comentado por \cite{Ghosh2019} e por \cite{Minaee2021}, hodiernamente há segmentações que utilizam de \textit{deep learning} e possuem ótimas abordagens, as quais estamos denominando como \textbf{segmentações modernas} e serão exploradas nas próximas seções.
