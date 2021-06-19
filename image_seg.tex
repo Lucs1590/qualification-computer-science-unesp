@@ -1,4 +1,5 @@
 \newpage
+\clearpage
 \section{Segmentação de Imagens}
 O processo de segmentação de imagens é uma área que pertence a categorias maiores de visão computacional e processamento digital de imagens, sendo que esta possui como objetivo principal a distinção de áreas ou propriedades desejadas \cite{Haralick1985, Yuheng2017ImageOverview, Ghosh2019} de um determinado \textit{frame}, assim, sendo possível realizar análises mais precisas ou separar apenas as áreas que são convenientes e de interesse, de acordo com o objetivo da análise.
 
@@ -160,14 +161,124 @@ P(R) = \left\{\begin{matrix}
 
 Por fim, ainda sobre o aspecto de crescimento de região, salienta-se que é de extrema importância a determinação das sementes e do valor limiar \cite{Yuheng2017ImageOverview,pedrini2008analise}, assim como as condições para determinação de sistema de cores e canais são semelhantes as de \textit{threshold segmentation}.
 
+
 \subsubsection{Segmentação por Bordas}
-The edges can be considered as the discontinuous local features of an image.
-Now the question is how can we detect these edges? This is where we can make use of filters and convolutions. as quais foram exploradas na seção \ref{deep:CNN}.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{itemize}
-    \item Citar sobel e laplacian (Olhar o livro do predini para poder citar);
-\end{itemize}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Em meio as categorias de segmentação tradicional encontra-se em especifico as segmentações por descontinuidade, com subcategorias de segmentação por pontos, retas, junções e , finalmente, por bordas \cite{pedrini2008analise}. Correntemente, é a partir dessas segmentações que são construídos os filtros convolucionais que foram exploradas na seção \ref{deep:CNN}.
+
+Sendo assim, é de referir que as bordas são definidas como limites que possuem uma contrastes discrepantes em relação ao seus níveis de cinza  ou que separam duas regiões homogêneas \cite{pedrini2008analise,Yuheng2017ImageOverview}, algo que não é tão perceptível em imagens reais, considerando o fato de que os dispositivos de captura costumeiramente realiza a suavização e o borramento das bordas.
+
+Para as questões de detecção dessas bordas são utilizados cálculos de derivadas, assim  como a representação por meio de matrizes fazem-se comuns \cite{pedrini2008analise, muthukrishnan2011edge}, citando que um dos mais conhecidos filtros de primeira ordem é o \textbf{filtro Sobel} e para segunda ordem, cita-se o filtro laplaciano.
+
+O operador Sobel, em suma, pode introduzido ao assimilar com uma operação de média local, em que este pode calcular bordas horizontais e verticais ou realizar a combinação de ambas. Tendo que diferenças horizontais entre os pontos são utilizadas para detecção de bordas verticais e que diferenças verticais entre os pontos são usadas para detecção de bordas horizontais \cite{pedrini2008analise}.
+
+Essa operações de Sobel podem ser feitas com o auxilio de convoluções e das seguintes matrizes \ref{segment:eq:4} e \ref{segment:eq:5}, sendo $G_x$ uma matriz $3x3$ para o encontro de bordas verticais e $G_y$ para o encontro de bordas horizontais \cite{pedrini2008analise}, tendo que sua combinação pode resultar em imagens como a da figura \ref{segment:fig:7}.
+
+\begin{equation}
+\label{segment:eq:4}
+    G_x = \begin{bmatrix}
+    -1 & 0 & 1 \\ 
+    -2 & 0 & 2 \\ 
+    -1 & 0 & 1
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\label{segment:eq:5}
+    G_y = \begin{bmatrix}
+    -1 & -2 & -1 \\ 
+     0 & 0 & 0 \\ 
+     1 & 2 & 1
+    \end{bmatrix}
+\end{equation}
+
+\begin{figure}[H]
+    \caption{Segmentação com operador Sobel.}
+    \centering
+    \label{segment:fig:7}
+    \begin{subfigure}[t]{0.55\textwidth}
+        \centering
+        \includegraphics[height=1.3in]{recursos/imagens/image_seg/o1.png}
+        \caption{Imagem original.}
+        \label{segment:fig:7.1}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=1.3in]{recursos/imagens/image_seg/o2.png}
+        \caption{Imagem resultante de $G_x$.}
+        \label{segment:fig:7.2}
+    \end{subfigure}%
+    ~ 
+    
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=1.3in]{recursos/imagens/image_seg/o3.png}
+        \caption{Imagem resultante de $G_y$.}
+        \label{segment:fig:7.3}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=1.3in]{recursos/imagens/image_seg/o4.png}
+        \caption{Imagem de combinação entre $G_x$ e $G_y$.}
+        \label{segment:fig:7.4}
+    \end{subfigure}
+
+    \vspace*{1 cm}
+    Fonte: \cite{pedrini2008analise}.
+\end{figure}
+
+Já em relação ao \textbf{operador laplaciano}, destaca-se que este faz uso de uma derivada segunda que pode ser representado a partir da equação \ref{segment:eq:6}, tendo que $f(x,y)$ é uma função bidimensional contínua e sendo recomendada para situações em que a imagem não tenha ruido e a posição da borda sejam mais relevantes \cite{Yuheng2017ImageOverview}, isso se da visto que o uso de uma por contar com uma derivada de segunda ordem, torna-se muito sensível ao ruídos \cite{pedrini2008analise}.
+
+\begin{equation}
+    \label{segment:eq:6}
+    \bigtriangledown^2 f = \frac{\partial^2f}{\partial x^2} + \frac{\partial^2f}{\partial y^2}
+\end{equation}
+
+Ainda sobre o operador laplaciano, pode se dizer que há uma necessidade de que o coeficiente do pixel central resulte em um valor positivo e que os seus pixeis externos sejam negativos \cite{pedrini2008analise}, assim, considerando uma matriz de vizinhança-8, pode-se exemplificar uma implementação do operador Laplaciano que considera as derivadas segundas em linhas e colunas tendo por base a matriz $h_1$ (\ref{segment:eq:7}), resultando em aplicações como as visualizadas na imagem \ref{segment:fig:8}.
+
+\begin{equation}
+    \label{segment:eq:7}
+    h_1 = \begin{bmatrix}
+     0 &  0 &  0 \\ 
+    -1 & -2 & -1 \\ 
+     0 &  0 &  0
+    \end{bmatrix} +
+    \begin{bmatrix}
+     0 & -1 & 0 \\ 
+     0 &  2 & 0 \\ 
+     0 & -1 & 0 
+    \end{bmatrix} =
+    \begin{bmatrix}
+     0 & -1 & 0 \\ 
+    -1 &  4 & -1 \\ 
+     0 & -1 & 0 
+    \end{bmatrix}
+\end{equation}
+
+\begin{figure}[H]
+   \caption{Segmentação com operador Laplaciano.}
+   \centering
+   \label{segment:fig:8}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=1.5in]{recursos/imagens/image_seg/ol1.png}
+        \caption{Imagem original.}
+        \label{segment:fig:8.1}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=1.5in]{recursos/imagens/image_seg/lp2.png}
+        \caption{Mapa de bordas resultante.}
+        \label{segment:fig:8.2}
+    \end{subfigure}%
+
+    \vspace*{1 cm}
+    Fonte: \cite{pedrini2008analise}.
+\end{figure}
+
 
 \subsubsection{Segmentação Baseada em Agrupamentos}
 
