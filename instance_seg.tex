@@ -10,8 +10,13 @@
     \item falar sobre estado da arte \cite{Hafiz2020}
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Sendo assim, nessa seção estaremos tratando das métricas utilizadas para calcular o desempenho de modelos que utilizam de segmentação de instâncias (seção \ref{instance:metrics}), bem como o modelo que representa o estado da arte para esse tipo de atividade (seção \ref{instance:mask}).
+
 
 \subsection{Métricas}
+\label{instance:metrics}
+
+
 \subsubsection{\textit{Average Precision}(AP)}
 \label{instance:AP}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -21,7 +26,9 @@
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \subsubsection{Mask R-CNN}
+\label{instance:mask}
 that can create a pixel-wise mask for each object in an image.
 Mask R-CNN is an extension of the popular Faster R-CNN object detection architecture.
 The Faster R-CNN method generates two things for each object in the image:
@@ -40,8 +47,6 @@ Mask R-CNN is the current state-of-the-art for image segmentation and runs at 5 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Considerações Finais da Seção}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{itemize}
-    \item falar dos problemas citados por \cite{Kirillov2019a}
-\end{itemize}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{instance:conclusion}
+
+Por meio dos estudos realizados em relação a segmentação de instancias, pôde-se perceber que há uma recomendação para fatores como ..., não obstante,como dito por \cite{Kirillov2019a}, as segmentações de instancias possuem uma deficiencia 
