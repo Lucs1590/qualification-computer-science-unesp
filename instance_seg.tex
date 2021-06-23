@@ -48,7 +48,7 @@ Sendo assim, neste Capítulo, estaremos tratando das métricas utilizadas para c
 \subsection{Métricas}
 \label{instance:metrics}
 
-No tocante às métricas que são utilizadas para a avaliação dos modelos de segmentação de instâncias, vale dizer que comumente são utilizadas as técnicas descritas pela \textit{COCO Evaluation Metric} \cite{Lin2016}, as quais habitualmente são utilizadas para o contexto de detecção de objetos e também englobam técnicas que já foram descritas para segmentação semântica (como descrito na Seção \ref{semantic:metrics}).
+No tocante às métricas que são utilizadas para a avaliação dos modelos de segmentação de instâncias, vale dizer que comumente são utilizadas as métricas de avaliação descritas pelo COCO \cite{Lin2016}, as quais habitualmente são utilizadas para o contexto de detecção de objetos e também englobam técnicas que já foram descritas para segmentação semântica (como descrito na Seção \ref{semantic:metrics}).
 
 Todavia, dentre as métricas mais utilizadas para essa categoria de segmentação, cita-se a de \textit{average precision} que será detalhada a seguir (Seção \ref{instance:AP}).
 
@@ -96,7 +96,7 @@ Quanto a esse \textit{framework}, vale ressaltar que o mesmo possui três ramos 
     Fonte: \cite{He2020}.
 \end{figure}
 
-Por fim, destaca-se nesses modelos o seu desempenho, visto que com a arquitetura proposta por \cite{He2020}, é possível executar o modelo em cenas à 5 \textit{frames} por segundo \cite{Minaee2021, He2020, Hafiz2020}, além do fato que o modelo explora as técnicas de CNN (Seção \ref{deep:CNN}) para sua otimização \cite{Li2020}, possibilitando o seu uso até mesmo em tarefas de \textit{pose estimation}. As imagens que representam o uso do \textit{framework} Mask R-CNN podem ser observadas na Figura \ref{instance:fig:3}.
+Por fim, destaca-se nesses modelos o seu desempenho, visto que com a arquitetura proposta por \cite{He2020}, é possível executar o modelo em cenas à 5 \textit{frames} por segundo \cite{Minaee2021, He2020, Hafiz2020}, além do fato que o modelo explora as técnicas de CNN (Seção \ref{deep:CNN}) para sua otimização \cite{Li2020}, possibilitando o seu uso até mesmo em outras tarefas fora do contexto de segmentação, como as atividades de de estimação de pose. As imagens que representam o uso do \textit{framework} Mask R-CNN podem ser observadas na Figura \ref{instance:fig:3}.
 
 \begin{figure}[H]
     \centering

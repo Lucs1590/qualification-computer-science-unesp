@@ -12,7 +12,7 @@ Inspiradas no modelo de sistema nervoso de seres inteligentes, as redes neurais 
     \label{deep:fig:1}
 
     \vspace*{1 cm}
-    Fonte: \cite{Neuronio:Educacao}.
+    Fonte: \cite{VanessaSardinhadosSantos2021Neuronio:Educacao}.
 \end{figure}
 
 Dentre as representações matemáticas, destaca-se o modelo pioneiro desenvolvido por McCulloch e Pitts (1943) \cite{mcculloch1943logical} sendo que sua representação matemática se dá pela equação:
@@ -176,7 +176,7 @@ Em meio às avaliações utilizadas como métrica para o cálculo da função de
 
 \begin{equation}
     \label{deep:eq:9}
-    MSE(\boldsymbol{y}, \boldsymbol{y'}) = \frac{1}{MN} \sum_{i=1}^{M} \sum_{j=1}^{N} ((\boldsymbol{y}_{i,j}) - \boldsymbol{y'}_{i,j})^2.
+    MSE(\boldsymbol{y}, \boldsymbol{y'}) = \frac{1}{MN} \sum_{i=1}^{M} \sum_{j=1}^{N} (\boldsymbol{y}_{i,j} - \boldsymbol{y'}_{i,j})^2.
 \end{equation}
 
 Ainda quanto as métricas para a realização de avaliação em relação a imagens, existem várias delas descritas na literatura, todavia,  cada uma delas possui seu uso especificado para o problema que deseja resolver, por exemplo o caso das métricas para segmentações panópticas na Seção \ref{panoptic:metrics}.
@@ -202,7 +202,7 @@ De qualquer modo é interessante ter consciência que até então não há um co
 Por meio do desenvolvimento de \cite{rumelhart1986learning}, o algoritmo \textit{Backpropagation} foi capaz de contribuir diretamente no desenvolvimento dos modelos de redes neurais profundas, de modo que esse algoritmo conseguiu realizar o reajuste de pesos em camadas ocultas dos modelos. Com o auxílio de uma função de custo (Seção
 \ref{deep:cust}), o erro é calculado na saída da rede $y$ e há a propagação do mesmo, iniciando da camada de saída em direção para a camada de entrada. Isso é realizado através do trabalho conjunto do algoritmo \textit{Backpropagation} e de um algoritmo de otimização (Seção \ref{deep:optimization}), em que o \textit{Backpropagation} realiza um cálculo rápido de gradientes utilizados pelos algoritmos de otimização.
 
-Dessa forma, a explicação dessa seção se resume em processos em que, dado o erro $E$ que é obtido a partir da saída da rede ($y$) em relação a um \textit{ground truth} $g$, a primeira etapa é realizada com o cálculo da derivada parcial de $E$ em relação a cada neurônio de saída, sendo formada por $\frac{\partial E}{\partial y'}$ tendo que $i \in \mathbb{K}$ como a representação dos tamanhos de cada saída. Depois, com a aplicação da regra da cadeia de $E$ em relação às entradas $x_j$, é possível obter a seguinte expressão \cite{rumelhart1986learning}:
+Dessa forma, a explicação dessa seção se resume em processos em que, dado o erro $E$ que é obtido a partir da saída da rede ($y$) em relação a um \textit{ground truth} $g$, a primeira etapa é realizada com o cálculo da derivada parcial de $E$ em relação a cada neurônio de saída, sendo formada por $\frac{\partial E}{\partial \boldsymbol{y'}}$ tendo que $i \in \mathbb{K}$ como a representação dos tamanhos de cada saída. Depois, com a aplicação da regra da cadeia de $E$ em relação às entradas $x_j$, é possível obter a seguinte expressão \cite{rumelhart1986learning}:
 
 \begin{equation}
     \label{deep:eq:11}
@@ -342,10 +342,12 @@ Uma operação de convolução pode ser retratada por meio da Figura \ref{deep:f
     \label{deep:fig:6}
     
     \vspace*{1 cm}
-    Fonte: \cite{PeltarionAI}.
+    Fonte: \cite{Peltarion2021Peltarion}.
 \end{figure}
 
-Depois do primeiro passo, ainda na Figura \ref{deep:fig:6}, há uma processo de deslizamento do \textit{kernel} para realizar outro processo de convolução que resultará em outra saída, processo o qual se repete até a o fim da imagem em ordem de esquerda para a direita, até o fim da linha e de cima para baixo, até o fim das colunas.
+Ainda na Figura \ref{deep:fig:6} é possível visualizar que há uma processo de deslizamento do \textit{kernel} dar continuidade ao processo de convolução que resultará em um dos valores comportados pela saída, processo o qual se repete até a o fim da imagem em ordem de esquerda para a direita, até o fim da linha e de cima para baixo, até o fim das colunas.
+
+Destaca-se que a convolução é um processo de média móvel, ou seja, há o calculo da média ponderada de uma dada janela na imagem, correspondente ao tamanho do \textit{kernel} utilizado, sendo que o \textit{kernel} define os pesos dos respectivos pontos. Por fim, esse \textit{kernel} vai sendo deslizado sobre a imagem, definindo novas janelas na imagem e obtendo suas respectivas médias ponderadas.
 
 
 \subsubsection{Camada de \textit{Pooling}}
@@ -360,7 +362,7 @@ No âmbito das camadas de \textit{pooling}, vale citar que são amplamente utili
     \label{deep:fig:7}
     
     \vspace*{1 cm}
-    Fonte: \cite{PeltarionAI}.
+    Fonte: \cite{Peltarion2021Peltarion}.
 \end{figure}
 
 Vale citar que outros modelos de \textit{pooling} também se fazem presentes na literatura, dos quais podem ser citados o \textit{average pooling}, \textit{median pooling} e \textit{weighted average}\cite{Goodfellow2016} ou até mesmo o \textit{global average pooling}, que reduz o \textit{feature map} em um único valor e é exemplificado por meio da Figura \ref{deep:fig:8}.
@@ -372,7 +374,7 @@ Vale citar que outros modelos de \textit{pooling} também se fazem presentes na 
     \label{deep:fig:8}
     
     \vspace*{1 cm}
-    Fonte: \cite{PeltarionAI}.
+    Fonte: \cite{Peltarion2021Peltarion}.
 \end{figure}
 
 \subsubsection{\textit{Dropout}}
@@ -389,7 +391,7 @@ Esse processo de \textit{dropout} pode ser representado pela Figura \ref{deep:fi
     \label{deep:fig:9}
     
     \vspace*{1 cm}
-    Fonte: \cite{PeltarionAI}.
+    Fonte: \cite{Peltarion2021Peltarion}.
 \end{figure}
 
 
