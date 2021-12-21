@@ -3,7 +3,7 @@
 \section{Segmentação de Imagens}
 \label{segment:image}
 
-O processo de segmentação de imagens pertence ás áreas de visão computacional e processamento digital de imagens, sendo seu objetivo principal a distinção de áreas ou propriedades desejadas \cite{Haralick1985, Yuheng2017, Ghosh2019} de uma determinada imagem, assim, sendo possível realizar análises mais precisas ou separar apenas as áreas que são convenientes e de interesse, de acordo com o objetivo da análise.
+O processo de segmentação de imagens pertence às áreas de visão computacional e processamento digital de imagens, sendo seu objetivo principal a distinção de áreas ou propriedades desejadas \cite{Haralick1985, Yuheng2017, Ghosh2019} de uma determinada imagem, assim, sendo possível realizar análises mais precisas ou separar apenas as áreas que são convenientes e de interesse, de acordo com o objetivo da análise.
 
 A partir de segmentações de imagens é possível realizar tarefas de reconhecimento, que são muito utilizadas para áreas de reconhecimento facial \cite{Yuheng2017}, por exemplo. Além dessa, dentre outras grandes áreas para a aplicação das técnicas de segmentação de imagens destacam-se setores da medicina, pavimentações, pedestres, carros autônomos, sensoriamento remoto e afins. Para exemplificar, as Figuras \ref{segment:fig:1}\subref{segment:fig:1.1} e \ref{segment:fig:1}\subref{segment:fig:1.2} representam segmentações faciais e médicas, respectivamente.  
 
@@ -31,7 +31,7 @@ A partir de segmentações de imagens é possível realizar tarefas de reconheci
     Fonte: \cite{Nirkin2018} e \cite{Withey2008}, respectivamente.
 \end{figure}
 
-Assim, estando claro o conceito de segmentação de imagens, diversas técnicas são estudadas nessa área, tendo que ás tradicionais são citadas na Seção \ref{segment:segment}.
+Assim, estando claro o conceito de segmentação de imagens, diversas técnicas são estudadas nessa área, tendo que às tradicionais são citadas na Seção \ref{segment:segment}.
 
 
 \subsection{Métodos e Técnicas Tradicionais}
@@ -173,7 +173,7 @@ Por fim, ainda sobre o aspecto de crescimento de região, salienta-se que é de 
 \subsubsection{Segmentação por Bordas}
 \label{segment:limit}
 
-Em meio às categorias de segmentação tradicional estão as segmentações por descontinuidade, com subcategorias de segmentação por pontos, retas, junções e, finalmente, por bordas \cite{pedrini2008analise}. Correntemente, é a partir dessas segmentações que são construídos os filtros convolucionais que foram exploradas na Seção \ref{deep:CNN}.
+Em meio às categorias de segmentação tradicional estão as segmentações por descontinuidade, com subcategorias de segmentação por pontos, retas, junções e, finalmente, por bordas \cite{pedrini2008analise}. Correntemente, é a partir dessas segmentações que são construídos os filtros convolucionais que foram explorados na Seção \ref{deep:CNN}.
 
 Sendo assim, é de referir que as bordas são definidas como limites que possuem regiões com contrastes discrepantes em relação ao seus níveis de cinza  ou que separam duas regiões homogêneas \cite{pedrini2008analise,Yuheng2017}, algo que não é tão perceptível em imagens reais, considerando o fato de que os dispositivos de captura costumeiramente realizam a suavização e o borramento das bordas.
 
@@ -191,7 +191,7 @@ Essas operações de Sobel podem ser feitas com o auxilio de convoluções e das
     -1 & 0 & 1
     \end{bmatrix}
 \end{equation}
-
+e
 \begin{equation}
 \label{segment:eq:5}
     G_y = \begin{bmatrix}
@@ -206,7 +206,7 @@ sendo $G_x$ uma matriz $3x3$ para o encontro de bordas verticais e $G_y$ para o 
     \caption{Segmentação com operador Sobel.}
     \centering
     \label{segment:fig:7}
-    \begin{subfigure}[t]{0.55\textwidth}
+    \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[height=1.3in]{recursos/imagens/image_seg/o1.png}
         \caption{Imagem original.}
@@ -334,7 +334,7 @@ Na Figura \ref{segment:fig:5}, é possível observar o uso do algoritmo K-means 
 \subsubsection{Segmentação com Redes Neurais}
 \label{segment:neural}
 
-As segmentações por meio de redes neurais, profundas (Seção \ref{deep:deep}) ou por meio das redes convolucionais (Seção \ref{deep:CNN}) regularmente são confundidas com a área de detecção de objetos \cite{Ghosh2019} pela característica de demarcação e pelo uso das \textit{bounding box}. Não obstante vale destacar que para segmentações de imagens as redes mais utilizadas são as CNNs, de modo que está consegue trabalhar com a extração das características mais importantes de determinado imagem e, em seguida, organizá-las, sendo eficiente não somente em tarefas de detecção, localização e rastreamento de objetos, mas também, como neste caso, segmentação de imagens \cite{Ghosh2019}.
+As segmentações por meio de redes neurais, profundas (Seção \ref{deep:deep}) ou por meio das redes convolucionais (Seção \ref{deep:CNN}) regularmente são confundidas com a área de detecção de objetos \cite{Ghosh2019} pela característica de demarcação e pelo uso das \textit{bounding box}. Não obstante vale destacar que para segmentações de imagens as redes mais utilizadas são as CNNs, de modo que esta consegue trabalhar com a extração das características mais importantes de determinada imagem e, em seguida, organizá-las, sendo eficiente não somente em tarefas de detecção, localização e rastreamento de objetos, mas também, como neste caso, segmentação de imagens \cite{Ghosh2019}.
 
 Métodos mais modernos que seguem essa linha serão explicados detalhadamente nos capítulos \ref{semantic:semantic}, \ref{instance:instance} e \ref{panoptic:panoptic}.
 
@@ -344,20 +344,28 @@ Métodos mais modernos que seguem essa linha serão explicados detalhadamente no
 
 Na Tabela \ref{segment:table:1}, é possível visualizar as técnicas comentadas no decorrer do capítulo, assim como uma breve descrição de seus usos, suas vantagens e desvantagens.
 
-\begin{table}[!ht]
-    \centering
-    \caption{Comparação entre os métodos de segmentações tradicionais.}
-    \label{segment:table:1}
-    \begin{tabular}{p{3.8cm}|p{3.8cm}|p{3.8cm}|p{3.8cm}}
-    \textbf{Técnica}                  & \textbf{Descrição}                                                                                  & \textbf{Vantagens}                                                                                                                                                                                      & \textbf{Desvantagens}                                                                                                                                                       \\ \hline
-    Segmentação Baseada em Regiões      & Concentra-se em encontrar e agrupar valores semelhantes sendo separados por um limiar.              & \begin{tabular}[c]{@{}p{3.8cm}@{}}- Possui baixa complexidade e alto desempenho;\\ - Não requer pré-processamento;\\ - Recomendado para imagens com alto contraste entre fundo e objeto de interesse.\end{tabular}         & - Omissão de detalhes quando não há um contraste significante.                                                                                                              \\ \hline
-    Segmentação por Bordas              & Realizado com base na detecção de descontinuidade, detectando bordas e definindo um limite do objeto. & - Recomendável para imagens com bons contrastes entre os objetos.                                                                                                                                       & - Perda de detalhes para imagens com muitas bordas, ruidosas ou com baixo contraste entre os objetos.                                                                       \\ \hline
-    Segmentação Baseada em Agrupamentos & Divide os pixels da imagem em k \textit{clusters} homogêneos e  exclusivos obtendo, assim, as segmentações.  & \begin{tabular}[c]{@{}p{3.8cm}@{}}- Conceitos já estabelecido;\\ - Recomendado para aplicações em tempo real;\\ - Bom desempenho para pequenos \textit{datasets};\\ - Não precisa de tempo de treinamento.\end{tabular} & \begin{tabular}[c]{@{}p{3.8cm}@{}}- Pode demandar muito tempo para encontrar a minimização da função de custo;\\ - Não é adequado para agrupar \textit{clusters} não convexos.\end{tabular} \\ \hline
-    Segmentação com Redes Neurais             & Normalmente relacionada a algoritmos de aprendizado profundo e CNNs.                                & \begin{tabular}[c]{@{}p{3.8cm}@{}}- Conceito já estabelecido;\\ - Abordagem simples e flexível;\\ - Disponibilizado por bibliotecas prontas em Python.\end{tabular}                                            & - O treinamento do modelo pode consumir muito tempo e recursos.                                                                                                              \\ \hline
-    \end{tabular}
+\begin{table}[H]
+\centering
+\caption{Comparação entre os métodos de segmentações tradicionais.}
+\label{segment:table:1}
+\resizebox{\textwidth}{!}{%
 
-    \vspace*{1 cm}
-    Fonte: do próprio autor.
+    \begin{tabular}{l|l|l|l}
+    \textbf{Técnica}                    & \textbf{Descrição}                                                                                                                                    & \textbf{Vantagens}                                                                                                                                                                                                     & \textbf{Desvantagens}                                                                                                                                                                        \\ 
+    \hline
+    Segmentação Baseada em Regiões      & \begin{tabular}[c]{@{}l@{}}Concentra-se em encontrar e\\agrupar valores semelhantes\\sendo separados por um limiar.\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}- Possui baixa complexidade\\~e alto desempenho;\\ - Não requer pré-processamento;\\ - Recomendado para imagens\\~com alto contraste entre fundo e\\~objeto de interesse.\end{tabular}      & \begin{tabular}[c]{@{}l@{}}- Omissão de detalhes quando não\\~há um contraste significante.\end{tabular}                                                                                     \\ 
+    \hline
+    Segmentação por Bordas              & \begin{tabular}[c]{@{}l@{}}Realizado com base na\\detecção de descontinuidade,\\detectando bordas e definindo\\um limite do objeto.\end{tabular}      & \begin{tabular}[c]{@{}l@{}}- Recomendável para imagens\\~com bons contrastes entre\\~os objetos.\end{tabular}                                                                                                          & \begin{tabular}[c]{@{}l@{}}- Perda de detalhes para imagens\\~com muitas bordas, ruidosas ou\\~com baixo contraste entre os objetos.\end{tabular}                                            \\ 
+    \hline
+    Segmentação Baseada em Agrupamentos & \begin{tabular}[c]{@{}l@{}}Divide os pixels da imagem\\em k \textit{clusters} homogêneos e\\exclusivos obtendo, assim,\\as segmentações.\end{tabular} & \begin{tabular}[c]{@{}l@{}}- Conceitos já estabelecido;\\ - Recomendado para aplicações\\~em tempo real;\\ - Bom desempenho para pequenos\\~\textit{datasets};\\ - Não precisa de tempo de\\~treinamento.\end{tabular} & \begin{tabular}[c]{@{}l@{}}- Pode demandar muito tempo para\\~encontrar a minimização da função\\~de custo;\\ - Não é adequado para agrupar \\\textit{~clusters} não convexos.\end{tabular}  \\ 
+    \hline
+    Segmentação com Redes Neurais       & \begin{tabular}[c]{@{}l@{}}Normalmente relacionada\\a algoritmos de aprendizado\\profundo e CNNs.\end{tabular}                                        & \begin{tabular}[c]{@{}l@{}}- Conceito já estabelecido;\\ - Abordagem simples e flexível.\end{tabular}                                                                                                                  & \begin{tabular}[c]{@{}l@{}}- O treinamento do modelo pode\\~consumir muito tempo e recursos.\end{tabular}                                                                                    \\
+    \hline
+    \end{tabular}
+}
+
+\vspace*{1 cm}
+Fonte: do próprio autor.
 \end{table}
 
 Na Seção \ref{segment:segment}, foi comentado sobre os algoritmos comumente utilizados para segmentações, trabalhando desde algoritmos mais simples como o de \textit{threshold segmentation} (Seção \ref{segment:region}) até o nível de complexidade de técnicas de redes neurais artificiais (Seção \ref{segment:neural}). Porém como comentado por \cite{Ghosh2019} e por \cite{Minaee2021}, hodiernamente há segmentações que utilizam de \textit{deep learning} e possuem ótimas abordagens, as quais estamos denominando como segmentações modernas e serão exploradas nas próximas seções.

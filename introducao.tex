@@ -2,7 +2,7 @@
 \clearpage
 \section{Introdução}
 
-A segmentação de imagens tem sido de extrema importância em meio ao contexto de visão computacional, entendimento de cenas, assim como um grande auxiliador para as questões relacionadas a atividades humanas. É visível que as segmentações sozinhas não causam um efeito de ação, mas são amplamente utilizadas como forma de auxiliar atividades humanas, como as análises das áreas médicas \cite{Lai2015, Withey2008} e exemplifica-se a extração de limite de tumor \cite{Malkanthi2017}, medição de volumes de tecido e mapeamento de órgãos específicos em determinados exames de imagem \cite{Gibson2018, Schoppe2020}, como é possível observar na Figura \ref{intro:fig:1}.
+A segmentação de imagens tem sido de extrema importância em meio ao contexto de visão computacional, entendimento de cenas, assim como uma grande auxiliadora para as questões relacionadas a atividades humanas. É visível que as segmentações sozinhas não causam um efeito de ação, mas são amplamente utilizadas como forma de auxiliar atividades humanas, como as análises das áreas médicas \cite{Lai2015, Withey2008} e exemplifica-se a extração de limite de tumor \cite{Malkanthi2017}, medição de volumes de tecido e mapeamento de órgãos específicos em determinados exames de imagem \cite{Gibson2018, Schoppe2020}, como é possível observar na Figura \ref{intro:fig:1}.
 
 \begin{figure}[H]
     \centering
@@ -23,7 +23,7 @@ Outro contexto que tem usufruído muito das segmentações é o de sistemas aut�
     \label{intro:fig:2}
 
     \vspace*{1 cm}
-    Fonte: \cite{Asadi-Aghbolaghi2020}.
+    Fonte: \cite{Lee2018}.
 \end{figure}
 
 Todavia, como citado no início deste capítulo, as segmentações não geram diretamente uma ação, mas são altamente difundidas como um processo intermediário para o reconhecimento de imagens ou detecção de objetos, como ocorre no trabalho executado por \cite{Carneiro2021}, que utiliza do método \textit{GrabCut} \cite{rother2004grabcut}, um método de segmentação baseado em grafos (que também são comuns no contexto de segmentação, como apresentado por \cite{Yi2012}) para realizar a segmentação das folhas de café antes de realizar a detecção de doenças e pragas na folha do café, como demonstrado na Figura \ref{intro:fig:3}. Este tipo de abordagem para as segmentações de imagens é muito comum como forma auxiliar em relação ao fluxo completo de sistemas de visão computacional.
@@ -38,12 +38,12 @@ Todavia, como citado no início deste capítulo, as segmentações não geram di
     Fonte: \cite{Carneiro2021}.
 \end{figure}
 
-Dentre as abordagens de segmentação, vale dizer que inúmeros algoritimos foram desenvolvidos para suprir a necessidade de segmentação, dos quais se destacam métodos artesanais (que serão trabalhados no Capitulo \ref{segment:image}), como os baseados em região ou limiar (Seção \ref{segment:region}), em bordas (Seção \ref{segment:limit}) e agrupamentos (Seção \ref{segment:group}) ou até em métodos mais complexos devido ao progresso proporcionado pelos avanços de redes neurais, como os algoritmos baseados nessa hipótese (Seção \ref{segment:neural}).
+Dentre as abordagens de segmentação, vale dizer que muitos algoritmos foram desenvolvidos para suprir a necessidade de segmentação, dos quais se destacam métodos artesanais (que serão trabalhados no Capitulo \ref{segment:image}), como os baseados em região ou limiar (Seção \ref{segment:region}), em bordas (Seção \ref{segment:limit}) e agrupamentos (Seção \ref{segment:group}) ou até em métodos mais complexos devido ao progresso proporcionado pelos avanços de redes neurais, como os algoritmos baseados nessa hipótese (Seção \ref{segment:neural}).
 
 Todavia, na medida em que algumas propostas utilizadas em inteligência artificial vêm avançando, observa-se diversos avanços nas áreas de aprendizado profundo, tendo grande destaque e evolução quanto ao âmbito de segmentação de imagens. Esses avanços ocorrem não só devido a hardware com mais capacidade de processamento ou uma maior quantidade de dados disponíveis, mas também por causa da criação de novos algoritmos e abordagens para resolver esses problemas \cite{Szegedy2015}.
 
 A partir desses modelos mais modernos que utilizam como recurso o aprendizado profundo, cita-se que estes possuem capacidade de segmentar e propor classes para todos os pixels de uma imagem \cite{Minaee2021}, outros são capazes de segmentar objetos de mesma classe como instâncias diferentes, ou ainda outros que propõe fazer a unificação de ambas propostas anteriores, como é o caso das segmentações semânticas (Capitulo \ref{semantic:semantic}), de instâncias (Capitulo \ref{instance:instance}) e panóptica (Capitulo \ref{panoptic:panoptic}).
 
-Dessa forma, o presente estudo propõe listar e descrever alguns modelos de algoritmos e \textit{framworks} conhecidos, ou até mesmo em estado-da-arte (com o \textit{Mask} R-CNN e \textit{Fully Convutional Networks}), de modo que estes estejam relacionados a segmentações e que seja possível encontrar vantagens, desvantagens e possibilidades de exploração em relação aos mesmos, assim, contribuindo para a evolução científica na esfera de segmentações, principalmente das que fazem uso de aprendizado profundo.
+Dessa forma, o presente estudo propõe listar e descrever alguns modelos de algoritmos e \textit{frameworks} conhecidos, ou até mesmo em estado-da-arte (com o \textit{Mask} R-CNN e \textit{Fully Convutional Networks}), de modo que estes estejam relacionados a segmentações e que seja possível encontrar vantagens, desvantagens e possibilidades de exploração em relação aos mesmos, assim, contribuindo para a evolução científica na esfera de segmentações, principalmente das que fazem uso de aprendizado profundo.
 
 Por fim, nos capítulos seguintes, assuntos relacionados à apresentação de conceitos de redes neurais profundas e redes neurais convolucionais serão tratadas no Capitulo \ref{deep:deep}. Após esta feita, será discorrido sobre as técnicas que tradicionalmente são utilizadas para atividades de segmentação no Capítulo \ref{segment:image}, acompanhada de segmentações que são fruto do advento das redes convolucionais e aprendizado profundo, tratando da segmentação semântica (Capítulo \ref{semantic:semantic}), de instâncias (Capítulo \ref{instance:instance}) e panóptica (Capítulo \ref{panoptic:panoptic}).

@@ -3,7 +3,7 @@
 \section{Segmentação Semântica}
 \label{semantic:semantic}
 
-No tocante às segmentações que fazem uso de técnicas de \textit{deep learning}, a segmentação semântica é uma das que fazem parte desse grupo, sendo que essas possuem o propósito de atribuir uma determinada classe, ou \textit{rótulo}, para cada pixel presente em uma cena \cite{Wang2017, Ghosh2019, Shelhamer2016, Arbelaez2012,Zhang2018} o que é determinado como um trabalho de nívell de pixel.
+No tocante às segmentações que fazem uso de técnicas de \textit{deep learning}, a segmentação semântica é uma das que fazem parte desse grupo, sendo que essas possuem o propósito de atribuir uma determinada classe, ou \textit{rótulo}, para cada pixel presente em uma cena \cite{Wang2017, Ghosh2019, Shelhamer2016, Arbelaez2012,Zhang2018} o que é determinado como um trabalho de nível de pixel.
 
 O uso de técnicas de segmentações semânticas tem sido útil para situações em que o contexto é desconhecido, visto que por meio dessas abordagens é possível entender à categoria dos objetos presentes na cena, assim como propriedades relacionadas a sua localização e os formatos dos objetos \cite{Zhang2018}, sendo de extrema importância para o trabalho com imagens médicas, sistemas autônomos e afins.
 
@@ -50,7 +50,9 @@ Quando se trata de segmentações semânticas, várias arquiteturas e \textit{fr
     Fonte: retirada e adaptade de \cite{Shelhamer2016}.
 \end{figure}
 
-Essa configuração de FCN foi apçicada nos \textit{datasets} PASCAL VOC 2011 \cite{everingham2010pascal}, SIFT Flow \cite{Liu2011} e NYUDv2 \cite{Silberman:ECCV12} chegando a resultados de 90,3\% de \hyperref[semantic:pa]{PA} e 62,7\% de \textit{mean IoU} no primeiro \textit{dataset} citado \cite{Ghosh2019} e estabelecendo referência de estado-da-arte em sua performance \cite{Minaee2021}.
+\begin{sloppypar}
+Essa configuração de FCN foi aplicada nos \textit{datasets} PASCAL VOC 2011 \cite{everingham2010pascal}, SIFT Flow \cite{Liu2011} e NYUDv2 \cite{Silberman:ECCV12} chegando a resultados de 90,3\% de \hyperref[semantic:pa]{PA} e 62,7\% de \textit{mean IoU} no primeiro \textit{dataset} citado \cite{Ghosh2019} e estabelecendo referência de estado-da-arte em sua performance \cite{Minaee2021}.
+\end{sloppypar}
 
 Para sua configuração foram utilizados conceitos e modificações da arquitetura das CNNs VGG16 \cite{Simonyan2015} e GoogLeNet \cite{Szegedy2015}, possibilitando a entrada e saída de tamanhos variados na rede \cite{Minaee2021}, de sorte que a entrada e saída tenham o mesmo tamanho, o que fica visível na Figura \ref{semantic:fig:6}.
 
@@ -64,7 +66,7 @@ Para sua configuração foram utilizados conceitos e modificações da arquitetu
     Fonte: retirada e adaptada de \cite{Shelhamer2016}.
 \end{figure}
 
-Por fim, quanto às suas limitações, é informado que as configurações de FCN são ineficientes em trabalhos de segmentação 3D e para o uso em tempo real, visto que leva cerca de 100ms para trabalhar com imagens de baixa resolução \cite{Minaee2021}, mas novas arquiteturas baseadas nesse modelo, como a ParseNet \cite{Liu2015} vêm evoluindo para suprir essas limitações.
+Por fim, quanto às suas limitações, é informado que as configurações de FCN são ineficientes em trabalhos de segmentação 3D e para o uso em tempo real, visto que leva cerca de 100ms - em hardware não especificado pelo autor - para trabalhar com imagens de baixa resolução \cite{Minaee2021}, mas novas arquiteturas baseadas nesse modelo, como a ParseNet \cite{Liu2015} vêm evoluindo para suprir essas limitações.
 
 
 \subsection{Métricas}
@@ -96,6 +98,11 @@ Já a métrica de intersecção entre a união, do inglês \textit{Intersection 
 
 Sua representação pode ser visualizada a partir da Figura \ref{semantic:fig:1}, além de que pela Equação \ref{semantic:eq:2} é possível entender que o resultado de IoU se dá pela razão entre a intersecção da segmentação predita (A) e \textit{ground truth} (B), e a união entre a segmentação predita e o \textit{ground truth}, ou seja,
 
+\begin{equation}
+    \label{semantic:eq:2}
+    IoU = J(A,B) = \frac{|A \cap B|}{|A \cup B|}.
+\end{equation}
+
 \begin{figure}[H]
     \centering
     \caption{Representação de IoU.}
@@ -106,18 +113,15 @@ Sua representação pode ser visualizada a partir da Figura \ref{semantic:fig:1}
     Fonte: do próprio autor.
 \end{figure}
 
-\begin{equation}
-    \label{semantic:eq:2}
-    IoU = J(A,B) = \frac{|A \cap B|}{|A \cup B|}.
-\end{equation}
-
+\begin{sloppypar}
 Após a criação dessa métrica, outras variações ganharam repercussão, das quais destaca-se \textit{Mean Intersection-over-Union (mIoU)}, a qual realiza a média entre todos os valores de IoU das classes presentes na cena e apresenta um valor escalar como resultado para a segmentação como um todo \cite{Minaee2021}, sendo utilizada em trabalhos como \cite{Mohan2020}.
+\end{sloppypar}
 
 
 \subsubsection{F1 \textit{Score}}
 \label{semantic:f1}
 
-Para a definição da métrica F1-\textit{score}, que é extremamente comum na esfera de segmentação de imagens, é necessário ter ciência de antemão que ela é composta pelo uso de outras duas métricas, sendo elas: 1) precisão, que é a divisão de verdadeiros positivos pela soma de verdadeiros positivos e falsos positivos; 2) revocação, que é a divisão de verdadeiros positivos pela soma de verdadeiros positivos e falsos negativos, como mostrados nas Equações 24 e 25, respectivamente,
+Para a definição da métrica F1-\textit{score}, que é extremamente comum na esfera de segmentação de imagens, é necessário ter ciência de antemão que ela é composta pelo uso de outras duas métricas, sendo elas: 1) precisão, que é a divisão de verdadeiros positivos pela soma de verdadeiros positivos e falsos positivos; 2) revocação, que é a divisão de verdadeiros positivos pela soma de verdadeiros positivos e falsos negativos, como mostrados nas Equações \ref{semantic:eq:3} e \ref{semantic:eq:4}, respectivamente,
 
 \begin{equation}
     \label{semantic:eq:3}
@@ -159,23 +163,23 @@ Por fim, vale comentar que para situações em que tem-se uma segmentação bin�
 
 Concluindo em relação a segmentações semânticas, pode-se dizer que são um grande avanço quando comparadas a tarefas de detecção de objetos, como ocorre em \cite{Vaillant1994}, visto que esse novo modelo de segmentações possibilita o trabalho com mais dados em relação às cenas, como citado neste capitulo (Capítulo \ref{semantic:semantic}).
 
-Entretanto, essa rede possui dificuldade quando o problema em questão está relacionado à separação de objetos que possuem a mesma classe, mas são objetos diferentes, visto que não há uma separação por indivíduos \cite{Kirillov2019a} como é possível observar na Figura \ref{semantic:fig:4}\subref{semantic:fig:4.1}, em que todas as pessoas próximas se encontram conectadas ou em situações que tse torna necessária a segmentação minuciosa de uma cena \cite{Ghosh2019}, como as partes do corpo de uma pessoa, por exemplo.
+Entretanto, essa rede possui dificuldade quando o problema em questão está relacionado à separação de objetos que possuem a mesma classe, mas são objetos diferentes, visto que não há uma separação por indivíduos \cite{Kirillov2019a} como é possível observar na Figura \ref{semantic:fig:4}\subref{semantic:fig:4.1}, em que todas as pessoas próximas se encontram conectadas ou em situações que se torna necessária a segmentação minuciosa de uma cena \cite{Ghosh2019}, como as partes do corpo de uma pessoa, por exemplo.
 
 \begin{figure}[H]
    \caption{Exemplo de segmentação semântica com instâncias unificadas.}
    \centering
    \label{semantic:fig:4}
-    \begin{subfigure}[t]{0.45\textwidth}
+    \begin{subfigure}[t]{0.6\textwidth}
         \centering
-        \includegraphics[width=1.3\linewidth]{recursos/imagens/semantic/sema_ori.png}
+        \includegraphics[width=1\linewidth]{recursos/imagens/semantic/sema_ori.png}
         \caption{Imagem original.}
         \label{semantic:fig:4.1}
     \end{subfigure}%
     ~ 
 
-    \begin{subfigure}[t]{0.45\textwidth}
+    \begin{subfigure}[t]{0.6\textwidth}
         \centering
-        \includegraphics[width=1.3\linewidth]{recursos/imagens/semantic/sema_unified.png}
+        \includegraphics[width=1\linewidth]{recursos/imagens/semantic/sema_unified.png}
         \caption{Segmentação com instâncias unificadas.}
         \label{semantic:fig:4.2}
     \end{subfigure}%
@@ -184,4 +188,4 @@ Entretanto, essa rede possui dificuldade quando o problema em questão está rel
     Fonte: \cite{Fischer2017}.
 \end{figure}
 
-Por fim, vale destacar que modelos de segmentação semântica não são recomendados para sistemas que precisam realizar segmentações próximas de um tempo real, levando em conta câmeras com menos de 25 quadros por segundo devido ao seu desempenho, como aponta \cite{Minaee2021}.
+Por fim, vale destacar que modelos de segmentação semântica não são recomendados para sistemas que precisam realizar segmentações próximas de um tempo real, levando em conta câmeras com menos de 25 quadros por segundo, devido ao seu desempenho, como aponta \cite{Minaee2021}.
