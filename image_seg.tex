@@ -293,9 +293,11 @@ Ainda sobre o operador laplaciano, pode se dizer que há uma necessidade de que 
 \subsubsection{Segmentação Baseada em Agrupamentos}
 \label{segment:group}
 
-Como o nome propõe, as segmentações baseadas em agrupamentos na esfera de visão computacional e processamento de imagens são compostas pela agregação de pixels que possuem características similares em determinado espaço de características \cite{Yuheng2017}. No entanto, a definição de agrupamento (ou \textit{clustering}) ainda não são concretas \cite{Yuheng2017}, haja vista que não é categorizada como segmentação por alguns autores, pois os agrupamentos são realizados no espaço de medidas, enquanto a segmentação ocorre no domínio espacial da imagem \cite{Haralick1985}.
+Como o nome propõe, as segmentações baseadas em agrupamentos na esfera de visão computacional e processamento de imagens são compostas pela agregação de pixels que possuem características similares em determinado espaço de características \cite{Yuheng2017}. No entanto, a definição de agrupamento (ou \textit{clustering}) ainda não é concreta \cite{Yuheng2017}, haja vista que não é categorizada como segmentação por alguns autores, pois os agrupamentos são realizados no espaço de medidas, enquanto a segmentação ocorre no domínio espacial da imagem \cite{Haralick1985}.
 
+\begin{sloppypar}
 Posto isso, destaca-se o uso do K-means \cite{macqueen1967some, bock2008origins}, o qual é um método não supervisionado que realiza agrupamento de dados de um \textit{dataset} de acordo com as suas similaridades e em quantidades desejadas ($k$). Ou seja, o algoritmo gera um ponto inicial randômico como centróide para um determinado \textit{cluster} e depois tenta atribuir os demais dados do \textit{dataset} aos \textit{clusters} de acordo com a sua proximidade. Para isso, o algoritmo usa técnicas de distância euclidiana \cite{Mahmud2012}. Vale ressaltar que os pontos centróides são atualizados conforme as classificações que são feitas no algoritmo, e os mesmos param de atualizar quando o algoritmo cumpre seu objetivo de convergência, há poucas interações dos dados com diferentes \textit{clusters} ou através de um número fixo de iterações \cite{dunham2006data}, conforme representado no fluxograma da Figura \ref{segment:fig:6}, tendo que $n \in \mathbb{Z}$.
+\end{sloppypar}
 
 \begin{figure}[H]
     \centering
