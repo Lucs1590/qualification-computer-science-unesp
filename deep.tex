@@ -88,7 +88,7 @@ Além disso, vale citar que um diferencial dos modelos de \textit{deep learning}
 
 Destarte, o uso e desenvolvimento de \textit{deep learning} tem se popularizado e sido considerado a resposta para problemas de diversas áreas, como segmentações em vários contextos, desenvolvimentos de carros autônomos, segurança, otimização de modelos de busca e afins \cite{Ghosh2019}, sendo que essa popularização é propicia devido: 1) ao desenvolvimento acelerado de \textit{hardwares} que acrescentam velocidade no treinamento dessas redes e 2) ao grande aumento de dados variados (com adventos como o \textit{big data}) \cite{Szegedy2015, ponti2018funciona}.
 
-Por conseguinte, no restante nas demais seções  deste capítulo serão apresentadas algumas variações de funções de ativação (Seção \ref{deep:activation}), sobre o processo de treinamento (Seção \ref{deep:train}) e de testes (Seção \ref{deep:test}) e, finalmente, sobre redes neurais convolucionais (Seção \ref{deep:CNN}).
+Por conseguinte, nas demais seções deste capítulo serão apresentadas algumas variações de funções de ativação (Seção \ref{deep:activation}), sobre o processo de treinamento (Seção \ref{deep:train}) e de testes (Seção \ref{deep:test}) e, finalmente, sobre redes neurais convolucionais (Seção \ref{deep:CNN}).
 
 
 \subsection{Funções de Ativação}
@@ -96,7 +96,7 @@ Por conseguinte, no restante nas demais seções  deste capítulo serão apresen
 
 Quanto às funções de ativação, destaca-se que na seção anterior foi apresentada uma função de ativação binária, todavia, existem outras funções de ativação que foram estudadas e são utilizadas para uma melhor adequação em contextos específicos.
 
-A função de ativação, como citado brevemente a priori, é calculada pelo neurônio e disseminada para os próximos neurônios.  Para essa Seção o valor calculado $\sum_{i = 1}^{N} w_ix_i +b$ ( entrada da função de ativação) será representado por $Y'$, de modo que poderemos ver sua atuação, a seguir, nas funções de ativação limiar, Linear, Sigmóide, ReLU e Sofmax.
+A função de ativação, como citado brevemente a priori, é calculada pelo neurônio e disseminada para os próximos neurônios.  Para essa Seção o valor calculado $\sum_{i = 1}^{N} w_ix_i +b$ (entrada da função de ativação) será representado por $Y'$, de modo que poderemos ver sua atuação, a seguir, nas funções de ativação limiar, Linear, Sigmóide, ReLU e Sofmax.
 
 
 \subsubsection{Função Limiar}
@@ -202,9 +202,9 @@ De qualquer modo é interessante ter consciência que até então não há um co
 \label{deep:backprop}
 
 Por meio do desenvolvimento de \cite{rumelhart1986learning}, o algoritmo \textit{Backpropagation} foi capaz de contribuir diretamente no desenvolvimento dos modelos de redes neurais profundas, de modo que esse algoritmo conseguiu realizar o reajuste de pesos em camadas ocultas dos modelos. Com o auxílio de uma função de custo (Seção
-\ref{deep:cust}), o erro é calculado na saída da rede $y$ e há a propagação do mesmo, iniciando da camada de saída em direção para a camada de entrada. Isso é realizado através do trabalho conjunto do algoritmo \textit{Backpropagation} e de um algoritmo de otimização (Seção \ref{deep:optimization}), em que o \textit{Backpropagation} realiza um cálculo rápido de gradientes utilizados pelos algoritmos de otimização.
+\ref{deep:cust}), o erro é calculado na saída da rede ($y$) e há a propagação do mesmo, iniciando da camada de saída em direção para a camada de entrada. Isso é realizado através do trabalho conjunto do algoritmo \textit{Backpropagation} e de um algoritmo de otimização (Seção \ref{deep:optimization}), em que o \textit{Backpropagation} realiza um cálculo rápido de gradientes utilizados pelos algoritmos de otimização.
 
-Dessa forma, a explicação dessa seção se resume em processos em que, dado o erro $E$ que é obtido a partir da saída da rede ($y$) em relação a um \textit{ground truth} ($g$), a primeira etapa é realizada com o cálculo da derivada parcial de $E$ em relação a cada neurônio de saída, sendo formada por $\frac{\partial E}{\partial \boldsymbol{y'}}$ tendo que $i \in \mathbb{K}$ como a representação dos tamanhos de cada saída. Depois, com a aplicação da regra da cadeia de $E$ em relação às entradas $x_j$, é possível obter a seguinte expressão \cite{rumelhart1986learning}:
+Dessa forma, a explicação dessa seção se resume em processos em que, dado o erro $E$ que é obtido a partir da saída da rede ($y$) em relação a um \textit{ground truth} ($g$), a primeira etapa é realizada com o cálculo da derivada parcial de $E$ em relação a cada neurônio de saída, sendo formada por $\frac{\partial E}{\partial \boldsymbol{y_i}}$ tendo que $i \in \mathbb{K}$ como a representação dos tamanhos de cada saída. Depois, com a aplicação da regra da cadeia de $E$ em relação às entradas $x_j$, é possível obter a seguinte expressão \cite{rumelhart1986learning}:
 
 \begin{equation}
     \label{deep:eq:11}
@@ -253,15 +253,21 @@ Já em casos de regressão, o mais comum é utilizarem a métrica MSE, conforme 
 
 Quando se trata na divisão entre os \textit{datasets} de treino e teste, habitualmente é comentado sobre a configuração de 20\% para teste e 80\% para treino, todavia o fato de utilizar um conjunto fixo implica em uma incerteza estatística sobre a média estimada de erro do teste, visto que pode ocorrer um desbalanceamento imprevisto \cite{Goodfellow2016}.
 
-Dessa forma, a validação cruzada (Seção \ref{deep:cross}) do inglês, \textit{cross validation}, trabalha com o principio de divisão entre os \textit{datasets} de treino e teste em subconjuntos que compõem o conjunto de dados original, realizando o cálculos a partir de escolhas aleatórias de amostras no decorrer das interações. Isto é, divide-se aleatoriamente o conjunto de dados original em um subconjunto de treinamento e de teste para cada nova interação - ou seja, uma etapa de uma época - o processo de divisão ocorre novamente.
+Dessa forma, a validação cruzada (Seção \ref{deep:cross}), do inglês, \textit{cross validation}, trabalha com o principio de divisão entre os \textit{datasets} de treino e teste em subconjuntos que compõem o conjunto de dados original, realizando o cálculos a partir de escolhas de amostras no decorrer das interações. Dentre as técnicas mais conhecidas de \textit{cross validation} para a divisão dos conjuntos de dados, destacam-se os métodos \textit{k-fold} e \textit{leave-one-out}, sendo que preservam o princípio de dividir aleatoriamente o conjunto de dados original em um subconjunto de treinamento e de teste, tendo a premissa de auxiliar a avaliação do algorítimo em relação a sua capacidade de generalização.
 
-Dessa forma, o erro ($\varepsilon_T$) é computado do teste ($T$) pela média dos erros sobre interações ($\varepsilon_i$) em relação à quantidade de interações($N$), conforme a Equação \ref{deep:eq:15}:
+Dessa forma, o erro ($\varepsilon$) é computado do teste ($T$) pela média dos erros sobre interações ($\varepsilon_i$) em relação à quantidade de interações($N$), conforme a Equação \ref{deep:eq:15}:
 
 \begin{equation}
     \label{deep:eq:15}
-    \varepsilon_T = \frac{1}{N} \sum_{i=1}^{N} \varepsilon_i.
+    \varepsilon_T = \frac{1}{N} \sum_{i=1}^{N} \varepsilon_i,
 \end{equation}
 
+ou por meio da Equação \ref{deep:eq:16}, quando se refere ao \textit{k-fold cross validation}, ao calcular os testes de erro com base na média dos erros de teste na enésima iteração ($\varepsilon_{Ti}$) em relação a quantidade de \textit{folds} ($k$).
+
+\begin{equation}
+    \label{deep:eq:16}
+    \varepsilon_T = \frac{1}{k} \sum_{i=1}^{N} \varepsilon_{Ti}.
+\end{equation}
 
 \subsubsection{\textit{Overfitting} e \textit{Underfitting}}
 \label{deep:overunder}
