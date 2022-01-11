@@ -2,7 +2,6 @@
 \newpage
 \section{Segmentação Semântica}
 \label{semantic:semantic}
-
 No tocante às segmentações que fazem uso de técnicas de \textit{deep learning}, a segmentação semântica é uma das que fazem parte desse grupo, sendo que essas possuem o propósito de atribuir uma determinada classe, ou \textit{rótulo}, para cada pixel presente em uma cena \cite{Wang2017, Ghosh2019, Shelhamer2016, Arbelaez2012,Zhang2018} o que é determinado como um trabalho de nível de pixel.
 
 O uso de técnicas de segmentações semânticas tem sido útil para situações em que o contexto é desconhecido, visto que por meio dessas abordagens é possível entender à categoria dos objetos presentes na cena, assim como propriedades relacionadas a sua localização e os formatos dos objetos \cite{Zhang2018}, sendo de extrema importância para o trabalho com imagens médicas, sistemas autônomos e afins.
@@ -37,7 +36,6 @@ Sendo assim, neste capítulo, assuntos relacionados a abordagens de estado-da-ar
 
 \subsection{\textit{Fully Convolutional Networks} (FCN)}
 \label{semantic:FCN}
-
 Quando se trata de segmentações semânticas, várias arquiteturas e \textit{frameworks} são propostos para a resolução de problemas, de modo que garanta evolução quanto ao desempenho e às suas capacidades, contudo, hodiernamente, o \textit{framework} que é considerado estado-da-arte para esse quesito é o Fully Convolutional Networks \cite{Shelhamer2016} ou FCN, que propõem o trabalho apenas com camadas convolucionais - incluindo a última camada \cite{Hesamian2019}, como demonstrado na Figura \ref{semantic:fig:5} - assim, estabelecendo uma subamostragem de pixels (\textit{pixelwise}), seguida pela construção de um mapa de segmentação de mesmo tamanho que a imagem de entrada \cite{Minaee2021, Zhang2018, Hesamian2019}.
 
 \begin{figure}[H]
@@ -71,7 +69,6 @@ Por fim, quanto às suas limitações, é informado que as configurações de FC
 
 \subsection{Métricas}
 \label{semantic:metrics}
-
 Tendo dito que o objetivo principal das segmentações semânticas está relacionado com a assimilação de classes para cada um dos pixels presentes na imagem \cite{Csurka} fazem-se necessárias métricas que mensurem o desenvolvimento positivo ou negativo do modelo em questão.
 
 Sendo assim, nesta seção, métricas comuns para a avaliação de segmentações semânticas serão discutidas: métricas baseadas em região (Sessão \ref{semantic:pa}), \textit{intersection over union} (Seção \ref{semantic:IoU}) e F1 \textit{Score} (Seção \ref{semantic:f1}).
@@ -79,7 +76,6 @@ Sendo assim, nesta seção, métricas comuns para a avaliação de segmentaçõe
 
 \subsubsection{\textit{Pixel Accuracy}}
 \label{semantic:pa}
-
 A métrica de \textit{pixel accuracy} (PA) é uma das métricas mais simples utilizadas no contexto de segmentação semântica, em que, na prática, se resume na razão entre o pixel classificado corretamente em relação ao total de pixels na imagem \cite{Minaee2021}. Sendo assim, é possível expressar a sua fórmula pela Equação \ref{semantic:eq:1}:
 
 \begin{equation}
@@ -93,7 +89,6 @@ Todavia, é relevante citar que essa métrica indicando apenas precisão dos pix
 
 \subsubsection{\textit{Intersection over Union} (IoU)}
 \label{semantic:IoU}
-
 Já a métrica de intersecção entre a união, do inglês \textit{Intersection over Union} (IoU) ou Jaccard Index, é uma métrica que não passa por problemas de desbalanceamento de classes, além de ser considerada uma das métricas mais comuns para esse tipo de atividade \cite{Minaee2021}.
 
 Sua representação pode ser visualizada a partir da Figura \ref{semantic:fig:1}, além de que pela Equação \ref{semantic:eq:2} é possível entender que o resultado de IoU se dá pela razão entre a intersecção da segmentação predita (A) e \textit{ground truth} (B), e a união entre a segmentação predita e o \textit{ground truth}, ou seja,
@@ -120,7 +115,6 @@ Após a criação dessa métrica, outras variações ganharam repercussão, das 
 
 \subsubsection{F1 \textit{Score}}
 \label{semantic:f1}
-
 Para a definição da métrica F1-\textit{score}, que é extremamente comum na esfera de segmentação de imagens, é necessário ter ciência de antemão que ela é composta pelo uso de outras duas métricas, sendo elas: 1) precisão, que é a divisão de verdadeiros positivos pela soma de verdadeiros positivos e falsos positivos; 2) revocação, que é a divisão de verdadeiros positivos pela soma de verdadeiros positivos e falsos negativos, como mostrados nas Equações \ref{semantic:eq:3} e \ref{semantic:eq:4}, respectivamente,
 
 \begin{equation}
@@ -160,7 +154,6 @@ Por fim, vale comentar que para situações em que tem-se uma segmentação bin�
 
 \subsection{Considerações Finais do Capítulo}
 \label{semantic:conclusion}
-
 Concluindo em relação a segmentações semânticas, pode-se dizer que são um grande avanço quando comparadas a tarefas de detecção de objetos, como ocorre em \cite{Vaillant1994}, visto que esse novo modelo de segmentações possibilita o trabalho com mais dados em relação às cenas, como citado neste capitulo (Capítulo \ref{semantic:semantic}).
 
 Entretanto, essa rede possui dificuldade quando o problema em questão está relacionado à separação de objetos que possuem a mesma classe, mas são objetos diferentes, visto que não há uma separação por indivíduos \cite{Kirillov2019a} como é possível observar na Figura \ref{semantic:fig:4}\subref{semantic:fig:4.1}, em que todas as pessoas próximas se encontram conectadas ou em situações que se torna necessária a segmentação minuciosa de uma cena \cite{Ghosh2019}, como as partes do corpo de uma pessoa, por exemplo.

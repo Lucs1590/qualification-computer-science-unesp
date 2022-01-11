@@ -55,18 +55,49 @@ Por fim, em relação aos métodos desenvolvido para cumprir com os objetivos do
 \label{proposal:dataset}
 Em relação ao conjunto de dados, ressalta-se que foi estabelecido uma parceria com a Faculdade de Odontologia de Araraquara - UNESP, de modo que ...
 
+
 \subsubsection{Método}
 \label{proposal:method}
+Dentre os métodos disponíveis para realizar a tarefa de segmentação panóptica de componentes visuais, destaca-se que serão realizados testes a partir dos modelos disponibilizados pela biblioteca \textit{Detectron2} \cite{detectron2}, seguindo também a formatação inicial proposta por Kirillov \textit{et al.} \cite{Kirillov2019a}, a qual era composta por um modelo de Mask R-CNN (Seção \ref{instance:mask}) para realizar a parte de segmentação de instâncias e o modelo de FCN (Seção \ref{semantic:FCN}) para realizar a segmentação de semântica.
+
+Todavia, haja vista o resultado esperado nesse trabalho, vide a Seção \ref{proposal:expres}, para as tarefas de segmentação panóptica com o uso de partes, diferente das abordagens demonstradas na Figura \ref{proposal:method:fig:1}, necessita também de uma parte voltada para a segmentação das partes de algo classificado como \textit{thing} ou \textit{stuff}, como demonstrado na Figura \ref{proposal:method:fig:2}, desse modo também será testada a estrutura desenhada por de Geus \textit{et al.} \cite{DeGeus2021} a qual é composta por um modelo de segmentação panóptica (DLv3-ResNeSt269 \& DetectoRS) juntamente com um modelo responsável por realizar uma segmentação de partes (BSANet).
+
+\begin{figure}[H]
+    \centering
+    \caption{Metodologias de rede para segmentação panóptica.}
+    \includegraphics[width=1\textwidth]{recursos/imagens/proposal/model_methodologies.png}
+    \label{proposal:method:fig:1}
+
+    \vspace*{1 cm}
+    Fonte: retirado e adaptado de \cite{Elharrouss2021PanopticReview}.
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Estrutura exemplificando metodologia para segmentação \textit{Part-Aware}.}
+    \includegraphics[width=4in]{recursos/imagens/proposal/estrutura.png}
+    \label{proposal:method:fig:2}
+
+    \vspace*{1 cm}
+    Fonte: do próprio autor.
+\end{figure}
+
 
 \subsection{Metodologia}
 \label{proposal:methodology}
+Nesta Seção, será descrito quanto à metodologia adotada para os experimentos a serem realizados, de modo a conquistar os objetivos propostos no presente trabalho. Na Subseção \ref{proposal:transf} será detalhado sobre o processos de transferência de aprendizado a ser realizado no conjunto de dados, na Subseção \ref{proposal:pcapooling} se discorrerá sobre o processo de alteração na camada de \textit{pooling} dos modelos e, finalmente, na Subseção \ref{proposal:avaliation} será descrito o método de avaliação escolhido para a submissão dos modelos.
 
 \subsubsection{Transferência de Aprendizado}
 \label{proposal:transf}
 
+
+\subsubsection{Alteração na Camada de \textit{Pooling}}
+\label{proposal:pcapooling}
+Por fim, com respeito à aplicação da técnica de \textit{Block-Based Principal Component Analysis} (ou BPCA) nas camadas de \textit{pooling} dos modelos base para a realização da segmentação panóptica, a esperança é que no momento em que as redes realizam o \textit{pooling}, que haja uma redução de dimensionalidade mantendo as estruturas originais, inclusive espacias, da imagem em questão, o que normalmente é perdido quando se aplica uma estratégia de \textit{max pooling} (representado na Figura \ref{deep:fig:7}), por exemplo. Esse tipo de aplicação já foi realizado por Levada A. \textit{et al.} \cite{Levada2011}, de modo que se provou satisfatória, todavia a aplicação em modelos de segmentação moderna pode ser relevante, de modo que possa trazer resultados positivos quanto às métricas de PQ e PartPQ.
+
+
 \subsubsection{Avaliação}
 \label{proposal:avaliation}
-
 O método de avaliação escolhido seguiu no mesmo caminho do artigo tomado como referência para realizar a segmentação \textit{part-aware panoptic segmentation} \cite{DeGeus2021}, que, no que lhe concerne, teve como base o artigo pioneiro de segmentação panóptica \cite{Kirillov2019a}, que aplica a métrica PQ (Equação \ref{panoptic:eq:2}), realizando uma sucinta adaptação que possibilita metrificar as partes das segmentações panópticas visto que é aplicado para cada uma das classes ($l$) presentes na cena, sendo elas \textit{thing} ou \textit{stuff}. Através da equação \ref{proposal:avaliation:eq:1} é possível entender a métrica de avaliação \textit{Part-PQ}, a qual fora escolhida para avaliação.
 
 \begin{equation}
@@ -86,9 +117,9 @@ Em relação à Equação \ref{proposal:avaliation:eq:1}, destaca-se ainda que a
 
 Por fim, após a aplicação de PartPQ em todas as classes, calcula-se a média entre avaliações realizadas, de modo que é possível avaliar o desempenho do modelo em toda a cena e demonstrou resultados consideráveis quando comparado à métrica original \cite{DeGeus2021}.
 
+
 \subsection{Revisão de Literatura}
 \label{proposal:revision}
-
 Em meio a vários estilos de revisão, vale dizer que a revisão sistemática é amplamente difundida em meio cientifico, destacando-se em pesquisas de âmbito clínico e médico e garantindo menos viés, maior confiabilidade e um resumo de forma crítica dos trabalhos científicos \cite{barbosa2019}. Sendo assim, no presente trabalho, foi realizado uma revisão, bem como buscas baseadas nos artigos \cite{barbosa2019} e \cite{liberati2009}, de modo que se inspirou nas recomendações dos mesmos, salvo os casos relacionados a questões de aplicações clínicas.
 
 Em relação às revisões, foram realizadas duas, de modo a abranger tanto os artigos técnicos em relação à segmentação panóptica, quanto artigos que servissem de base para a segmentação na área odontológica. A questão a ser tomada como base para esse estudo é: Como modelar \textit{framework} para segmentar imagens de componentes visuais hierarquicamente?
@@ -102,7 +133,7 @@ Sendo assim, os indicadores referentes as pesquisas realizadas sobre esse assunt
 \begin{figure}[H]
     \centering
     \caption{Diagrama de revisão de estudos em segmentação panóptica.}
-    \includegraphics[height=2.3in]{recursos/imagens/introduction/grabcut.png}
+    \includegraphics[height=4.5in]{recursos/imagens/proposal/revisao1.png}
     \label{proposal:revision:fig:1}
 
     \vspace*{1 cm}
@@ -115,19 +146,18 @@ Quanto aos critérios de inclusão, destaca-se os artigos que abordaram ao menos
 
 \begin{figure}[H]
     \centering
-    \caption{Diagrama de revisão de estudos em segmentação panóptica.}
-    \includegraphics[height=2.3in]{recursos/imagens/introduction/grabcut.png}
+    \caption{Diagrama de revisão de estudos em segmentação odontológica.}
+    \includegraphics[height=4.5in]{recursos/imagens/proposal/revisao2.png}
     \label{proposal:revision:fig:2}
 
     \vspace*{1 cm}
     Fonte: do próprio autor.
 \end{figure}
-.
+
 
 \subsection{Cronograma}
 \label{proposal:cron}
-
-Com o intuito de listar todas as atividades necessárias para o cumprimento do projeto, bem como definição do período em que as mesmas devem ser realizadas, foram construídas a Tabela \ref{proposal:cron:table:1} e \ref{proposal:cron:table:2}, almejando realizar no máximo quatro  experimentos simultaneamente, considerando a complexidade, esforço e incerteza envolvida em cada um desses testes. Em relação às submissões é desejado realizar uma para conferência, objetivando  contribuir com os experimentos desenvolvidos na primeira etapa e uma segunda para um periódico com o intuito de contribuir com as descobertas realizadas no experimento IV. Por fim, tem se como objetivo realizar a escrita do trabalho em todo o período do cronograma - salvo o mês planejado para a defesa - sendo que essa atividade ocorrera paralelamente aos demais experimentos e atividades listadas.
+Com o intuito de listar todas as atividades necessárias para o cumprimento do projeto, bem como definição do período em que as mesmas devem ser realizadas, foram construídas a Tabela \ref{proposal:cron:table:1} e \ref{proposal:cron:table:2}, almejando realizar no máximo quatro  experimentos simultaneamente, considerando a complexidade, esforço e incerteza envolvida em cada um desses testes. Em relação às submissões é desejado realizar uma para conferência, objetivando  contribuir com os experimentos desenvolvidos na primeira etapa e uma segunda para um periódico com o intuito de contribuir com as descobertas realizadas no experimento IV. Por fim, tem se como objetivo realizar a escrita do trabalho em todo o período do cronograma - salvo o mês planejado para a defesa - sendo que essa atividade ocorrera paralelamente aos demais experimentos e atividades listadas. Por fim, vale lembrar, como citado na Subseção \ref{proposal:dataset}, que o trabalho de anotação das imagens ocorrerá em parceria com estudantes e a equipe coordenada pelo Prof. Dr. Osmir Batista de Oliveira Júnior. 
 
 \definecolor{midgray}{gray}{.5}
 
@@ -190,5 +220,54 @@ Com o intuito de listar todas as atividades necessárias para o cumprimento do p
     Fonte: do próprio autor.
 \end{table}
 
+
 \subsection{Resultados Esperados}
 \label{proposal:expres}
+Tendo em vista as quatro principais propostas que estão resumidas no Capítulo \ref{proposal:proposal}, vale dizer que para cada uma delas há a esperança de colher resultados.
+
+No que diz respeito a aplicação de segmentação de componentes visuais na área odontológica, destaca-se que esse é o ponto que coloca o desenvolvimento de frente a problemas reais, com o objetivo de obter a maior descrição de cena possível no contexto odontológico, assim auxiliando profissionais da área na evidenciação de caracteristicas da boca. Essa proposta foi iniciada a partir do estudo realizado por \cite{DeGeus2021} que busca, por meio do \textit{Part-Awere Panoptic Segmentation}, trazer uma visão mais holística das cenas. Sendo assim, com a meta de esclarecer visualmente esse resultado esperado, a expectativa é que por meio da entrada de uma imagem, como a representada pela Figura \ref{proposal:expres:fig:4}, tenha-se como saída da rede uma outra imagem, como a representada pela Figura \ref{proposal:expres:fig:5}.
+
+\begin{figure}[H]
+    \centering
+    \caption{Exemplo de imagem de entrada para a rede a ser desenvolvida.}
+    \includegraphics[height=4.3in]{recursos/imagens/proposal/boca.png}
+    \label{proposal:expres:fig:4}
+
+    \vspace*{1 cm}
+    Fonte: do próprio autor.
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Exemplo de imagem de saída esperada pela rede a ser desenvolvida.}
+    \includegraphics[height=4.3in]{recursos/imagens/proposal/boca_segmentada_v2.png}
+    \label{proposal:expres:fig:5}
+
+    \vspace*{1 cm}
+    Fonte: do próprio autor.
+\end{figure}
+
+Tendo observado e considerando as figuras de entrada e saída, respectivamente, Figura \ref{proposal:expres:fig:4}
+ e \ref{proposal:expres:fig:5}, pode-se dizer que uma descrição de cena que se encaixa na representação da Figura \ref{proposal:expres:fig:5}, dadas às segmentações pode ser: Fotografia de uma boca contendo ``pele'', ``lábios'', ``bochechas'', ``gengivas'', ``palato mole'', ``língua'' e ``úvula'', como o tipo \textit{stuff}. Além disso, tem-se como parte da ``gengiva'', ``resto de comida''. Já em relação às instâncias (\textit{things}), nessa fotografia, encontram-se ``26 dentes'', sendo que é possível localizar como partes dos dentes 1, 2 e 11, ``cáries'' e como parte dos dentes 1, 2, 13 e 14, ``restaurações''.
+
+Essa descrição de resultado esperado bem como as segmentações exemplificadas só são possíveis por meio de uma segmentação panóptica com uma segmentação voltada para as partes, o que suporta o uso do método estudado em \cite{DeGeus2021}, estabelecendo, assim, uma segmentação hierárquica de componentes visuais.
+
+Caso a técnica de segmentação escolhida fosse a semântica, a contagem de dentes não seria possível. Por outro lado, se a segmentação escolhida fosse a de instâncias, partes como gengivas, comissuras e partes incontáveis seriam ignoradas e, por fim, caso a segmentação escolhida fosse a panóptica, desenvolvida por Kirillov \textit{et al.} \cite{Kirillov2019a}, não seria possível estabelecer uma relação entre as partes das classes, como é exemplificado na Figura \ref{proposal:expres:fig:6}, onde as cáries e a restauração são parte do ``dente 2''.
+
+\begin{figure}[H]
+    \centering
+    \caption{Exemplo de hierarquia entre componentes visuais.}
+    \includegraphics[width=1\textwidth]{recursos/imagens/proposal/segmentada.png}
+    \label{proposal:expres:fig:6}
+
+    \vspace*{1 cm}
+    Fonte: do próprio autor.
+\end{figure}
+
+Em resumo, no presente trabalho, quanto à segmentação hierárquica de componentes visuais espera-se a realização de um \textit{framework} que mapeie fotografias odontológicas, retornando as estruturas da boca e, principalmente, possibilitando a contagem de dentes e a presença de caries.
+ 
+Em relação a contribuição com a publicação dos códigos para a segmentação hierárquica de componentes visuais é esperado que seja desenvolvido uma biblioteca que facilite e colabore com o desenvolvimento de novos métodos de segmentação panóptica com o uso de \textit{part-aware}, além de acelerar o desenvolvimento com os códigos já desenvolvidos no presente trabalho.
+
+Acerca da avaliação e adaptação de uma ferramenta de segmentação para a anotação das imagens, vale dizer que essa é uma tarefa de suma importância, de modo a se tornar escalável a atividade de anotação de imagens para com a parceria estabelecida entre a Faculdade de Odontologia de Araraquara, além de trazer velocidade às fases de treino e teste do modelo a ser desenvolvido. Destarte, quanto ao ponto relatado a expectativa é que no final das análises, uma ferramenta tenha uma análise comparativa entre as ferramentas estudadas e que uma seja determinada para a anotações recorrentes que ocorrerão nesse projeto, além de contar com contribuições para a ferramenta escolhida caso sua implementação não seja suficiente, propondo, assim, auxiliar na segmentação com o uso de segmentação panóptica, tecnica que já fora testada para essa atividade em outros estudos \cite{Elharrouss2021PanopticReview}.
+
+Por fim, com respeito à aplicação da técnica BPCA nas camadas de \textit{pooling} dos modelos base a esperança é que uma redução de dimensionalidade mantendo as estruturas espacias da imagem em questão.
