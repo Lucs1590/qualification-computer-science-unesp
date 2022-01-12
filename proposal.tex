@@ -39,7 +39,7 @@ As demais seções desse capítulo estão organizadas de seguinte modo que a Se�
 
 \subsection{Materiais e Métodos}
 \label{proposal:matmet}
-Nesta Seção, serão discorridos os detalhes sobre as tecnologias que serão utilizadas para o desenvolvimento de um modelo de segmentação panóptica que segmenta componentes visuais (Subseção \ref{proposal:tec}), sobre os conjuntos de dados e as estratégias utilizadas para cumprirem com o objetivo da segmentação (Subseção \ref{proposal:dataset}) e, por fim, as técnicas e métodos escolhidos para serem utilizados nos experimentos (Subseção \ref{proposal:method}).
+Nesta Seção, serão discorridos os detalhes sobre as tecnologias que serão utilizadas para o desenvolvimento de um modelo de segmentação panóptica que segmenta componentes visuais (Subseção \ref{proposal:tec}), as técnicas e métodos escolhidos para serem utilizados nos experimentos (Subseção \ref{proposal:method}) e, por fim, sobre os conjuntos de dados selecionados para cumprirem com o objetivo da segmentação (Subseção \ref{proposal:dataset}).
 
 
 \subsubsection{Tecnologias}
@@ -51,12 +51,7 @@ Já em relação às bibliotecas planejadas ao projeto, destacam-se aquelas cujo
 Por fim, em relação aos métodos desenvolvido para cumprir com os objetivos do presente trabalho, no que lhes concerne, de realizar a segmentação de componentes visuais, declara-se que serão disponibilizado de modo \textit{Open Source} por meio do \textit{Github} do autor\footnote{Perfil \textit{Github} do autor – \url{https://github.com/Lucs1590}}, segundo os preceitos a licença Apache v2.0 \cite{Licenses}, com o intuito de contribuir com o crescimento de futuros pesquisadores, além de possibilitar futuras melhorias da aréa de segmentação com uso de segmentação hierárquica.
 
 
-\subsubsection{Conjuntos de Dados}
-\label{proposal:dataset}
-Em relação ao conjunto de dados, ressalta-se que foi estabelecido uma parceria com a Faculdade de Odontologia de Araraquara - UNESP, de modo que ...
-
-
-\subsubsection{Método}
+\subsubsection{Métodos}
 \label{proposal:method}
 Dentre os métodos disponíveis para realizar a tarefa de segmentação panóptica de componentes visuais, destaca-se que serão realizados testes a partir dos modelos disponibilizados pela biblioteca \textit{Detectron2} \cite{detectron2}, seguindo também a formatação inicial proposta por Kirillov \textit{et al.} \cite{Kirillov2019a}, a qual era composta por um modelo de Mask R-CNN (Seção \ref{instance:mask}) para realizar a parte de segmentação de instâncias e o modelo de FCN (Seção \ref{semantic:FCN}) para realizar a segmentação de semântica.
 
@@ -83,6 +78,47 @@ Todavia, haja vista o resultado esperado nesse trabalho, vide a Seção \ref{pro
 \end{figure}
 
 
+\subsubsection{Conjuntos de Dados}
+\label{proposal:dataset}
+Em relação ao conjunto de dados, por esse trabalho fazer uso da segmentação \textit{Part-Aware Panoptic Segmentation} proposta em \cite{DeGeus2021}, sendo que esta é uma nova abordagem, vale dizer que a quantidade de conjuntos de dados ainda é escassa, principalmente quando se trata de trabalhos voltados para uma área em específico, como a odontológica.
+
+Todavia, no presente trabalho serão utilizados tanto conjuntos de dados que são mais generalistas, mas são voltados para a segmentação panóptica, quanto conjuntos de dados voltados para a parte odontológica, os quais precisarão ser anotados de modo a estarem adaptados para o seu uso em bases de treino e teste.
+
+Quanto aos conjuntos de dados mais generalistas vale dizer que há algumas estratégias e justificativas para o seu uso, as quais serão descritas na Subseção \ref{proposal:transf}, entretanto, dentre os conjuntos de dados escolhidos, destacam-se PASCAL Panoptic Parts e Cityscapes Panoptic Parts, sendo que os estes foram desenvolvidos pelos autores que abrolharam a segmentação panóptica com uso da técnica \textit{Part-Aware} \cite{DeGeus2021}.
+
+O conteúdo dos conjuntos PASCAL Panoptic Parts e Cityscapes Panoptic Parts foram criados a partir de dos conjuntos de dados \cite{everingham2010pascal} e \cite{Cordts2016}, sendo que o conteúdo do primeiro está voltado para pessoas, animais, veículos e cenas em locais fechados, quando o segundo conta com cenas de cidades, respectivamente, os quais são exemplificados na Figura \ref{proposal:dataset:fig:1}.
+
+\begin{figure}[H]
+   \caption{Imagens originais e anotadas dos \textit{datasets} para \textit{Part-Aware Panoptic Segmentation}.}
+   \centering
+   \label{proposal:dataset:fig:1}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=3in]{recursos/imagens/proposal/city.png}
+        \caption{Imagem original e anotada do Cityscapes Panoptic Parts, respectivamente.}
+        \label{proposal:dataset:fig:1.1}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=3in]{recursos/imagens/proposal/pascal.png}
+        \caption{Imagem original e anotada do PASCAL Panoptic Parts, respectivamente.}
+        \label{proposal:dataset:fig:1.2}
+    \end{subfigure}%
+
+    \vspace*{1 cm}
+    Fonte: retirado e adaptado de \cite{Lin2016}.
+\end{figure}
+
+
+Os conjuntos criados, os quais contemplam segmentação \textit{Part-Aware}, quando relacionado ao Cityscape Panoptic Parts, vale dizer que este possui 2975 imagens para treino e 500 para validação, totalizando em 3475 imagens dispostas em resolução de 1024×2048. Por sua vez, o PASCAL Panoptic Parts possui 4998 imagens para treino e  5105 imagens para validação, as quais estão em resoluções de 387×470, totalizando à disposição de 10103 imagens.
+
+Por fim, ainda há a disposição de um conjunto de dados \cite{mo2019}, sendo que este abrange a anotação de 573585 partes de instancias, realizando a cobertura de 24 categorias de objetos, as quais também podem ser úteis para agregar ao projeto.
+
+Quanto aos conjuntos de dados citados anteriormente que estarão dispostos para o meio odontológico, vale citar que esses não possuem uma anotação com classes de partes, as quais se fazem \textit{mister} para a aplicação panóptica com uso de \textit{Part-Aware}, todavia vale destacar que foi estabelecido uma parceria com a Faculdade de Odontologia de Araraquara - UNESP, a qual terá com líder o Prof. Dr. Osmir Batista de Oliveira Júnior, de modo que estudantes e especialistas da área realizem as anotações, bem como a disponibilização, de algumas imagens de fotografias odontológicas, de modo a contribuírem para o projeto.
+
+Além das fotografias cedidas pela parceria estabelecida, vale destacar que alguns conjuntos de dados serão utilizados com o intuito de agregar em volume de imagens, dos quais, cita-se o conjunto de dados desenvolvido por You \textit{et al.} \cite{You2020}, o qual possui 886 anotadas, o conjunto desenvolvido por Hyttinen \textit{et al.} \cite{Hyttinen2020}, com 316 imagens, sendo que 215 desssas imagens possuem uma anotação inicial e, por fim, o conjunto de dados disponível no \textit{website} da Dental Care, o qual cede 839 imagens odontológicas como cortesia para estudos e desenvolvimento científico. O objetivo é que todas essas 1370 imagens sejam agregadas à \textit{pipeline} de anotação de modo a se tornarem úteis para a construção do modelo proposto no presente trabalho.
+
 \subsection{Metodologia}
 \label{proposal:methodology}
 Nesta Seção, será descrito quanto à metodologia adotada para os experimentos a serem realizados, de modo a conquistar os objetivos propostos no presente trabalho. Na Subseção \ref{proposal:transf} será detalhado sobre o processos de transferência de aprendizado a ser realizado no conjunto de dados, na Subseção \ref{proposal:pcapooling} se discorrerá sobre o processo de alteração na camada de \textit{pooling} dos modelos e, finalmente, na Subseção \ref{proposal:avaliation} será descrito o método de avaliação escolhido para a submissão dos modelos.
@@ -98,7 +134,7 @@ Por fim, com respeito à aplicação da técnica de \textit{Block-Based Principa
 
 \subsubsection{Avaliação}
 \label{proposal:avaliation}
-O método de avaliação escolhido seguiu no mesmo caminho do artigo tomado como referência para realizar a segmentação \textit{part-aware panoptic segmentation} \cite{DeGeus2021}, que, no que lhe concerne, teve como base o artigo pioneiro de segmentação panóptica \cite{Kirillov2019a}, que aplica a métrica PQ (Equação \ref{panoptic:eq:2}), realizando uma sucinta adaptação que possibilita metrificar as partes das segmentações panópticas visto que é aplicado para cada uma das classes ($l$) presentes na cena, sendo elas \textit{thing} ou \textit{stuff}. Através da equação \ref{proposal:avaliation:eq:1} é possível entender a métrica de avaliação \textit{Part-PQ}, a qual fora escolhida para avaliação.
+O método de avaliação escolhido seguiu no mesmo caminho do artigo tomado como referência para realizar a segmentação \textit{Part-Aware Panoptic Segmentation} \cite{DeGeus2021}, que, no que lhe concerne, teve como base o artigo pioneiro de segmentação panóptica \cite{Kirillov2019a}, que aplica a métrica PQ (Equação \ref{panoptic:eq:2}), realizando uma sucinta adaptação que possibilita metrificar as partes das segmentações panópticas visto que é aplicado para cada uma das classes ($l$) presentes na cena, sendo elas \textit{thing} ou \textit{stuff}. Através da equação \ref{proposal:avaliation:eq:1} é possível entender a métrica de avaliação \textit{Part-PQ}, a qual fora escolhida para avaliação.
 
 \begin{equation}
 \label{proposal:avaliation:eq:1}
