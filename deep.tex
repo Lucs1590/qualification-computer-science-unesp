@@ -361,7 +361,7 @@ Destaca-se que a convolução é um processo de média móvel, ou seja, há o ca
 \subsubsection{Camada de \textit{Pooling}}
 \label{deep:pooling}
 
-No âmbito das camadas de \textit{pooling}, vale citar que são amplamente utilizada nas CNNs para reduzir o tempo de treinamento, visto que estas camadas tem como objetivo a redução de dimensionalidade do mapa de características entre as execuções da rede, algo que fica muito claro ao observar a Figura \ref{deep:fig:7} que dá forma à técnica conhecida como \textit{max pooling}, que captura apenas os maiores valores do \textit{feature map}, de acordo com o deslizamento do \textit{kernel}.
+No âmbito das camadas de \textit{pooling}, vale citar que são amplamente utilizada nas CNNs para reduzir o tempo de treinamento, visto que estas camadas tem como objetivo a redução de dimensionalidade do mapa de características entre as execuções da rede, algo que fica muito claro ao observar a Figura \ref{deep:fig:7}, que dá forma à técnica conhecida como \textit{max pooling}, a qual captura apenas os maiores valores do mapa de características, de acordo com o deslizamento do \textit{kernel}.
 
 \begin{figure}[H]
     \centering
@@ -374,7 +374,7 @@ No âmbito das camadas de \textit{pooling}, vale citar que são amplamente utili
 \end{figure}
 
 \begin{sloppypar}
-Vale citar que outros modelos de \textit{pooling} também se fazem presentes na literatura, dos quais podem ser citados o \textit{average pooling}, \textit{median pooling} e \textit{weighted average} \cite{Goodfellow2016} ou até mesmo o \textit{global average pooling}, que reduz o \textit{feature map} em um único valor e é exemplificado por meio da Figura \ref{deep:fig:8}.
+Ainda, vale mencionar que outros modelos de \textit{pooling} também se fazem presentes na literatura, dos quais podem ser citados o \textit{average pooling}, \textit{median pooling} e \textit{weighted average} \cite{Goodfellow2016} ou até mesmo o \textit{global average pooling}, que reduz o \textit{feature map} em um único valor e é exemplificado por meio da Figura \ref{deep:fig:8}. Após estes modelos supracitados, a motivação para adaptação do método de \textit{pooling} vem crescendo, de modo que cada modificação contribua para solucionar o problema em questão.
 \end{sloppypar}
 
 \begin{figure}[H]
