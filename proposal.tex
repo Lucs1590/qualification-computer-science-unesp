@@ -7,7 +7,7 @@
 Considerando as segmentações modernas citadas nos Capítulos \ref{semantic:semantic}, \ref{instance:instance} e \ref{panoptic:panoptic}, fica claro que a segmentação panóptica é nomeada como a que possui maior riqueza de detalhes, de modo a ter uma compreensão mais clara das cenas, todavia considerando os problemas discorridos no Capítulo \ref{panoptic:panoptic}, bem como na Seção \ref{panoptic:conclusion} estudos vêm sendo desenvolvidos para solucionar esses obstáculos.
 
 \begin{sloppypar}
-Dentre os estudos desenvolvidos, cita-se o de Part-Aware Panoptic Segmentation \cite{DeGeus2021} com as propostas de trazer uma visão holística maior para as cenas e unir tarefas de \textit{scene parsing} e \textit{part parsing}, dispondo-se, indiretamente, também a trabalhar com objetos de pequena escala.
+Dentre os estudos desenvolvidos, cita-se o de \textit{Part-Aware Panoptic Segmentation} \cite{DeGeus2021} com as propostas de trazer uma visão holística maior para as cenas e unir tarefas de \textit{scene parsing} e \textit{part parsing}, dispondo-se, indiretamente, também a trabalhar com objetos de pequena escala.
 \end{sloppypar}
 
 Dentre as áreas com oportunidades para o desenvolvimento e aplicação dessa técnica, a qual ainda não fora explorada, cita-se a área odontológica que, como também citado na Introdução (Capítulo \ref{intro:intro}), possibilita desafios com a meta de descrever o que há na boca a partir de fotografias orais, o que pode ser explorado por meio de um \textit{framework} de segmentação panóptica.
@@ -28,7 +28,7 @@ Sendo assim, este trabalho tem como objetivo aplicar técnicas de segmentação 
 Em resumo, dentre as perspectivas de contribuição deste trabalho, lista-se:
 
 \begin{enumerate}[I]
-  \item A utilização da segmentação panóptica para a segmentação de componentes visuais na área odontológica;
+  \item A utilização da segmentação panóptica hierárquica para a segmentação de componentes visuais na área odontológica;
   \item A disponibilização do código de maneira \textit{open source} com a finalidade de dar suporte aos trabalhos na área de \textit{part-aware panoptica segmentation}.
   \item A avaliação e adaptação (caso necessário) de uma ferramenta que auxilie a anotação de imagens com técnicas de segmentação;
   \item A aplicação da técnica \textit{block-based pca} na camada de \textit{pooling} dos modelos base para a segmentação panóptica.
@@ -84,9 +84,9 @@ Em relação ao conjunto de dados, por esse trabalho fazer uso da segmentação 
 
 Todavia, no presente trabalho serão utilizados tanto conjuntos de dados que são mais generalistas, mas são voltados para a segmentação panóptica, quanto conjuntos de dados voltados para a parte odontológica, os quais precisarão ser anotados de modo a estarem adaptados para o seu uso em bases de treino e teste.
 
-Quanto aos conjuntos de dados mais generalistas vale dizer que há algumas estratégias e justificativas para o seu uso, as quais serão descritas na Subseção \ref{proposal:transf}, entretanto, dentre os conjuntos de dados escolhidos, destacam-se PASCAL Panoptic Parts e Cityscapes Panoptic Parts, sendo que os estes foram desenvolvidos pelos autores que abrolharam a segmentação panóptica com uso da técnica \textit{Part-Aware} \cite{DeGeus2021}.
+Quanto aos conjuntos de dados mais generalistas vale dizer que há algumas estratégias e justificativas para o seu uso, as quais serão descritas na Subseção \ref{proposal:transf}, entretanto, dentre os conjuntos de dados escolhidos, destacam-se PASCAL \textit{Panoptic Parts} e \textit{Cityscapes Panoptic Parts}, sendo que os estes foram desenvolvidos pelos autores que abrolharam a segmentação panóptica com uso da técnica \textit{Part-Aware} \cite{DeGeus2021}.
 
-O conteúdo dos conjuntos PASCAL Panoptic Parts e Cityscapes Panoptic Parts foram criados a partir de dos conjuntos de dados \cite{everingham2010pascal} e \cite{Cordts2016}, sendo que o conteúdo do primeiro está voltado para pessoas, animais, veículos e cenas em locais fechados, quando o segundo conta com cenas de cidades, respectivamente, os quais são exemplificados na Figura \ref{proposal:dataset:fig:1}.
+O conteúdo dos conjuntos PASCAL \textit{Panoptic Parts} e \textit{Cityscapes Panoptic Parts} foram criados a partir de dos conjuntos de dados \cite{everingham2010pascal} e \cite{Cordts2016}, sendo que o conteúdo do primeiro está voltado para pessoas, animais, veículos e cenas em locais fechados, quando o segundo conta com cenas de cidades, respectivamente, os quais são exemplificados na Figura \ref{proposal:dataset:fig:1}.
 
 \begin{figure}[H]
    \caption{Imagens originais e anotadas dos \textit{datasets} para \textit{Part-Aware Panoptic Segmentation}.}
@@ -94,15 +94,15 @@ O conteúdo dos conjuntos PASCAL Panoptic Parts e Cityscapes Panoptic Parts fora
    \label{proposal:dataset:fig:1}
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
-        \includegraphics[height=3in]{recursos/imagens/proposal/city.png}
-        \caption{Imagem original e anotada do Cityscapes Panoptic Parts, respectivamente.}
+        \includegraphics[height=2.5in]{recursos/imagens/proposal/city.png}
+        \caption{Imagem original e anotada do \textit{Cityscapes Panoptic Parts}, respectivamente.}
         \label{proposal:dataset:fig:1.1}
     \end{subfigure}%
     ~ 
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
-        \includegraphics[height=3in]{recursos/imagens/proposal/pascal.png}
-        \caption{Imagem original e anotada do PASCAL Panoptic Parts, respectivamente.}
+        \includegraphics[height=2.5in]{recursos/imagens/proposal/pascal.png}
+        \caption{Imagem original e anotada do PASCAL \textit{Panoptic Parts}, respectivamente.}
         \label{proposal:dataset:fig:1.2}
     \end{subfigure}%
 
@@ -111,7 +111,7 @@ O conteúdo dos conjuntos PASCAL Panoptic Parts e Cityscapes Panoptic Parts fora
 \end{figure}
 
 
-Os conjuntos criados, os quais contemplam segmentação \textit{Part-Aware}, quando relacionado ao Cityscape Panoptic Parts, vale dizer que este possui 2975 imagens para treino e 500 para validação, totalizando em 3475 imagens dispostas em resolução de 1024×2048. Por sua vez, o PASCAL Panoptic Parts possui 4998 imagens para treino e  5105 imagens para validação, as quais estão em resoluções de 387×470, totalizando à disposição de 10103 imagens.
+Os conjuntos criados, os quais contemplam segmentação \textit{Part-Aware}, quando relacionado ao \textit{Cityscape Panoptic Parts}, vale dizer que este possui 2975 imagens para treino e 500 para validação, totalizando em 3475 imagens dispostas em resolução de 1024×2048. Por sua vez, o PASCAL \textit{Panoptic Parts} possui 4998 imagens para treino e  5105 imagens para validação, as quais estão em resoluções de 387×470, totalizando à disposição de 10103 imagens.
 
 Por fim, ainda há a disposição do conjunto de dados PartNet \cite{mo2019}, sendo que este abrange a anotação de 573585 partes de instancias, realizando a cobertura de 24 categorias de objetos, as quais também podem ser úteis para agregar ao projeto.
 
@@ -129,7 +129,7 @@ Tendo em vista que os conjuntos de dados na área odontológica preparados para 
 
 A técnica de transferência de aprendizado foi inspirada em casos do mundo real, onde um panorama sobre determinado assunto tende a trazer mais eficacia para o aprendizado de novos assuntos \cite{Pan2010}, mas também para casos em que há uma pequena quantidade de amostras disponíveis em um conjunto de dados alvo para o treinamento de uma rede \cite{Weiss2016}, ocasionando em problemas, haja vista que redes de aprendizado profundo contam de uma grande quantidade de dados para ter bom desempenho \cite{Goodfellow2016}
 
-Sendo assim, por esse projeto se enquadrar no segundo caso citado dentro do paragrafo anterior, onde a quantidade de amostras do conjunto de dados para realizar a fase de treinamento é pequena, a técnica de transferência de aprendizado será adotada, utilizando amostras dos conjuntos de dados PASCAL Panoptic Parts, Cityscapes Panoptic Parts e PartsNet para o treinamento da rede, até dado momento e, depois, submetendo a mesma rede no conjunto de dados odontológico que será anotado em conjunto com a parceria realizada.
+Sendo assim, por esse projeto se enquadrar no segundo caso citado dentro do paragrafo anterior, onde a quantidade de amostras do conjunto de dados para realizar a fase de treinamento é pequena, a técnica de transferência de aprendizado será adotada, utilizando amostras dos conjuntos de dados PASCAL \textit{Panoptic Parts}, \textit{Cityscapes Panoptic Parts} e PartsNet para o treinamento da rede, até dado momento e, depois, submetendo a mesma rede no conjunto de dados odontológico que será anotado em conjunto com a parceria realizada.
 
 
 \subsubsection{Alteração na Camada de \textit{Pooling}}
@@ -158,7 +158,7 @@ Em relação à Equação \ref{proposal:avaliation:eq:1}, destaca-se ainda que a
 \label{proposal:avaliation:eq:2}
     IoU_p(p,g)= \left\{\begin{matrix}
         mIoU_{part}(p,g), & l \in \mathcal{L}^{parts}    & \\ 
-        IOU_ins(p,g),        & l \in \mathcal{L}^{no-parts} & 
+        IOU_{ins}(p,g),        & l \in \mathcal{L}^{no-parts} & 
     \end{matrix}\right.
 \end{equation}
 
