@@ -64,7 +64,7 @@ Todavia, haja vista o resultado esperado nesse trabalho, vide a Seção \ref{pro
     \label{proposal:method:fig:1}
 
     \vspace*{1 cm}
-    Fonte: retirado e adaptado de \cite{Elharrouss2021PanopticReview}.
+    Fonte: retirado e adaptado de \cite{Elharrouss2021}.
 \end{figure}
 
 \begin{figure}[H]
@@ -173,7 +173,7 @@ Em relação às revisões, foram realizadas duas, de modo a abranger tanto os a
 
 Para a primeira revisão citada, foram procurados todo tipo de estudo publicados a partir do ano de 2019 até o ano presente (2022) com o assunto relacionado a \textit{panoptic segmentation}, de modo a se basear no ano de publicação do artigo pioneiro \cite{Kirillov2019a} no assunto. Foram usados os termos a seguir em diferentes combinações: ``\textit{panoptic segmentation}'', ``\textit{part}'' e ``\textit{part-aware}''. Os idiomas foram restritos à português e inglês.
 
-Os critério de inclusão baseou-se em artigos que possuíssem a citação da técnica de segmentação \textit{part-aware} de modo a contribuir com uma segmentação hierárquica dos componentes que compunham a cena. Já em relação aos critérios de exclusão destaca-se artigos com descrição inadequada das variáveis de interesse a esta revisão, quando o artigo era especifico para uma determinada aplicação que não condizia com o tema (como carros autônomos), quando o estudo estava duplicado entre as ferramentas de busca e quando as variáveis não eram de interesse a esta revisão.
+Os critério de inclusão baseou-se em artigos que possuíssem a citação da técnica de segmentação \textit{part-aware} de modo a contribuir com uma segmentação hierárquica dos componentes que compunham a cena. Já em relação aos critérios de exclusão destaca-se artigos com descrição inadequada em relação ao interesse dessa revisão, quando o artigo era especifico para uma determinada aplicação que não condizia com o tema (como carros autônomos) e quando o estudo estava duplicado entre as ferramentas de busca.
 
 Sendo assim, os indicadores referentes as pesquisas realizadas sobre esse assunto podem ser visualizadas no diagrama abaixo (Figura \ref{proposal:revision:fig:1}).
 
@@ -189,7 +189,7 @@ Sendo assim, os indicadores referentes as pesquisas realizadas sobre esse assunt
 
 Quando se trata da segunda revisão em pauta, a que contempla as segmentações na área odontológica, destaca-se que os estudos procurados também não se limitaram ao tipo, incluindo congressos, artigos de revista, entre outros, além de utilizarem o intervalo dos anos de 2019 a 2022 como métrica, de modo a encontrar segmentações odontológicas que acompanhasse a técnica de segmentação panóptica. Os termos utilizados estão listados a seguir, de modo que foram buscados em diferentes combinações: ``odonto'', ``\textit{dentistry}'', ``\textit{deep learning}'', ``\textit{semantic segmentation}'', ``\textit{instance segmentation}'', ``\textit{panoptic segmentation}'' e ``CNN''. Os idiomas foram restritos à português e inglês.
 
-Quanto aos critérios de inclusão, destaca-se os artigos que abordaram ao menos uma das segmentações modernas, de feitio a estarem alinhados com a proposta do projeto. Quanto aos critérios de exclusão, pode-se dizer que são similares aos da primeira revisão, relatando artigos com descrição inadequada das variáveis de interesse, estudos duplicados entre as ferramentas de busca e quando as variáveis não eram de interesse a esta revisão. Dessa forma, por meio da Figura \ref{proposal:revision:fig:2} é possível visualizar a representação da revisão realizada.
+Quanto aos critérios de inclusão, destaca-se os artigos que abordaram ao menos uma das segmentações modernas, de feitio a estarem alinhados com a proposta do projeto. Quanto aos critérios de exclusão, pode-se dizer que são similares aos da primeira revisão, relatando artigos com descrição inadequada acerca da revisão em questão, estudos duplicados entre as ferramentas de busca e quando o estudo não estava diretamente relacionado aos temas ``segmentação'' e ``odontologia''. Dessa forma, por meio da Figura \ref{proposal:revision:fig:2} é possível visualizar a representação da revisão realizada.
 
 \begin{figure}[H]
     \centering
@@ -315,6 +315,6 @@ Em resumo, no presente trabalho, quanto à segmentação hierárquica de compone
  
 Em relação a contribuição com a publicação dos códigos para a segmentação hierárquica de componentes visuais é esperado que seja desenvolvido uma biblioteca que facilite e colabore com o desenvolvimento de novos métodos de segmentação panóptica com o uso de \textit{part-aware}, além de acelerar o desenvolvimento com os códigos já desenvolvidos no presente trabalho.
 
-Acerca da avaliação e adaptação de uma ferramenta de segmentação para a anotação das imagens, vale dizer que essa é uma tarefa de suma importância, de modo a se tornar escalável a atividade de anotação de imagens para com a parceria estabelecida entre a Faculdade de Odontologia de Araraquara, além de trazer velocidade às fases de treino e teste do modelo a ser desenvolvido. Destarte, quanto ao ponto relatado a expectativa é que no final das análises, uma ferramenta tenha uma análise comparativa entre as ferramentas estudadas e que uma seja determinada para a anotações recorrentes que ocorrerão nesse projeto, além de contar com contribuições para a ferramenta escolhida caso sua implementação não seja suficiente, propondo, assim, auxiliar na segmentação com o uso de segmentação panóptica, técnica que já fora testada para essa atividade em outros estudos \cite{Elharrouss2021PanopticReview}.
+Acerca da avaliação e adaptação de uma ferramenta de segmentação para a anotação das imagens, vale dizer que essa é uma tarefa de suma importância, de modo a se tornar escalável a atividade de anotação de imagens para com a parceria estabelecida entre a Faculdade de Odontologia de Araraquara, além de trazer velocidade às fases de treino e teste do modelo a ser desenvolvido. Destarte, quanto ao ponto relatado a expectativa é que no final das análises, uma ferramenta tenha uma análise comparativa entre as ferramentas estudadas e que uma seja determinada para a anotações recorrentes que ocorrerão nesse projeto, além de contar com contribuições para a ferramenta escolhida caso sua implementação não seja suficiente, propondo, assim, auxiliar na segmentação com o uso de segmentação panóptica, técnica que já fora testada para essa atividade em outros estudos \cite{Elharrouss2021, Jasper2020}.
 
 Por fim, com respeito à aplicação da técnica BPCA nas camadas de \textit{pooling} dos modelos base, a esperança é que haja uma redução de dimensionalidade mantendo as estruturas espacias da imagem em questão, trazendo, assim, resultados positivos quanto às métricas de PQ e PartPQ.
