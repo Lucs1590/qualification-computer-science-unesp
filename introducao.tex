@@ -40,8 +40,17 @@ Todavia, como citado no início deste capítulo, as segmentações não geram di
     Fonte: \cite{Carneiro2021}.
 \end{figure}
 
+Quanto às áreas de aplicação que viabilizam o uso das técnicas de segmentação e podem usufruir da mesma, vale citar a área odontológica, em que há uma busca em relação à exploração de todos os componentes presentes na boca dos pacientes, desde doenças (como as cáries) até a contagem e classificação de saúde dos dentes, como exemplificado na Figura \ref{intro:fig:4}. Para várias dessas atividades, o diagnóstico é acompanhado de análises de imagens clínicas, buscando evidenciar as necessidades com o uso de aparelhos \cite{Schwendicke2020}. Deste modo, como citado por \cite{Bansal2021, Nguyen2021,Schwendicke2020}, destaca-se que as soluções para esses tipos de problemas têm sido encontradas com a aplicação de inteligência artificial que aumentam o desempenho da atuação humana.
 
-Falar de odonto.
+\begin{figure}[H]
+    \centering
+    \caption{Exemplo de segmentação na área odontológica.}
+    \includegraphics[width=1\linewidth]{recursos/imagens/introduction/odonto_segmentation.png}
+    \label{intro:fig:4}
+
+    \vspace*{1 cm}
+    Fonte: retirado e adaptado de \cite{Shuai2016,Bayrakdar2021,Gil2019}, respectivamente.
+\end{figure}
 
 Dentre as abordagens de segmentação, vale dizer que muitos algoritmos foram desenvolvidos para suprir a necessidade de segmentação, dos quais se destacam métodos artesanais (que serão trabalhados no Capitulo \ref{segment:image}), como os baseados em região ou limiar (Seção \ref{segment:region}), em bordas (Seção \ref{segment:limit}) e agrupamentos (Seção \ref{segment:group}) ou até em métodos mais complexos devido ao progresso proporcionado pelos avanços de redes neurais, como os algoritmos baseados nessa hipótese (Seção \ref{segment:neural}).
 
@@ -49,8 +58,8 @@ Todavia, na medida em que algumas propostas utilizadas em inteligência artifici
 
 A partir desses modelos mais modernos que utilizam como recurso o aprendizado profundo, cita-se que estes possuem capacidade de segmentar e propor classes para todos os pixels de uma imagem \cite{Minaee2021}, outros são capazes de segmentar objetos de mesma classe como instâncias diferentes, ou ainda outros que propõe fazer a unificação de ambas propostas anteriores dando um maior detalhamento das cenas, como é o caso das segmentações semânticas (Capitulo \ref{semantic:semantic}), de instâncias (Capitulo \ref{instance:instance}) e panóptica (Capitulo \ref{panoptic:panoptic}).
 
-No presente projeto serão listados alguns modelos de algoritmos e \textit{frameworks} conhecidos, dos quais alguns são definidos como estado-da-arte (\textit{Mask} R-CNN e \textit{Fully Convutional Networks}, por exemplo), de modo que estes estejam relacionados a segmentações e que seja possível encontrar vantagens, desvantagens e possibilidades de exploração em relação aos mesmos para basear novos experimentos, assim, contribuindo para a evolução científica na esfera de segmentações, principalmente das que fazem uso de aprendizado profundo.
+No presente projeto serão listados alguns modelos de algoritmos e \textit{frameworks} conhecidos, dos quais alguns são definidos como estado-da-arte (\textit{Mask} R-CNN e \textit{Fully Convolutional Networks}, por exemplo), de modo que estes estejam relacionados a segmentações e que seja possível encontrar vantagens, desvantagens e possibilidades de exploração em relação aos mesmos para basear novos experimentos, assim, contribuindo para a evolução científica na esfera de segmentações, principalmente das que fazem uso de aprendizado profundo.
 
-Dentre as áreas citadas, destaca-se que na área odontológica é possível encontrar diversos desafios que podem ser otimizados com o uso de modelos de segmentações modernos, como realizado por \cite{Ghazvinian2021, Minyoung2020}, de modo a auxiliar profissionais da área com uma descrição da boca do pacientem, logo colaborando para o diagnóstico \cite{Ghazvinian2021}. Sendo assim, como proposta principal desse trabalho encontra-se a aplicação de uma segmentação que consiga detalhar todos os componentes presentes em imagens orais, de modo a garantir que os componentes preservem suas hierarquias.
+Dentre as áreas citadas, destaca-se que na área odontológica é possível encontrar diversos desafios que podem ser otimizados com o uso de modelos de segmentações modernos - como realizado por \cite{Ghazvinian2021, Minyoung2020} - o que não é muito comum, visto que normalmente utiliza-se os métodos tradicionais \cite{Hammad2020}.  O projeto de segmentação vai de encontro ao auxilio de profissionais da área resultando em uma descrição da boca do paciente, logo colaborando para o diagnóstico \cite{Ghazvinian2021}. Sendo assim, como proposta principal desse trabalho encontra-se a aplicação de uma segmentação que consiga detalhar todos os componentes presentes em imagens orais, de modo a garantir que os componentes preservem suas hierarquias.
 
 Por fim, nos capítulos seguintes, assuntos relacionados à apresentação de conceitos de redes neurais profundas e redes neurais convolucionais serão tratadas no Capitulo \ref{deep:deep}. Após esta feita, será discorrido sobre as técnicas que tradicionalmente são utilizadas para atividades de segmentação no Capítulo \ref{segment:image}, acompanhada de segmentações que são fruto do advento das redes convolucionais e aprendizado profundo, tratando da segmentação semântica (Capítulo \ref{semantic:semantic}), de instâncias (Capítulo \ref{instance:instance}) e panóptica (Capítulo \ref{panoptic:panoptic}), para quê, finalmente sejam apresentados os detalhes que são propostos nesse trabalho de forma clara no Capítulo \ref{proposal:proposal}.

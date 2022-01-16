@@ -7,10 +7,10 @@
 Considerando as segmentações modernas citadas nos Capítulos \ref{semantic:semantic}, \ref{instance:instance} e \ref{panoptic:panoptic}, fica claro que a segmentação panóptica é nomeada como a que possui maior riqueza de detalhes, de modo a ter uma compreensão mais clara das cenas, todavia considerando os problemas discorridos no Capítulo \ref{panoptic:panoptic}, bem como na Seção \ref{panoptic:conclusion} estudos vêm sendo desenvolvidos para solucionar esses obstáculos.
 
 \begin{sloppypar}
-Dentre os estudos desenvolvidos, cita-se o de \textit{Part-Aware Panoptic Segmentation} \cite{DeGeus2021} com as propostas de trazer uma visão holística maior para as cenas e unir tarefas de \textit{scene parsing} e \textit{part parsing}, dispondo-se, indiretamente, também a trabalhar com objetos de pequena escala.
+Dentre os estudos desenvolvidos, cita-se o de \textit{Part-Aware Panoptic Segmentation} \cite{DeGeus2021} com as propostas de trazer uma visão holística maior para as cenas e unir tarefas de \textit{scene parsing} e \textit{part parsing}, dispondo-se, indiretamente, também a trabalhar com objetos de pequena escala, o que é um problema para uma rede comomum de segmentação panóptica, como a desenvolvida por \cite{Kirillov2019a}.
 \end{sloppypar}
 
-Dentre as áreas com oportunidades para o desenvolvimento e aplicação dessa técnica, a qual ainda não fora explorada, cita-se a área odontológica que, como também citado na Introdução (Capítulo \ref{intro:intro}), possibilita desafios com a meta de descrever o que há na boca a partir de fotografias orais, o que pode ser explorado por meio de um \textit{framework} de segmentação panóptica.
+Dentre as áreas com oportunidades para o desenvolvimento e aplicação dessa técnica, a qual ainda não fora explorada, cita-se a área odontológica que, como citado na Introdução (Capítulo \ref{intro:intro}), possibilita desafios com a meta de descrever o que há na boca a partir de fotografias orais, o que pode ser explorado por meio de um \textit{framework} de segmentação panóptica.
 
 Sendo assim, este trabalho tem como objetivo aplicar técnicas de segmentação panóptica em componentes visuais odontológicos de modo a obter as segmentações organizada hierarquicamente, ou seja, com os segmentos de cada pixel nas cenas e suas partes, o que é exemplificado por meio da Figura \ref{proposal:proposal:fig:3}. Além disso, tem a nova proposta para a aplicação \textit{pooling} nos modelos base, com o intuito de buscar resultado relevantes no que se refere às validações de segmentação panóptica.
 
@@ -187,6 +187,20 @@ Sendo assim, os indicadores referentes as pesquisas realizadas sobre esse assunt
     Fonte: do próprio autor.
 \end{figure}
 
+\begin{table}[H]
+    \centering
+    \caption{Trabalhos selecionados a partir da revisão sobre segmentação panóptica.}
+    \label{proposal:revision:1}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l|l|l}
+    \textbf{Título}                  &  \textbf{Autores}                 &  \textbf{Referência}  \\ \hline
+       &    &    
+    \end{tabular}}
+
+    \vspace*{1 cm}
+    Fonte: do próprio autor.
+\end{table}
+
 Quando se trata da segunda revisão em pauta, a que contempla as segmentações na área odontológica, destaca-se que os estudos procurados também não se limitaram ao tipo, incluindo congressos, artigos de revista, entre outros, além de utilizarem o intervalo dos anos de 2019 a 2022 como métrica, de modo a encontrar segmentações odontológicas que acompanhasse a técnica de segmentação panóptica. Os termos utilizados estão listados a seguir, de modo que foram buscados em diferentes combinações: ``odonto'', ``\textit{dentistry}'', ``\textit{deep learning}'', ``\textit{semantic segmentation}'', ``\textit{instance segmentation}'', ``\textit{panoptic segmentation}'' e ``CNN''. Os idiomas foram restritos à português e inglês.
 
 Quanto aos critérios de inclusão, destaca-se os artigos que abordaram ao menos uma das segmentações modernas, de feitio a estarem alinhados com a proposta do projeto. Quanto aos critérios de exclusão, pode-se dizer que são similares aos da primeira revisão, relatando artigos com descrição inadequada acerca da revisão em questão, estudos duplicados entre as ferramentas de busca e quando o estudo não estava diretamente relacionado aos temas ``segmentação'' e ``odontologia''. Dessa forma, por meio da Figura \ref{proposal:revision:fig:2} é possível visualizar a representação da revisão realizada.
@@ -200,6 +214,20 @@ Quanto aos critérios de inclusão, destaca-se os artigos que abordaram ao menos
     \vspace*{1 cm}
     Fonte: do próprio autor.
 \end{figure}
+
+\begin{table}[H]
+    \centering
+    \caption{Trabalhos selecionados a partir da revisão sobre segmentação odontológica.}
+    \label{proposal:revision:2}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l|l|l}
+    \textbf{Título}                  &  \textbf{Autores}                 &  \textbf{Referência}  \\ \hline
+       &    &    
+    \end{tabular}}
+
+    \vspace*{1 cm}
+    Fonte: do próprio autor.
+\end{table}
 
 
 \subsection{Cronograma}
