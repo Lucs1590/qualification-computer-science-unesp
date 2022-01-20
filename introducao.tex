@@ -7,12 +7,9 @@ A segmentação de imagens tem sido de extrema importância em meio ao contexto 
 
 \begin{figure}[H]
     \centering
-    \caption{Exemplos de segmentação no contexto médico.}
+    \caption{Exemplos de segmentação no contexto médico. Representação de segmentação de vasos sanguíneos, câncer de pele, câncer pulmonar e núcleos celulares, respectivamente.}
     \includegraphics[width=1\linewidth]{recursos/imagens/introduction/medical-image-segmentation.png}
     \label{intro:fig:1}
-    {\tiny Representação de segmentação de vasos sanguíneos, câncer de pele, câncer pulmonar e núcleos celulares, respectivamente.}
-
-    \vspace*{1 cm}
     Fonte: \cite{Asadi-Aghbolaghi2020}.
 \end{figure}
 
@@ -23,8 +20,6 @@ Outro contexto que tem usufruído muito das segmentações é o de sistemas aut�
     \caption{Exemplos de segmentação feita por sistemas autônomos.}
     \includegraphics[width=1\linewidth]{recursos/imagens/introduction/placas.png}
     \label{intro:fig:2}
-
-    \vspace*{1 cm}
     Fonte: \cite{Lee2018}.
 \end{figure}
 
@@ -35,8 +30,6 @@ Todavia, como citado no início deste capítulo, as segmentações não geram di
     \caption{Segmentação feita com \textit{GrabCut}.}
     \includegraphics[height=3in]{recursos/imagens/introduction/grabcut.png}
     \label{intro:fig:3}
-
-    \vspace*{1 cm}
     Fonte: \cite{Carneiro2021}.
 \end{figure}
 
@@ -47,19 +40,19 @@ Quanto às áreas de aplicação que viabilizam o uso das técnicas de segmenta�
     \caption{Exemplo de segmentação na área odontológica.}
     \includegraphics[width=1\linewidth]{recursos/imagens/introduction/odonto_segmentation.png}
     \label{intro:fig:4}
-
-    \vspace*{1 cm}
     Fonte: retirado e adaptado de \cite{Shuai2016,Bayrakdar2021,Gil2019}, respectivamente.
 \end{figure}
 
-Dentre as abordagens de segmentação, vale dizer que muitos algoritmos foram desenvolvidos para suprir a necessidade de segmentação, dos quais se destacam métodos artesanais (que serão trabalhados no Capitulo \ref{segment:image}), como os baseados em região ou limiar (Seção \ref{segment:region}), em bordas (Seção \ref{segment:limit}) e agrupamentos (Seção \ref{segment:group}) ou até em métodos mais complexos devido ao progresso proporcionado pelos avanços de redes neurais, como os algoritmos baseados nessa hipótese (Seção \ref{segment:neural}).
+Dentre as abordagens de segmentação, vale dizer que muitos algoritmos foram desenvolvidos para suprir a necessidade de segmentação, dos quais se destacam métodos artesanais (que serão trabalhados no Capitulo \ref{segment:image}), como os baseados em região ou limiar (Seção \ref{segment:region}), em bordas (Seção \ref{segment:limit}) e agrupamentos (Seção \ref{segment:group}) ou até em métodos mais complexos, devido ao progresso proporcionado pelos avanços de redes neurais, como os algoritmos baseados nessa hipótese (Seção \ref{segment:neural}).
 
-Todavia, na medida em que algumas propostas utilizadas em inteligência artificial vêm avançando, observa-se diversos avanços nas áreas de aprendizado profundo, tendo grande destaque e evolução quanto ao âmbito de segmentação de imagens. Esses avanços ocorrem não só devido a \textit{hardware} com mais capacidade de processamento ou uma maior quantidade de dados disponíveis, mas também por causa da criação de novos algoritmos e abordagens para resolver esses problemas \cite{Szegedy2015}.
+Todavia, na medida em que algumas propostas utilizadas em inteligência artificial vêm avançando, observa-se diversos avanços nas áreas de aprendizado profundo, tendo grande destaque e evolução quanto ao âmbito de segmentação de imagens. Esses avanços ocorrem não só devido a um \textit{hardware} com mais capacidade de processamento ou uma maior quantidade de dados disponíveis, mas também por causa da criação de novos algoritmos e abordagens para resolver esses problemas \cite{Szegedy2015}.
 
-A partir desses modelos mais modernos que utilizam como recurso o aprendizado profundo, cita-se que estes possuem capacidade de segmentar e propor classes para todos os pixels de uma imagem \cite{Minaee2021}, outros são capazes de segmentar objetos de mesma classe como instâncias diferentes, ou ainda outros que propõe fazer a unificação de ambas propostas anteriores dando um maior detalhamento das cenas, como é o caso das segmentações semânticas (Capitulo \ref{semantic:semantic}), de instâncias (Capitulo \ref{instance:instance}) e panóptica (Capitulo \ref{panoptic:panoptic}).
+A partir desses modelos mais modernos que utilizam como recurso o aprendizado profundo, cita-se que estes possuem capacidade de segmentar e propor classes para todos os pixels de uma imagem \cite{Minaee2021}, outros são capazes de segmentar objetos de mesma classe como instâncias diferentes, ou ainda outros que propõe fazer a unificação de ambas propostas anteriores dando um maior detalhamento das cenas, como é o caso das segmentações semânticas (Capitulo \ref{semantic:semantic}), de instâncias (Capitulo \ref{instance:instance}) e panóptica (Capitulo \ref{panoptic:panoptic}), respectivamente.
 
 No presente projeto serão listados alguns modelos de algoritmos e \textit{frameworks} conhecidos, dos quais alguns são definidos como estado-da-arte (\textit{Mask} R-CNN e \textit{Fully Convolutional Networks}, por exemplo), de modo que estes estejam relacionados a segmentações e que seja possível encontrar vantagens, desvantagens e possibilidades de exploração em relação aos mesmos para basear novos experimentos, assim, contribuindo para a evolução científica na esfera de segmentações, principalmente das que fazem uso de aprendizado profundo.
 
-Dentre as áreas citadas, destaca-se que na área odontológica é possível encontrar diversos desafios que podem ser otimizados com o uso de modelos de segmentações modernos - como realizado por \cite{Ghazvinian2021, Minyoung2020} - o que não é muito comum, visto que normalmente utiliza-se os métodos tradicionais \cite{Hammad2020}.  O projeto de segmentação vai de encontro ao auxilio de profissionais da área resultando em uma descrição da boca do paciente, logo colaborando para o diagnóstico \cite{Ghazvinian2021}. Sendo assim, como proposta principal desse trabalho encontra-se a aplicação de uma segmentação que consiga detalhar todos os componentes presentes em imagens orais, de modo a garantir que os componentes preservem suas hierarquias.
+Dentre as áreas citadas, destaca-se que na área odontológica é possível encontrar diversos desafios que podem ser otimizados com o uso de modelos de segmentações modernos - como realizado por \cite{Ghazvinian2021, Minyoung2020} - o que não é muito comum, visto que normalmente utiliza-se os métodos tradicionais \cite{Hammad2020}.  O projeto de segmentação vai de encontro ao auxilio de profissionais da área resultando em uma descrição da boca do paciente, logo colaborando para o diagnóstico \cite{Ghazvinian2021}. Sendo assim, como proposta principal desse trabalho tem-se a investigação de um arcabouço para segmentação panóptica de fotografias bucais baseado em aprendizado profundo, visando obter automaticamente uma descrição detalhada (relatório dos componentes visuais) da condição bucal de pacientes, sendo este detalhamento multinível, como uma hierarquia dos componentes visuais.
 
-Por fim, nos capítulos seguintes, assuntos relacionados à apresentação de conceitos de redes neurais profundas e redes neurais convolucionais serão tratadas no Capitulo \ref{deep:deep}. Após esta feita, será discorrido sobre as técnicas que tradicionalmente são utilizadas para atividades de segmentação no Capítulo \ref{segment:image}, acompanhada de segmentações que são fruto do advento das redes convolucionais e aprendizado profundo, tratando da segmentação semântica (Capítulo \ref{semantic:semantic}), de instâncias (Capítulo \ref{instance:instance}) e panóptica (Capítulo \ref{panoptic:panoptic}), para quê, finalmente sejam apresentados os detalhes que são propostos nesse trabalho de forma clara no Capítulo \ref{proposal:proposal}.
+Assim, espera-se que esta investigação possa contribuir para a geração futura de uma ferramenta automática para a geração detalhada de sobre as condições bucais e dentais de pacientes. Além de poder contribuir com os profissionais dentistas, isso pode contribuir como uma ferramenta de auxílio inicial ao diagnóstico e triagem, algo importante para locais do planeta que possui recursos e acessos escassos para o tratamento odontológico.
+
+Por fim, nos capítulos seguintes, assuntos relacionados à apresentação de conceitos de redes neurais profundas e redes neurais convolucionais serão tratadas no Capítulo \ref{deep:deep}. Após, será discorrido sobre as técnicas que tradicionalmente são utilizadas para atividades de segmentação no Capítulo \ref{segment:image}, acompanhada de segmentações que são fruto do advento das redes convolucionais e aprendizado profundo, tratando da segmentação semântica (Capítulo \ref{semantic:semantic}), de instâncias (Capítulo \ref{instance:instance}) e panóptica (Capítulo \ref{panoptic:panoptic}), para quê, finalmente sejam apresentados os detalhes da metodologia proposta nesse trabalho de forma clara no Capítulo \ref{proposal:proposal}.  Finalmente, o Capítulo \ref{final:final} apresenta algumas considerações finais do trabalho.

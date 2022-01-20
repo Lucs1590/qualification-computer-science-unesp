@@ -4,24 +4,21 @@
 \section{Proposta de Segmentação Panóptica em Componentes Visuais}
 \label{proposal:proposal}
 
-Considerando as segmentações modernas citadas nos Capítulos \ref{semantic:semantic}, \ref{instance:instance} e \ref{panoptic:panoptic}, fica claro que a segmentação panóptica é nomeada como a que possui maior riqueza de detalhes, de modo a ter uma compreensão mais clara das cenas, todavia considerando os problemas discorridos no Capítulo \ref{panoptic:panoptic}, bem como na Seção \ref{panoptic:conclusion} estudos vêm sendo desenvolvidos para solucionar esses obstáculos.
+Considerando as segmentações modernas citadas nos Capítulos \ref{semantic:semantic}, \ref{instance:instance} e \ref{panoptic:panoptic}, fica claro que a segmentação panóptica é nomeada como a que possui maior riqueza de detalhes, de modo a ter uma compreensão mais clara das cenas, todavia considerando os problemas discorridos no Capítulo \ref{panoptic:panoptic}, bem como na Seção \ref{panoptic:conclusion}, estudos vêm sendo desenvolvidos para solucionar esses obstáculos.
 
 \begin{sloppypar}
-Dentre os estudos desenvolvidos, cita-se o de \textit{Part-Aware Panoptic Segmentation} \cite{DeGeus2021} com as propostas de trazer uma visão holística maior para as cenas e unir tarefas de \textit{scene parsing} e \textit{part parsing}, dispondo-se, indiretamente, também a trabalhar com objetos de pequena escala, o que é um problema para uma rede comomum de segmentação panóptica, como a desenvolvida por \cite{Kirillov2019a}.
+Dentre os estudos desenvolvidos, cita-se o de \textit{Part-Aware Panoptic Segmentation} \cite{DeGeus2021} com as propostas de trazer uma visão holística maior para as cenas e unir tarefas de \textit{scene parsing} e \textit{part parsing}, dispondo-se, indiretamente, também a trabalhar com objetos de pequena escala, o que é um problema para uma rede comum de segmentação panóptica, como a desenvolvida por \cite{Kirillov2019a}.
 \end{sloppypar}
 
 Dentre as áreas com oportunidades para o desenvolvimento e aplicação dessa técnica, a qual ainda não fora explorada, cita-se a área odontológica que, como citado na Introdução (Capítulo \ref{intro:intro}), possibilita desafios com a meta de descrever o que há na boca a partir de fotografias orais, o que pode ser explorado por meio de um \textit{framework} de segmentação panóptica.
 
-Sendo assim, este trabalho tem como objetivo aplicar técnicas de segmentação panóptica em componentes visuais odontológicos de modo a obter as segmentações organizada hierarquicamente, ou seja, com os segmentos de cada pixel nas cenas e suas partes, o que é exemplificado por meio da Figura \ref{proposal:proposal:fig:3}. Além disso, tem a nova proposta para a aplicação \textit{pooling} nos modelos base, com o intuito de buscar resultado relevantes no que se refere às validações de segmentação panóptica.
+Sendo assim, este trabalho tem como objetivo aplicar técnicas de segmentação panóptica em componentes visuais odontológicos de modo a obter as segmentações organizadas hierarquicamente, ou seja, com os segmentos de cada pixel nas cenas e suas partes, o que é exemplificado por meio da Figura \ref{proposal:proposal:fig:3}. Além disso, tem uma nova proposta de camada de \textit{pooling} nos modelos base, com o intuito de buscar resultado relevantes no que se refere às validações de segmentação panóptica.
 
 \begin{figure}[H]
     \centering
-    \caption{Exemplo de aplicação de \textit{Part-Aware Panoptic Segmentation}.}
+    \caption{Exemplo de aplicação de \textit{Part-Aware Panoptic Segmentation}. Linhas contendo a imagem de entrada, valor de referencia e segmentação realizada com o método \textit{part-aware}, respectivamente, de cima para baixo.}
     \includegraphics[width=1\linewidth]{recursos/imagens/proposal/part-aware-example.png}
     \label{proposal:proposal:fig:3}
-    {\tiny Linhas contendo a imagem de entrada, valor de referencia e segmentação realizada com o método \textit{part-aware}, respectivamente, de cima para baixo.}
-
-    \vspace*{1 cm}
     Fonte: \cite{DeGeus2021}.
 \end{figure}
 
@@ -31,24 +28,24 @@ Em resumo, dentre as perspectivas de contribuição deste trabalho, lista-se:
   \item A utilização da segmentação panóptica hierárquica para a segmentação de componentes visuais na área odontológica;
   \item A disponibilização do código de maneira \textit{open source} com a finalidade de dar suporte aos trabalhos na área de \textit{part-aware panoptica segmentation}.
   \item A avaliação e adaptação (caso necessário) de uma ferramenta que auxilie a anotação de imagens com técnicas de segmentação;
-  \item A aplicação da técnica \textit{block-based pca} na camada de \textit{pooling} dos modelos base para a segmentação panóptica.
+  \item A aplicação da técnica \textit{block-based pca} \cite{Salvadeo2011} (será explicado na Seção \ref{pooling}) como camada de \textit{pooling} dos modelos base para a segmentação panóptica.
 \end{enumerate}
 
-As demais seções desse capítulo estão organizadas de seguinte modo que a Seção \ref{proposal:matmet} descreve sobre os materiais e métodos utilizados nos experimentos, a Seção \ref{proposal:methodology} descreve a metodologia utilizada em alguns dos experimentos propostos, a Seção \ref{proposal:cron} apresenta um cronograma das atividades neste trabalho, e, finalmente, a Seção \ref{proposal:expres} demonstra alguns resultados esperados no decorrer do andamento do presente trabalho.
+As demais seções desse capítulo estão organizadas de seguinte modo: a Seção \ref{proposal:matmet} descreve sobre os materiais e métodos utilizados nos experimentos, a Seção \ref{proposal:methodology} descreve a metodologia utilizada em alguns dos experimentos propostos, a Seção \ref{proposal:revision} demonstra detalhamentos sobre a revisão de literatura em relação ao tema, a Seção \ref{proposal:cron} apresenta um cronograma das atividades neste trabalho, e, finalmente, a Seção \ref{proposal:expres} demonstra alguns resultados esperados no decorrer do andamento do presente trabalho.
 
 
 \subsection{Materiais e Métodos}
 \label{proposal:matmet}
-Nesta Seção, serão discorridos os detalhes sobre as tecnologias que serão utilizadas para o desenvolvimento de um modelo de segmentação panóptica que segmenta componentes visuais (Subseção \ref{proposal:tec}), as técnicas e métodos escolhidos para serem utilizados nos experimentos (Subseção \ref{proposal:method}) e, por fim, sobre os conjuntos de dados selecionados para cumprirem com o objetivo da segmentação (Subseção \ref{proposal:dataset}).
+Nesta Seção, serão discorridos os detalhes sobre as tecnologias que serão utilizadas para o desenvolvimento de um modelo de segmentação panóptica que segmenta componentes visuais (Seção \ref{proposal:tec}), as técnicas e métodos escolhidos para serem utilizados nos experimentos (Seção \ref{proposal:method}) e, por fim, sobre os conjuntos de dados selecionados para cumprirem com o objetivo da segmentação (Seção \ref{proposal:dataset}).
 
 
 \subsubsection{Tecnologias}
 \label{proposal:tec}
-Dentre as tecnologias planejadas para o desenvolvimento do presente trabalho, vale citar que destaca-se o uso da linguagem de programação interpretada e de alto nível, \textit{Python}, sendo essa uma linguagem vantajosa por ser popularmente conhecida em meio cientifico, com uma ampla comunidade e com  bibliotecas dispostas para facilitar o desenvolvimento de soluções \cite{Millman2011PythonEngineers}.
+Dentre as tecnologias planejadas para o desenvolvimento do presente trabalho, vale citar que destaca-se o uso da linguagem de programação interpretada e de alto nível, \textit{Python}, sendo essa uma linguagem vantajosa por ser popularmente conhecida no meio cientifico, com uma ampla comunidade e com  bibliotecas dispostas para facilitar o desenvolvimento de soluções \cite{Millman2011PythonEngineers}.
 
 Já em relação às bibliotecas planejadas ao projeto, destacam-se aquelas cujo desenvolvimento é amplamente utilizado para o auxilio de projetos de visão computacional, aprendizado de máquina e redes neurais, das quais cita-se: \textit{PyTorch}, \textit{Keras}, \textit{TensorFlow}, \textit{OpenCV}, \textit{Numpy}, \textit{Pandas}, entre outras, dando destaque para a biblioteca \textit{Detectron2} \cite{detectron2} que já possui algumas funções especializadas para o trabalho com segmentações, incluindo redes de segmentação panóptica.
 
-Por fim, em relação aos métodos desenvolvido para cumprir com os objetivos do presente trabalho, no que lhes concerne, de realizar a segmentação de componentes visuais, declara-se que serão disponibilizado de modo \textit{Open Source} por meio do \textit{Github} do autor\footnote{Perfil \textit{Github} do autor – \url{https://github.com/Lucs1590}}, segundo os preceitos a licença Apache v2.0 \cite{Licenses}, com o intuito de contribuir com o crescimento de futuros pesquisadores, além de possibilitar futuras melhorias da aréa de segmentação com uso de segmentação hierárquica.
+Por fim, em relação aos métodos desenvolvidos para cumprir com os objetivos do presente trabalho, no que lhes concerne, de realizar a segmentação de componentes visuais, declara-se que serão disponibilizado de modo \textit{Open Source} por meio do \textit{Github} do autor\footnote{Perfil \textit{Github} do autor – \url{https://github.com/Lucs1590}}, segundo os preceitos a licença Apache v2.0 \cite{Licenses}, com o intuito de contribuir com o crescimento de futuros pesquisadores, além de possibilitar futuras melhorias da aréa de segmentação com uso de segmentação hierárquica.
 
 
 \subsubsection{Métodos}
@@ -84,7 +81,7 @@ Em relação ao conjunto de dados, por esse trabalho fazer uso da segmentação 
 
 Todavia, no presente trabalho serão utilizados tanto conjuntos de dados que são mais generalistas, mas são voltados para a segmentação panóptica, quanto conjuntos de dados voltados para a parte odontológica, os quais precisarão ser anotados de modo a estarem adaptados para o seu uso em bases de treino e teste.
 
-Quanto aos conjuntos de dados mais generalistas vale dizer que há algumas estratégias e justificativas para o seu uso, as quais serão descritas na Subseção \ref{proposal:transf}, entretanto, dentre os conjuntos de dados escolhidos, destacam-se PASCAL \textit{Panoptic Parts} e \textit{Cityscapes Panoptic Parts}, sendo que os estes foram desenvolvidos pelos autores que abrolharam a segmentação panóptica com uso da técnica \textit{Part-Aware} \cite{DeGeus2021}.
+Quanto aos conjuntos de dados mais generalistas vale dizer que há algumas estratégias e justificativas para o seu uso, as quais serão descritas na Seção \ref{proposal:transf}, entretanto, dentre os conjuntos de dados escolhidos, destacam-se PASCAL \textit{Panoptic Parts} e \textit{Cityscapes Panoptic Parts}, sendo que os estes foram desenvolvidos pelos autores que abrolharam a segmentação panóptica com uso da técnica \textit{Part-Aware} \cite{DeGeus2021}.
 
 O conteúdo dos conjuntos PASCAL \textit{Panoptic Parts} e \textit{Cityscapes Panoptic Parts} foram criados a partir de dos conjuntos de dados \cite{everingham2010pascal} e \cite{Cordts2016}, sendo que o conteúdo do primeiro está voltado para pessoas, animais, veículos e cenas em locais fechados, quando o segundo conta com cenas de cidades, respectivamente, os quais são exemplificados na Figura \ref{proposal:dataset:fig:1}.
 
@@ -121,7 +118,7 @@ Além das fotografias cedidas pela parceria estabelecida, vale destacar que algu
 
 \subsection{Metodologia}
 \label{proposal:methodology}
-Nesta Seção, será descrito quanto à metodologia adotada para os experimentos a serem realizados, de modo a conquistar os objetivos propostos no presente trabalho. Na Subseção \ref{proposal:transf} será detalhado sobre o processos de transferência de aprendizado a ser realizado no conjunto de dados, na Subseção \ref{proposal:pcapooling} se discorrerá sobre o processo de alteração na camada de \textit{pooling} dos modelos e, finalmente, na Subseção \ref{proposal:avaliation} será descrito o método de avaliação escolhido para a submissão dos modelos.
+Nesta Seção, será descrito quanto à metodologia adotada para os experimentos a serem realizados, de modo a conquistar os objetivos propostos no presente trabalho. Na Seção \ref{proposal:transf} será detalhado sobre o processos de transferência de aprendizado a ser realizado no conjunto de dados, na Seção \ref{proposal:pcapooling} se discorrerá sobre o processo de alteração na camada de \textit{pooling} dos modelos e, finalmente, na Seção \ref{proposal:avaliation} será descrito o método de avaliação escolhido para a submissão dos modelos.
 
 \subsubsection{Transferência de Aprendizado}
 \label{proposal:transf}
@@ -134,7 +131,7 @@ Sendo assim, por esse projeto se enquadrar no segundo caso citado dentro do para
 
 \subsubsection{Alteração na Camada de \textit{Pooling}}
 \label{proposal:pcapooling}
-Como explicado na Subseção \ref{deep:pooling}, a adaptação dos modelos de \textit{pooling} é crescente, sendo que essas modificações são motivadas pelos problemas a serem resolvidos, sendo assim, quando se trata de segmentações modernas, duas abordagens ganham destaque como técnicas de \textit{pooling}, sendo elas: \textit{Atrous Spatial Pyramid Pooling} (ASPP) \cite{Chen2018} e \textit{Pyramid Pooling} \cite{Zhao2017}.
+Como explicado na Seção \ref{deep:pooling}, a adaptação dos modelos de \textit{pooling} é crescente, sendo que essas modificações são motivadas pelos problemas a serem resolvidos, sendo assim, quando se trata de segmentações modernas, duas abordagens ganham destaque como técnicas de \textit{pooling}, sendo elas: \textit{Atrous Spatial Pyramid Pooling} (ASPP) \cite{Chen2018} e \textit{Pyramid Pooling} \cite{Zhao2017}.
 
 Basicamente, a abordagem relacionada ao modulo de ASPP está atrelada às segmentações semânticas \cite{Mohan2020}, sendo que este módulo tem como sua principal vantagem a captura de objetos e contexto úteis da imagem em várias escalas diferentes, haja vista que seu comportamento está atrelado à re-amostragem com diversas taxas de convolução para cada \textit{kernel}, possibilitando, assim, a sondagem de um mapa de características, antes mesmo do processo de convolução, com vários campos de visão \cite{Chen2018}.
 
@@ -257,7 +254,7 @@ Tendo em vista os estudos que estão relacionados a segmentação na área odont
 
 \subsection{Cronograma}
 \label{proposal:cron}
-Com o intuito de listar todas as atividades necessárias para o cumprimento do projeto, bem como definição do período em que as mesmas devem ser realizadas, foram construídas a Tabela \ref{proposal:cron:table:1} e \ref{proposal:cron:table:2}, almejando realizar no máximo quatro  experimentos simultaneamente, considerando a complexidade, esforço e incerteza envolvida em cada um desses testes. Em relação às submissões é desejado realizar uma para conferência, objetivando  contribuir com os experimentos desenvolvidos na primeira etapa e uma segunda para um periódico com o intuito de contribuir com as descobertas realizadas no experimento IV. Por fim, tem se como objetivo realizar a escrita do trabalho em todo o período do cronograma - salvo o mês planejado para a defesa - sendo que essa atividade ocorrera paralelamente aos demais experimentos e atividades listadas. Por fim, vale lembrar, como citado na Subseção \ref{proposal:dataset}, que o trabalho de anotação das imagens ocorrerá em parceria com estudantes e a equipe coordenada pelo Prof. Dr. Osmir Batista de Oliveira Júnior. 
+Com o intuito de listar todas as atividades necessárias para o cumprimento do projeto, bem como definição do período em que as mesmas devem ser realizadas, foram construídas a Tabela \ref{proposal:cron:table:1} e \ref{proposal:cron:table:2}, almejando realizar no máximo quatro  experimentos simultaneamente, considerando a complexidade, esforço e incerteza envolvida em cada um desses testes. Em relação às submissões é desejado realizar uma para conferência, objetivando  contribuir com os experimentos desenvolvidos na primeira etapa e uma segunda para um periódico com o intuito de contribuir com as descobertas realizadas no experimento IV. Por fim, tem se como objetivo realizar a escrita do trabalho em todo o período do cronograma - salvo o mês planejado para a defesa - sendo que essa atividade ocorrera paralelamente aos demais experimentos e atividades listadas. Por fim, vale lembrar, como citado na Seção \ref{proposal:dataset}, que o trabalho de anotação das imagens ocorrerá em parceria com estudantes e a equipe coordenada pelo Prof. Dr. Osmir Batista de Oliveira Júnior. 
 
 \definecolor{midgray}{gray}{.5}
 
