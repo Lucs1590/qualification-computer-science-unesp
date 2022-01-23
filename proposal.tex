@@ -7,8 +7,29 @@
 Considerando as segmentações modernas citadas nos Capítulos \ref{semantic:semantic}, \ref{instance:instance} e \ref{panoptic:panoptic}, fica claro que a segmentação panóptica é nomeada como a que possui maior riqueza de detalhes, de modo a ter uma compreensão mais clara das cenas, todavia considerando os problemas discorridos no Capítulo \ref{panoptic:panoptic}, bem como na Seção \ref{panoptic:conclusion}, estudos vêm sendo desenvolvidos para solucionar esses obstáculos.
 
 \begin{sloppypar}
-Dentre os estudos desenvolvidos, cita-se o de \textit{Part-Aware Panoptic Segmentation} \cite{DeGeus2021} com as propostas de trazer uma visão holística maior para as cenas e unir tarefas de \textit{scene parsing} e \textit{part parsing}, dispondo-se, indiretamente, também a trabalhar com objetos de pequena escala, o que é um problema para uma rede comum de segmentação panóptica, como a desenvolvida por \cite{Kirillov2019a}.
+Dentre os estudos desenvolvidos, cita-se o de \textit{Part-Aware Panoptic Segmentation} \cite{DeGeus2021} com as propostas de trazer uma visão holística maior para as cenas e unir tarefas de \textit{scene parsing} e \textit{part parsing}, dispondo-se, indiretamente, também a trabalhar com objetos de pequena escala, o que é um problema para uma rede comum de segmentação panóptica, como a desenvolvida por \cite{Kirillov2019a}. A comparação, bem como demonstração de detalhes em relação a segmentação panóptica comum pode ser observada na Figura \ref{proposal:proposal:fig:4}.
 \end{sloppypar}
+
+\begin{figure}[H]
+   \caption{Segmentação Panóptica e \textit{Part-Aware}.}
+   \centering
+   \label{proposal:proposal:fig:4}
+    \begin{subfigure}[t]{0.4\textwidth}
+        \centering
+        \includegraphics[height=1.25in]{recursos/imagens/proposal/pano_vs.png}
+        \caption{Segmentação panóptica comum.}
+        \label{proposal:proposal:fig:4.1}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.4\textwidth}
+        \centering
+        \includegraphics[height=1.25in]{recursos/imagens/proposal/part_pano_vs.png}
+        \caption{Segmentação com \textit{part-aware}.}
+        \label{proposal:proposal:fig:4.2}
+    \end{subfigure}%
+
+    Fonte: retirado e adaptado de \cite{DeGeus2021}.
+\end{figure}
 
 Dentre as áreas com oportunidades para o desenvolvimento e aplicação dessa técnica, a qual ainda não fora explorada, cita-se a área odontológica que, como citado na Introdução (Capítulo \ref{intro:intro}), possibilita desafios com a meta de descrever o que há na boca a partir de fotografias orais, o que pode ser explorado por meio de um \textit{framework} de segmentação panóptica.
 
@@ -26,7 +47,7 @@ Em resumo, dentre as perspectivas de contribuição deste trabalho, lista-se:
 
 \begin{enumerate}[I]
   \item A utilização da segmentação panóptica hierárquica para a segmentação de componentes visuais na área odontológica;
-  \item A disponibilização do código de maneira \textit{open source} com a finalidade de dar suporte aos trabalhos na área de \textit{part-aware panoptica segmentation}.
+  \item A disponibilização de biblioteca de código com a finalidade de dar suporte aos trabalhos na área de \textit{part-aware panoptica segmentation}.
   \item A avaliação e adaptação (caso necessário) de uma ferramenta que auxilie a anotação de imagens com técnicas de segmentação;
   \item A aplicação da técnica \textit{block-based pca} \cite{Salvadeo2011} (será explicado na Seção \ref{proposal:pcapooling}) como camada de \textit{pooling} dos modelos base para a segmentação panóptica.
 \end{enumerate}
@@ -45,14 +66,14 @@ Dentre as tecnologias planejadas para o desenvolvimento do presente trabalho, va
 
 Já em relação às bibliotecas planejadas ao projeto, destacam-se aquelas cujo desenvolvimento é amplamente utilizado para o auxilio de projetos de visão computacional, aprendizado de máquina e redes neurais, das quais cita-se: \textit{PyTorch}, \textit{Keras}, \textit{TensorFlow}, \textit{OpenCV}, \textit{Numpy}, \textit{Pandas}, entre outras, dando destaque para a biblioteca \textit{Detectron2} \cite{detectron2} que já possui algumas funções especializadas para o trabalho com segmentações, incluindo redes de segmentação panóptica.
 
-Por fim, em relação aos métodos desenvolvidos para cumprir com os objetivos do presente trabalho, no que lhes concerne, de realizar a segmentação de componentes visuais, declara-se que serão disponibilizado de modo \textit{Open Source} por meio do \textit{Github} do autor\footnote{Perfil \textit{Github} do autor – \url{https://github.com/Lucs1590}}, segundo os preceitos a licença Apache v2.0 \cite{Licenses}, com o intuito de contribuir com o crescimento de futuros pesquisadores, além de possibilitar futuras melhorias da aréa de segmentação com uso de segmentação hierárquica.
+Por fim, em relação aos métodos desenvolvidos para cumprir com os objetivos do presente trabalho, no que lhes concerne, de realizar a segmentação de componentes visuais, declara-se que serão disponibilizado em forma de biblioteca por meio do \textit{Github} do autor\footnote{Perfil \textit{Github} do autor – \url{https://github.com/Lucs1590}}, segundo os preceitos a licença Apache v2.0 \cite{Licenses}, com o intuito de contribuir com o crescimento de futuros pesquisadores, além de possibilitar futuras melhorias da aréa de segmentação com uso de segmentação hierárquica.
 
 
 \subsubsection{Métodos}
 \label{proposal:method}
 Dentre os métodos disponíveis para realizar a tarefa de segmentação panóptica de componentes visuais, destaca-se que serão realizados testes a partir dos modelos disponibilizados pela biblioteca \textit{Detectron2} \cite{detectron2}, seguindo também a formatação inicial proposta por Kirillov \textit{et al.} \cite{Kirillov2019a}, a qual era composta por um modelo de Mask R-CNN (Seção \ref{instance:mask}) para realizar a parte de segmentação de instâncias e o modelo de FCN (Seção \ref{semantic:FCN}) para realizar a segmentação semântica.
 
-Todavia, haja vista o resultado esperado nesse trabalho, vide a Seção \ref{proposal:expres}, para as tarefas de segmentação panóptica com o uso de partes, diferente das abordagens demonstradas na Figura \ref{proposal:method:fig:1}, necessita também de uma parte voltada para a segmentação das partes de algo classificado como \textit{thing} ou \textit{stuff}, como demonstrado na Figura \ref{proposal:method:fig:2}, desse modo também será testada a estrutura desenhada por de Geus \textit{et al.} \cite{DeGeus2021}, a qual é composta por um modelo de segmentação panóptica (DLv3-ResNeSt269 \& DetectoRS) juntamente com um modelo responsável por realizar uma segmentação de partes (BSANet).
+Todavia, haja vista o resultado esperado nesse trabalho, vide a Seção \ref{proposal:expres}, para as tarefas de segmentação panóptica com o uso de partes, diferente das abordagens de estruturas que possuem apenas as tarefas de segmentações de instâncias e semântica, seja de modo compartilhado, unificado, com conexões ou cascata, como demonstradas na Figura \ref{proposal:method:fig:1}, a segmentação de partes cientes necessita, também, de uma parte voltada para a segmentação das partes de objetos classificados como \textit{thing} ou \textit{stuff}, como demonstrado na Figura \ref{proposal:method:fig:2}, a qual representa uma estrutura voltada para a segmentação panóptica de modo unificado (segmentação semântica e de instância) e outra para a segmentação de partes cientes. Sendo assim, também será testada a estrutura desenhada por de Geus \textit{et al.} \cite{DeGeus2021}, a qual é composta por um modelo de segmentação panóptica (DLv3-ResNeSt269 \& DetectoRS) juntamente com um modelo responsável por realizar uma segmentação de partes (BSANet).
 
 \begin{figure}[H]
     \centering
@@ -60,7 +81,6 @@ Todavia, haja vista o resultado esperado nesse trabalho, vide a Seção \ref{pro
     \includegraphics[width=1\textwidth]{recursos/imagens/proposal/model_methodologies.png}
     \label{proposal:method:fig:1}
 
-    \vspace*{1 cm}
     Fonte: retirado e adaptado de \cite{Elharrouss2021}.
 \end{figure}
 
@@ -70,7 +90,6 @@ Todavia, haja vista o resultado esperado nesse trabalho, vide a Seção \ref{pro
     \includegraphics[width=4in]{recursos/imagens/proposal/estrutura.png}
     \label{proposal:method:fig:2}
 
-    \vspace*{1 cm}
     Fonte: do próprio autor.
 \end{figure}
 
@@ -103,23 +122,40 @@ O conteúdo dos conjuntos PASCAL \textit{Panoptic Parts} e \textit{Cityscapes Pa
         \label{proposal:dataset:fig:1.2}
     \end{subfigure}%
 
-    \vspace*{1 cm}
     Fonte: retirado e adaptado de \cite{Lin2016}.
 \end{figure}
 
 
-Os conjuntos criados, os quais contemplam segmentação \textit{Part-Aware}, quando relacionado ao \textit{Cityscape Panoptic Parts}, vale dizer que este possui 2975 imagens para treino e 500 para validação, totalizando em 3475 imagens dispostas em resolução de 1024×2048. Por sua vez, o PASCAL \textit{Panoptic Parts} possui 4998 imagens para treino e  5105 imagens para validação, as quais estão em resoluções de 387×470, totalizando à disposição de 10103 imagens.
+Os conjuntos criados por \cite{DeGeus2021}, os quais contemplam segmentação \textit{Part-Aware}, quando relacionado ao \textit{Cityscape Panoptic Parts}, vale dizer que este possui 2975 imagens para treino e 500 para validação, totalizando em 3475 imagens dispostas em resolução de 1024×2048. Por sua vez, o PASCAL \textit{Panoptic Parts} possui 4998 imagens para treino e  5105 imagens para validação, as quais estão em resoluções de 387×470, totalizando à disposição de 10103 imagens.
 
 Por fim, ainda há a disposição do conjunto de dados de partes, do qual se cita \textit{PartNet} \cite{mo2019} e \textit{PartImageNet} \cite{He2021}, sendo que o primeiro abrange a anotação de 573585 partes de instâncias, realizando a cobertura de 24 categorias de objetos, as quais também podem ser úteis para agregar ao projeto. Já o segundo, por ter sido criado com base no trabalho desenvolvido por \cite{DeGeus2021}, encontra-se disponível para o exercício das redes panópticas \textit{part-aware}, com 158 classes e por volta de 24000 imagens, visto que a fonte das imagens anotadas é o projeto \textit{ImageNet}.
 
-Quanto aos conjuntos de dados citados anteriormente que estarão dispostos para o meio odontológico, vale citar que esses não possuem uma anotação com classes de partes, as quais se fazem \textit{mister} para a aplicação panóptica com uso de \textit{Part-Aware}, todavia vale destacar que temos uma parceria da Faculdade de Odontologia de Araraquara (FOAr) - UNESP, a qual terá com líder o Prof. Dr. Osmir Batista de Oliveira Júnior, de modo que estudantes e especialistas da área realizem as anotações, bem como a disponibilização, de algumas imagens de fotografias odontológicas, de modo a contribuírem para o projeto.
+Quanto aos conjuntos de dados comentados anteriormente que estarão dispostos para o meio odontológico, vale citar que esses não possuem uma anotação com classes de partes, as quais se fazem \textit{mister} para a aplicação panóptica com uso de \textit{Part-Aware}, todavia vale destacar que temos uma parceria da Faculdade de Odontologia de Araraquara (FOAr) - UNESP, a qual terá com líder o Prof. Dr. Osmir Batista de Oliveira Júnior, de modo que estudantes e especialistas da área realizem as anotações, bem como a disponibilização, de 5000 imagens de fotografias odontológicas, de modo a contribuírem para o projeto.
 
-Além das fotografias cedidas pela parceria, vale destacar que alguns conjuntos de dados serão utilizados com o intuito de agregar em volume de imagens odontológicas, dos quais, cita-se o conjunto de dados desenvolvido por You \textit{et al.} \cite{You2020}, o qual possui 886 anotadas, o conjunto desenvolvido por Hyttinen \textit{et al.} \cite{Hyttinen2020}, com 316 imagens, sendo que 215 desssas imagens possuem uma anotação inicial e, por fim, o conjunto de dados disponível no \textit{website} da Dental Care\footnote{\textit{Website Dental Care} – \url{https://www.dentalcare.com/en-us/research/media-library}}, o qual cede 839 imagens odontológicas como cortesia para estudos e desenvolvimento científico. O objetivo é que todas essas 1370 imagens sejam agregadas à \textit{pipeline} de anotação de modo a se tornarem úteis para a construção do modelo proposto no presente trabalho.
+Além das fotografias cedidas pela parceria, vale destacar que alguns conjuntos de dados serão utilizados com o intuito de agregar em volume de imagens odontológicas, dos quais, cita-se o conjunto de dados desenvolvido por You \textit{et al.} \cite{You2020}, o qual possui 886 anotadas, o conjunto desenvolvido por Hyttinen \textit{et al.} \cite{Hyttinen2020}, com 316 imagens, sendo que 215 dessas imagens possuem uma anotação inicial e, por fim, o conjunto de dados disponível no \textit{website} da \textit{Dental Care}\footnote{\textit{Website \textit{Dental Care}} – \url{https://www.dentalcare.com/en-us/research/media-library}}, o qual cede 839 imagens odontológicas como cortesia para estudos e desenvolvimento científico. O objetivo é que todas essas 1370 imagens sejam agregadas à \textit{pipeline} de anotação e ao conjunto disponibilizado pela parceria, de modo a se tornarem úteis para a construção do modelo proposto no presente trabalho. Exemplos dos conjuntos de dados citados podem ser observados na Figura \ref{proposal:dataset:fig:2}.
+
+\begin{figure}[H]
+    \centering
+    \caption{Exemplo de imagens dos conjuntos de dados odontológicos.}
+    \includegraphics[width=1\textwidth]{recursos/imagens/proposal/image_odonto_dataset.png}
+    \label{proposal:dataset:fig:2}
+
+    Fonte: retirado e adaptado de \cite{You2020, Hyttinen2020} e \textit{Dental Care}, respectivamente.
+\end{figure}
 
 
 \subsection{Metodologia}
 \label{proposal:methodology}
-Nesta Seção, será descrito quanto à metodologia adotada para os experimentos a serem realizados, de modo a conquistar os objetivos propostos no presente trabalho. Na Seção \ref{proposal:transf} será detalhado sobre o processo de transferência de aprendizado a ser realizado no conjunto de dados, na Seção \ref{proposal:pcapooling} se discorrerá sobre o processo de alteração na camada de \textit{pooling} dos modelos e, finalmente, na Seção \ref{proposal:avaliation} será descrito o método de avaliação escolhido para a submissão dos modelos.
+Nesta Seção, será descrito quanto à metodologia adotada para os experimentos a serem realizados, de modo a conquistar os objetivos propostos no presente trabalho. Na Seção \ref{proposal:transf} será detalhado sobre o processo de transferência de aprendizado a ser realizado no conjunto de dados, na Seção \ref{proposal:pcapooling} se discorrerá sobre o processo de alteração na camada de \textit{pooling} dos modelos e, finalmente, na Seção \ref{proposal:avaliation} será descrito o método de avaliação escolhido para a submissão dos modelos. Em resumo, o processo esperado resume-se na Figura \ref{proposal:methodology:fig:1}.
+
+\begin{figure}[H]
+    \centering
+    \caption{\textit{Pipeline} do presente trabalho.}
+    \includegraphics[width=0.7\textwidth]{recursos/imagens/proposal/full_diagram.png}
+    \label{proposal:methodology:fig:1}
+
+    Fonte: do próprio autor.
+\end{figure}
 
 \subsubsection{Transferência de Aprendizado}
 \label{proposal:transf}
@@ -134,11 +170,38 @@ Sendo assim, por esse projeto se enquadrar no segundo caso citado dentro do par�
 \label{proposal:pcapooling}
 Como explicado na Seção \ref{deep:pooling}, a adaptação dos modelos de \textit{pooling} é crescente, sendo que essas modificações são motivadas pelos problemas a serem resolvidos, sendo assim, quando se trata de segmentações modernas, duas abordagens ganham destaque como técnicas de \textit{pooling}, sendo elas: \textit{Atrous Spatial Pyramid Pooling} (ASPP) \cite{Chen2018} e \textit{Pyramid Pooling} \cite{Zhao2017}.
 
-Basicamente, a abordagem relacionada ao modulo de ASPP está atrelada às segmentações semânticas \cite{Mohan2020}, sendo que este módulo tem como sua principal vantagem a captura de objetos e contexto úteis da imagem em várias escalas diferentes, haja vista que seu comportamento está atrelado à re-amostragem com diversas taxas de convolução para cada \textit{kernel}, possibilitando, assim, a sondagem de um mapa de características, antes mesmo do processo de convolução, com vários campos de visão \cite{Chen2018}.
+Basicamente, a abordagem relacionada ao módulo de ASPP está atrelada às segmentações semânticas \cite{Mohan2020}, sendo que este módulo tem como sua principal vantagem a captura de objetos e contexto úteis da imagem em várias escalas diferentes, haja vista que seu comportamento está atrelado à re-amostragem com diversas taxas de convolução para cada \textit{kernel}, possibilitando, assim, a sondagem de um mapa de características, antes mesmo do processo de convolução, com vários campos de visão \cite{Chen2018}. O exemplo desse módulo pode ser visualizado na Figura \ref{proposal:pcapooling:fig:1}.
 
-Já quando se trata do módulo de \textit{Pyramid Pooling}, vale dizer que este está atrelado à dimensão das características, tendo como principal motivação provar ser um \textit{pooling} de contexto global antes de realizar sua representação \cite{Zhao2017}. Todavia, quando se trata desse modelo de \textit{pooling}, vale dizer que a sua maior vantagem está relacionada à flexibilidade que é cedida às entradas das redes, de modo que torna-se possível realizar entradas com tamanhos variados.
+\begin{figure}[H]
+    \centering
+    \caption{Exemplo representativo do ASPP.}
+    \includegraphics[width=1\textwidth]{recursos/imagens/proposal/aspp.png}
+    \label{proposal:pcapooling:fig:1}
 
-Entretanto, vale citar que, no presente trabalho, além da escolha dos modelos acima listados, também será realizado um experimento com a aplicação da técnica de \textit{Block-Based Principal Component Analysis} (ou BPCA) nas camadas de \textit{pooling} dos modelos base para a realização da segmentação panóptica. O BPCA, desenvolvido por Salvadeo \textit{et al.} \cite{Salvadeo2011}, que se provou satisfatório para aplicações relacionadas ao reconhecimento de faces, realiza a aplicação do método \textit{Principal Component Analysis} (PCA) entre blocos que dividem uma imagem original, de modo a manter as estruturas espaciais da imagem original. Sendo assim, para o presente trabalho, tem-se a expectativa de adicionar esse método na camada de \textit{pooling} do modelo base  de segmentação panóptica ciente de parte, tendo uma redução de dimensionalidade e mantendo as estruturas originais da entrada em questão, o que normalmente é perdido quando se aplica uma estratégia de \textit{pooling} em escala global (como representado na Figura \ref{deep:fig:7}).
+    Fonte: retirado e adaptado de \cite{Chen2018}.
+\end{figure}
+
+Já quando se trata do módulo de \textit{Pyramid Pooling}, vale dizer que este está atrelado à dimensão das características, tendo como principal motivação provar ser um \textit{pooling} de contexto global antes de realizar sua representação \cite{Zhao2017}. Todavia, quando se trata desse modelo de \textit{pooling}, vale dizer que a sua maior vantagem está relacionada à flexibilidade que é cedida às entradas das redes, de modo que torna-se possível realizar entradas com tamanhos variados. O exemplo desse módulo pode ser visualizado na Figura \ref{proposal:pcapooling:fig:2}.
+
+\begin{figure}[H]
+    \centering
+    \caption{Exemplo representativo do \textit{Pyramid Pooling}.}
+    \includegraphics[width=1\textwidth]{recursos/imagens/proposal/pyramidal.png}
+    \label{proposal:pcapooling:fig:2}
+
+    Fonte: retirado e adaptado de \cite{Zhao2017}.
+\end{figure}
+
+Entretanto, vale citar que, no presente trabalho, além da escolha dos modelos acima listados, também será realizado um experimento com a aplicação da técnica de \textit{Block-Based Principal Component Analysis} (ou BPCA) nas camadas de \textit{pooling} dos modelos base para a realização da segmentação panóptica. O BPCA, desenvolvido por Salvadeo \textit{et al.} \cite{Salvadeo2011}, que se provou satisfatório para aplicações relacionadas ao reconhecimento de faces, realiza a aplicação do método \textit{Principal Component Analysis} (PCA) entre blocos que dividem uma imagem original, de modo a manter as estruturas espaciais da imagem original. Sendo assim, para o presente trabalho, tem-se a expectativa de adicionar esse método na camada de \textit{pooling} do modelo base  de segmentação panóptica ciente de parte, tendo uma redução de dimensionalidade e mantendo as estruturas originais da entrada em questão, o que normalmente é perdido quando se aplica uma estratégia de \textit{pooling} em escala global (como representado na Figura \ref{deep:fig:7}).  Um exemplo desse módulo pode ser visualizado na Figura \ref{proposal:pcapooling:fig:3}.
+
+\begin{figure}[H]
+    \centering
+    \caption{Exemplo representativo do BPCA.}
+    \includegraphics[width=1\textwidth]{recursos/imagens/proposal/BPCA.png}
+    \label{proposal:pcapooling:fig:3}
+
+    Fonte: retirado e adaptado de \cite{Salvadeo2011}.
+\end{figure}
 
 
 \subsubsection{Avaliação}
@@ -156,7 +219,7 @@ Em relação à Equação \ref{proposal:avaliation:eq:1}, destaca-se ainda que a
 \label{proposal:avaliation:eq:2}
     IoU_p(p,g)= \left\{\begin{matrix}
         mIoU_{part}(p,g), & l \in \mathcal{L}^{parts}    & \\ 
-        IOU_{ins}(p,g),        & l \in \mathcal{L}^{no-parts} & 
+        IoU_{ins}(p,g),        & l \in \mathcal{L}^{no-parts} & 
     \end{matrix}\right.
 \end{equation}
 
@@ -181,7 +244,6 @@ Sendo assim, os indicadores referentes às pesquisas realizadas sobre esse assun
     \includegraphics[height=4.5in]{recursos/imagens/proposal/revisao_panoptica.png}
     \label{proposal:revision:fig:1}
 
-    \vspace*{1 cm}
     Fonte: do próprio autor.
 \end{figure}
 
@@ -192,17 +254,17 @@ Sendo assim, por meio do estudo realizado em relação às referências de segme
     \caption{Trabalhos selecionados a partir da revisão sobre segmentação panóptica.}
     \label{proposal:revision:tab:1}
     \resizebox{\textwidth}{!}{
-    \begin{tabular}{l|l|l}
-        \textbf{Título}                                                 &  \textbf{Autores}                                                                                                     &  \textbf{Referência}    \\ \hline
-        Part-Aware Panoptic Segmentation                                & Daan de Geus, Panagiotis Meletis, Chenyang Lu, Xiaoxiao Wen, Gijs Dubbelman                                           &  \cite{DeGeus2021}      \\
-        Improving Panoptic Segmentation at All Scales                   & Lorenzo Porzi, Samuel Rota Bulo, Peter Kontschieder                                                                   &  \cite{Porzi2021}       \\
-        SpatialFlow: Bridging All Tasks for Panoptic Segmentation       & Qiang Chen, Anda Cheng, Xiangyu He, Peisong Wang, Jian Cheng                                                          &  \cite{Chen2019a}       \\
-        Visual relation of interest detection based on part detection   & You Zhou, Fan Yu                                                                                                      &  \cite{YouZhou2021}     \\
-        Panoptic Image Annotation with a Collaborative Assistant        & Jasper R.R. Uijlings, Mykhaylo Andriluka, Vittorio Ferrari                                                            &  \cite{Jasper2020}      \\
-        Panoptic Segmentation-Based Attention for Image Captioning      & Wenjie Cai, Zheng Xiong, Xianfang Sun, Paul L. Rosin, Longcun Jin, Xinyi Peng                                         &  \cite{Cai2020}         \\
-        Supplementary Material: Part-aware Panoptic Segmentation        & Daan de Geus, Panagiotis Meletis, Chenyang Lu, Xiaoxiao Wen, Gijs Dubbelman                                           &  \cite{DeGeus2021a}     \\
-        Panoptic Segmentation: A Review                                 & Omar Elharrouss, Somaya Al-Maadeed, Nandhini Subramanian, Najmath Ottakath, Noor Almaadeed, Yassine Himeur            &  \cite{Elharrouss2021}  \\
-        PartImageNet: A Large, High-Quality Dataset of Parts            & Ju He, Shuo Yang, Shaokang Yang, Adam Kortylewski, Xiaoding Yuan, Jie-Neng Chen, Shuai Liu, Cheng Yang, Alan Yuille   &  \cite{He2021}   
+    \begin{tabular}{l|l}
+        \textbf{Título}                                                &  \textbf{Referência}    \\ \hline
+        Part-Aware Panoptic Segmentation                               &  \cite{DeGeus2021}      \\
+        Improving Panoptic Segmentation at All Scales                  &  \cite{Porzi2021}       \\
+        SpatialFlow: Bridging All Tasks for Panoptic Segmentation      &  \cite{Chen2019a}       \\
+        Visual relation of interest detection based on part detection  &  \cite{YouZhou2021}     \\
+        Panoptic Image Annotation with a Collaborative Assistant       &  \cite{Jasper2020}      \\
+        Panoptic Segmentation-Based Attention for Image Captioning     &  \cite{Cai2020}         \\
+        Supplementary Material: Part-aware Panoptic Segmentation       &  \cite{DeGeus2021a}     \\
+        Panoptic Segmentation: A Review                                &  \cite{Elharrouss2021}  \\
+        PartImageNet: A Large, High-Quality Dataset of Parts           &  \cite{He2021}   
     \end{tabular}}
 
     \vspace*{1 cm}
@@ -219,7 +281,7 @@ Quanto aos critérios de inclusão, destaca-se os artigos que abordaram ao menos
     \includegraphics[height=4.5in]{recursos/imagens/proposal/revisao_odonto.png}
     \label{proposal:revision:fig:2}
 
-    \vspace*{1 cm}
+
     Fonte: do próprio autor.
 \end{figure}
 
@@ -230,32 +292,34 @@ Tendo em vista os estudos que estão relacionados à segmentação na área odon
     \caption{Trabalhos selecionados a partir da revisão sobre segmentação odontológica.}
     \label{proposal:revision:tab:2}
     \resizebox{\textwidth}{!}{
-    \begin{tabular}{l|l|l}
-        \textbf{Título}                                                                                                                 &  \textbf{Autores}                                                                                                                                                                                                     &  \textbf{Referência}  \\ \hline
-        A study on tooth segmentation and numbering using end-to-end deep neural networks                                               & Bernardo Silva, Laís Pinheiro, Luciano Oliveira, Matheus Pithon                                                                                                                                                       &  \cite{Silva2020}       \\
-        Accurate Segmentation of Dental Panoramic Radiographs with U-NETS                                                               & Thorbjørn Louring Koch, Mathias Perslev, Christian Igel, Sami Sebastian Brandt                                                                                                                                        &  \cite{Koch2019}        \\
-        ToothNet: Automatic Tooth Instance Segmentation and Identification From Cone Beam CT Images                                     & Zhiming Cui, Changjian Li, Wenping Wang                                                                                                                                                                               &  \cite{Cui2019}         \\
-        Toothpix: Pixel-Level Tooth Segmentation in Panoramic X-Ray Images based on Generative Adversarial Networks                     & Weiwei Cui, Liaoyuan Zeng, Bunsan Chong, Qianni Zhang                                                                                                                                                                 &  \cite{Cui2021}         \\
-        Simultaneous Nuclear Instance and Layer Segmentation in Oral Epithelial Dysplasia                                               & Adam J. Shephard, Simon Graham, Saad Bashir, Mostafa Jahanifar, Hanya Mahmood, Ali Khurram, Nasir M. Rajpoot                                                                                                          &  \cite{Shephard2021}    \\
-        Automated detection and classification of oral lesions using deep learning to detect oral potentially malignant disorders       & Gizem Tanriver, Merva Soluk Tekkesin, Onur Ergen                                                                                                                                                                      &  \cite{Tanriver2021}    \\
-        Pose-aware instance segmentation framework from cone beam CT images for tooth segmentation                                      & Minyoung Chung, Minkyung Lee, Jioh Hong, Sanguk Park, Jusang Lee, Jingyu Lee, Il-Hyung Yang, Jeongjin Lee, Yeong-Gil Shin                                                                                             &  \cite{Minyoung2020}    \\
-        Mask-MCNet: Instance Segmentation in 3D Point Cloud of Intra-oral Scans                                                         & Farhad Ghazvinian Zanjani, David Anssari Moin, Frank Claessen, Teo Cherici, Sarah Parinussa, Arash Pourtaherian, Svitlana Zinger, Peter H. N. de With                                                                 &  \cite{Ghazvinian2021}  \\
-        Artificial Intelligence for Fast and Accurate 3-Dimensional Tooth Segmentation on Cone-beam Computed Tomography                 & Pierre Lahoud, Mostafa Ez Eldeen, Thomas Beznik, Holger Willems, André Leite, Adriaan Van Gerven, Reinhilde Jacobs                                                                                                    &  \cite{Lahoud2021}      \\
-        Clinically Applicable System For 3D Teeth Segmentation in Intraoral Scans using Deep Learning                                   & Jin Hao, Wen Liao, Yueling Zhang, Peilin Li, Jianru Yi, Jerry Peng, Zeu Zhao, Zhang Chen, Wenxuan Shi, Tingyu Chen, Bowen Zhou, Yang Feng, Bing Fang, Haoji Hu, Howard Yang, Erping Li, Zuozhu Liu, Zhihe Zhao        &  \cite{Hao2020}         \\
-        Machine learning in orthodontics: Challenges and perspectives                                                                   & Jialing Liu, Ye Chen, Shihao Li, Zhihe Zhao, Zhihong Wu                                                                                                                                                               &  \cite{Liu2021}         \\
-        Automatic 3D tooth segmentation using convolutional neural networks in harmonic parameter space                                 & Jianda Zhang, Chunpeng Li, Qiang Song, Lin Gao, Yu-Kun Lai                                                                                                                                                            &  \cite{Zhang2020}       \\
-        Automatic Dental Plaque Segmentation based on Local-to-global Features Fused Self-attention Network                             & Shuai Li, Yuting Guo, Zhennan Pang, Wenfeng Song, Aimin Hao, Bin Xia, Hong Qin                                                                                                                                        &  \cite{Li2022}          \\
-        Interpretable and Interactive Deep Multiple Instance Learning for Dental Caries Classification in Bitewing X-rays               & Benjamin Bergner, Csaba Rohrer, Aiham Taleb, Martha Duchrau, Guilherme De Leon, Jonas Almeida Rodrigues, Falk Schwendicke, Joachim Krois, Christoph Lippert                                                           &  \cite{Bergner2021}  
+    \begin{tabular}{l|l}
+        \textbf{Título}                                                                                                              &  \textbf{Referência}  \\ \hline
+        A study on tooth segmentation and numbering using end-to-end deep neural networks                                            &  \cite{Silva2020}       \\
+        Accurate Segmentation of Dental Panoramic Radiographs with U-NETS                                                            &  \cite{Koch2019}        \\
+        ToothNet: Automatic Tooth Instance Segmentation and Identification From Cone Beam CT Images                                  &  \cite{Cui2019}         \\
+        Toothpix: Pixel-Level Tooth Segmentation in Panoramic X-Ray Images based on Generative Adversarial Networks                  &  \cite{Cui2021}         \\
+        Simultaneous Nuclear Instance and Layer Segmentation in Oral Epithelial Dysplasia                                            &  \cite{Shephard2021}    \\
+        Automated detection and classification of oral lesions using deep learning to detect oral potentially malignant disorders    &  \cite{Tanriver2021}    \\
+        Pose-aware instance segmentation framework from cone beam CT images for tooth segmentation                                   &  \cite{Minyoung2020}    \\
+        Mask-MCNet: Instance Segmentation in 3D Point Cloud of Intra-oral Scans                                                      &  \cite{Ghazvinian2021}  \\
+        Artificial Intelligence for Fast and Accurate 3-Dimensional Tooth Segmentation on Cone-beam Computed Tomography              &  \cite{Lahoud2021}      \\
+        Clinically Applicable System For 3D Teeth Segmentation in Intraoral Scans using Deep Learning                                &  \cite{Hao2020}         \\
+        Machine learning in orthodontics: Challenges and perspectives                                                                &  \cite{Liu2021}         \\
+        Automatic 3D tooth segmentation using convolutional neural networks in harmonic parameter space                              &  \cite{Zhang2020}       \\
+        Automatic Dental Plaque Segmentation based on Local-to-global Features Fused Self-attention Network                          &  \cite{Li2022}          \\
+        Interpretable and Interactive Deep Multiple Instance Learning for Dental Caries Classification in Bitewing X-rays            &  \cite{Bergner2021}  
     \end{tabular}}
 
-    \vspace*{1 cm}
+    \vspace*{1cm}
     Fonte: do próprio autor.
 \end{table}
 
 
 \subsection{Cronograma}
 \label{proposal:cron}
-Com o intuito de listar todas as atividades necessárias para o cumprimento do projeto, bem como definição do período em que as mesmas devem ser realizadas, foram construídas as Tabelas \ref{proposal:cron:table:1} e \ref{proposal:cron:table:2}, almejando realizar no máximo quatro  experimentos simultaneamente, considerando a complexidade, esforço e incerteza envolvida em cada um desses testes. Em relação às submissões é desejado realizar uma para conferência, objetivando  contribuir com os experimentos desenvolvidos na primeira etapa e, uma segunda, para um periódico, com o intuito de contribuir com as descobertas realizadas no experimento IV. Por fim, tem se como objetivo realizar a escrita do trabalho em todo o período do cronograma - salvo o mês planejado para a defesa - sendo que essa atividade ocorrerá paralelamente aos demais experimentos e atividades listadas. Por fim, vale lembrar, como citado na Seção \ref{proposal:dataset}, que o trabalho de anotação das imagens ocorrerá em parceria com estudantes e a equipe coordenada pelo Prof. Dr. Osmir Batista de Oliveira Júnior. 
+Com o intuito de listar todas as atividades necessárias para o cumprimento do projeto, bem como definição do período em que as mesmas devem ser realizadas, foram construídas as Tabelas \ref{proposal:cron:table:1} e \ref{proposal:cron:table:2}, almejando realizar no máximo cinco  experimentos simultaneamente, considerando a complexidade, esforço e incerteza envolvida em cada um desses testes. Em relação às submissões é desejado realizar uma para conferência, objetivando  contribuir com os experimentos desenvolvidos na primeira etapa e, uma segunda, para um periódico, com o intuito de contribuir com as descobertas realizadas no experimento \rom{4}. Tem-se como objetivo realizar a escrita do trabalho em todo o período do cronograma - salvo o mês planejado para a defesa - sendo que essa atividade ocorrerá paralelamente aos demais experimentos e atividades listadas. Sendo assim, destaca-se que o prazo para defesa é em Fevereiro de 2023 e que o adiantamento no planejamento resguarda a execução de incidentes inesperados.
+
+Por fim, vale lembrar, como citado na Seção \ref{proposal:dataset}, que o trabalho de anotação das imagens ocorrerá em parceria com estudantes e a equipe coordenada pelo Prof. Dr. Osmir Batista de Oliveira Júnior e está planejado para ocorrer paralelamente aos demais experimentos em um prazo de seis meses.
 
 \definecolor{midgray}{gray}{.5}
 
@@ -284,7 +348,7 @@ Com o intuito de listar todas as atividades necessárias para o cumprimento do p
 \end{table}
 
 
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \caption{Cronograma de atividades.}
     \label{proposal:cron:table:2}
@@ -294,11 +358,11 @@ Com o intuito de listar todas as atividades necessárias para o cumprimento do p
             \hline
             \textbf{Macroatividades}        & FEV & MAR & ABR & MAI & JUN & JUL & AGO & SET  \\ 
             \hline
-            Experimento I                   & \cellcolor{midgray} & \cellcolor{midgray} & \cellcolor{midgray} &     &     &     &     &      \\ 
+            Experimento I                   & \cellcolor{midgray} & \cellcolor{midgray} & \cellcolor{midgray} & \cellcolor{midgray} & \cellcolor{midgray} & \cellcolor{midgray} &     &      \\ 
             \hline
-            Experimento II                 &     & \cellcolor{midgray} & \cellcolor{midgray} &     &     &     &     &      \\ 
+            Experimento II                  &     & \cellcolor{midgray} & \cellcolor{midgray} &     &     &     &     &      \\ 
             \hline
-            Experimento III                  &     &     &     & \cellcolor{midgray} & \cellcolor{midgray} & \cellcolor{midgray} &     &  \\ 
+            Experimento III                 &     &     &     & \cellcolor{midgray} & \cellcolor{midgray} & \cellcolor{midgray} &     &  \\ 
             \hline
             Experimento IV                  &     &     &     & \cellcolor{midgray} & \cellcolor{midgray} &     &     &      \\ 
             \hline
@@ -331,17 +395,15 @@ No que diz respeito a aplicação de segmentação de componentes visuais na ár
     \includegraphics[height=4.3in]{recursos/imagens/proposal/boca.png}
     \label{proposal:expres:fig:4}
 
-    \vspace*{1 cm}
     Fonte: do próprio autor.
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \caption{Exemplo de imagem de saída esperada pela rede a ser desenvolvida.}
-    \includegraphics[height=4.3in]{recursos/imagens/proposal/boca_segmentada_v2.png}
+    \includegraphics[height=7in]{recursos/imagens/proposal/boca_segmentada_v2.png}
     \label{proposal:expres:fig:5}
 
-    \vspace*{1 cm}
     Fonte: do próprio autor.
 \end{figure}
 
@@ -358,7 +420,6 @@ Caso a técnica de segmentação escolhida fosse a semântica, a contagem de den
     \includegraphics[width=1\textwidth]{recursos/imagens/proposal/segmentada.png}
     \label{proposal:expres:fig:6}
 
-    \vspace*{1 cm}
     Fonte: do próprio autor.
 \end{figure}
 
@@ -366,6 +427,15 @@ Em resumo, no presente trabalho, quanto à segmentação hierárquica de compone
  
 Em relação á contribuição com a publicação dos códigos para a segmentação hierárquica de componentes visuais é esperado que seja desenvolvido uma biblioteca que facilite e colabore com o desenvolvimento de novos métodos de segmentação panóptica com o uso de \textit{part-aware}, além de acelerar o desenvolvimento com os códigos já desenvolvidos no presente trabalho.
 
-Acerca da avaliação e adaptação de uma ferramenta de segmentação para a anotação das imagens, vale dizer que essa é uma tarefa de suma importância, de modo a se tornar escalável a atividade de anotação de imagens para com a parceria do Prof. Osmir e equipe da Faculdade de Odontologia de Araraquara, além de trazer velocidade às fases de treino e teste do modelo a ser desenvolvido. Destarte, quanto ao ponto relatado a expectativa é que, no final das análises, uma ferramenta tenha uma análise comparativa entre as ferramentas estudadas e que uma seja determinada para as anotações recorrentes que ocorrerão nesse projeto, além de contar com contribuições para a ferramenta escolhida, caso sua implementação não seja suficiente, propondo, assim, auxiliar na segmentação com o uso de segmentação panóptica, técnica que já fora testada para essa atividade em outros estudos \cite{Elharrouss2021, Jasper2020}.
+Acerca da avaliação e adaptação de uma ferramenta de segmentação para a anotação das imagens, vale dizer que essa é uma tarefa de suma importância, de modo a se tornar escalável a atividade de anotação de imagens para com a parceria do Prof. Osmir e equipe da Faculdade de Odontologia de Araraquara, além de trazer velocidade às fases de treino e teste do modelo a ser desenvolvido. Destarte, quanto ao ponto relatado a expectativa é que, no final das análises, uma ferramenta tenha uma análise comparativa entre as ferramentas estudadas e que uma seja determinada para as anotações recorrentes que ocorrerão nesse projeto, além de contar com contribuições para a ferramenta escolhida, caso sua implementação não seja suficiente, propondo, assim, auxiliar na segmentação com o uso de segmentação panóptica, técnica que já fora testada para essa atividade em outros estudos \cite{Elharrouss2021, Jasper2020}. Dentre as ferramentas candidatas para a execução dessa tarefa, destaca-se a desenvolvida por \cite{Jasper2020}, a qual utiliza um assistente automatizado para anotar imagens de um conjunto predefinido de segmentos com base em \textit{Mask} R-CNN (Seção \ref{instance:mask}), de modo que o trabalho do anotador diminui para confirmações se o assistente anotou corretamente o segmento, como demonstrado na Figura \ref{proposal:expres:fig:7}.
 
-Por fim, com respeito à aplicação da técnica BPCA nas camadas de \textit{pooling} dos modelos base, a esperança é que haja uma redução de dimensionalidade mantendo as estruturas espaciais da imagem em questão, trazendo, assim, resultados positivos quanto às métricas de PQ e PartPQ. Com isso, seria definido um novo modelo para \textit{pooling}, que podemos chamar de BPCA \textit{pooling}.
+\begin{figure}[H]
+    \centering
+    \caption{Exemplo correção em ferramenta de anotação com imagem de entrada, reparo e anotação final, respectivamente.}
+    \includegraphics[width=1\textwidth]{recursos/imagens/proposal/annotation_tool.png}
+    \label{proposal:expres:fig:7}
+
+    Fonte: retirado e adaptado de \cite{Jasper2020}.
+\end{figure}
+
+Por fim, com respeito à aplicação da técnica BPCA nas camadas de \textit{pooling} dos modelos base, a esperança é que haja uma redução de dimensionalidade mantendo as estruturas espaciais da imagem em questão, trazendo, assim, resultados positivos quanto às métricas de PQ e PartPQ. Com isso, seria definido um novo modelo para \textit{pooling}, que podemos chamar de BPCA \textit{pooling}. Ao findar do desenvolvimento desse modelo, há intenção de submete-lo a testes em relação ao modelo comum de segmentação panóptica, desenvolvido por \cite{Kirillov2019a}, além do modelo de segmentação panóptica com uso de \textit{part-aware}, desenvolvido por \cite{DeGeus2021}, objetivando resultados superiores aos atuais.

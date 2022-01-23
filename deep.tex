@@ -1,8 +1,11 @@
 \newpage
 \clearpage
+
+\pagenumbering{arabic}
+\setcounter{page}{6}
+
 \section{Redes Neurais Profundas}
 \label{deep:deep}
-
 Inspiradas no modelo de sistema nervoso de seres inteligentes, as redes neurais são compostas por um conjunto interconectado de neurônios de modo que, assim como o sistema humano, um neurônio, quando conectado com outros neurônios, pode comunicar impulsos nervosos por meio de sinapses. A representação do modelo humano pode ser observado na Figura \ref{deep:fig:1}.
 
 \begin{figure}[H]
@@ -11,8 +14,7 @@ Inspiradas no modelo de sistema nervoso de seres inteligentes, as redes neurais 
     \includegraphics[width=1\linewidth]{recursos/imagens/deep/neuronio.png}
     \label{deep:fig:1}
 
-    \vspace*{1 cm}
-    Fonte: Traduzido de adaptado de \cite{Stevens1979}.
+    Fonte: traduzido e adaptado de \cite{Stevens1979}.
 \end{figure}
 
 Dentre as representações matemáticas, destaca-se o modelo pioneiro desenvolvido por McCulloch e Pitts (1943) \cite{mcculloch1943logical}, que baseado no neurônio biológico busca definir uma saída binária, a partir de entradas que são recebidas por meio dos dendritos, sendo assim, sua representação matemática se dá pela equação:
@@ -30,7 +32,6 @@ Para a Equação \ref{deep:eq:1} e para a Figura \ref{deep:fig:2}, é importante
     \includegraphics[width=1\linewidth]{recursos/imagens/deep/neuronio_mc.png}
     \label{deep:fig:2}
 
-    \vspace*{1 cm}
     Fonte: do próprio autor. Inspirado em \cite{mcculloch1943logical}.
 \end{figure}
 
@@ -66,8 +67,7 @@ Dentre as vantagens para o modelo Perceptron, pode-se salientar a sua aptidão p
         \label{deep:fig:3.2}
     \end{subfigure}%
 
-    \vspace*{1 cm}
-    Fonte: retirado e adaptado de \cite{Goncalves}.
+    Fonte: do próprio autor.
 \end{figure}
 
 Para suprir essa necessidade de trabalhar com problemas não lineares, Werbos (1974) \cite{Werbos:74} realizou uma proposta de utilizar várias camadas de neurônios Perceptron juntos, de modo que obrigatoriamente possuísse uma camada de entrada, oculta e de saída. Assim, esse modelo - nomeado de \textit{Multi Layer Perceptron} (MLP) \cite{Werbos:74} e representado na Figura \ref{deep:fig:4} - possibilitou o trabalho com funções de ativação não lineares e o desenvolvimento de técnicas de aprendizado, como a \textit{backpropagation}, desenvolvida por \cite{rumelhart1986learning}, a qual será detalhada na Seção \ref{deep:backprop}.
@@ -78,7 +78,6 @@ Para suprir essa necessidade de trabalhar com problemas não lineares, Werbos (1
     \includegraphics[width=1\linewidth]{recursos/imagens/deep/mlp.png}
     \label{deep:fig:4}
 
-    \vspace*{1 cm}
     Fonte: do próprio autor.
 \end{figure}
 
@@ -301,7 +300,6 @@ A partir da representação na Figura \ref{deep:fig:5} é possível exemplificar
         \label{deep:fig:5.3}
     \end{subfigure}
 
-    \vspace*{1 cm}
     Fonte: retirado e adaptado de \cite{Goodfellow2016}.
 \end{figure}
 
@@ -327,8 +325,7 @@ Um modelo indicando uma entrada, as camadas convolucionais (Seção \ref{deep:co
     \includegraphics[width=1\linewidth]{recursos/imagens/deep/cnn.jpg}
     \label{deep:fig:10}
 
-    \vspace*{1 cm}
-    Fonte: retirada e adaptada de \cite{Minaee2021DeepClassification}.
+    Fonte: retirada e adaptado de \cite{Minaee2021DeepClassification}.
 \end{figure}
 
 Sendo assim, nas próximas seções fatores que compõem uma rede convolucional serão detalhados, como a camada convolucional (Seção \ref{deep:conv}), a camada de \textit{pooling} (Seção \ref{deep:pooling}), fator \textit{dropout} (Seção \ref{deep:dropout}) e a camada de saída (Seção \ref{deep:output}) da rede.
@@ -348,8 +345,7 @@ Uma operação de convolução pode ser retratada por meio da Figura \ref{deep:f
     \caption{Representação do processo de convolução.}
     \includegraphics[width=1\linewidth]{recursos/imagens/deep/2d_convolution.png}
     \label{deep:fig:6}
-    
-    \vspace*{1 cm}
+
     Fonte: do próprio autor.
 \end{figure}
 
@@ -368,8 +364,7 @@ No âmbito das camadas de \textit{pooling}, vale citar que são amplamente utili
     \caption{\textit{Max pooling}.}
     \includegraphics[width=0.5\linewidth]{recursos/imagens/deep/max_pooling.png}
     \label{deep:fig:7}
-    
-    \vspace*{1 cm}
+
     Fonte: do próprio autor.
 \end{figure}
 
@@ -382,8 +377,7 @@ Ainda, vale mencionar que outros modelos de \textit{pooling} também se fazem pr
     \caption{\textit{Global average pooling}.}
     \includegraphics[height=3in]{recursos/imagens/deep/global_average_pooling.png}
     \label{deep:fig:8}
-    
-    \vspace*{1 cm}
+
      Fonte: do próprio autor.
 \end{figure}
 
@@ -401,8 +395,7 @@ Esse processo de \textit{dropout} pode ser representado pela Figura \ref{deep:fi
     \caption{Processo de \textit{dropout}.}
     \includegraphics[width=1\linewidth]{recursos/imagens/deep/dropout.png}
     \label{deep:fig:9}
-    
-    \vspace*{1 cm}
+
      Fonte: do próprio autor.
 \end{figure}
 
