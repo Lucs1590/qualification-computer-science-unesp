@@ -2,7 +2,7 @@
 \clearpage
 \section{Segmentação Panóptica}
 \label{panoptic:panoptic}
-A segmentação panóptica \cite{Kirillov2019a} é uma nova abordagem que caminha em busca da unificação dos métodos avançados de segmentações, sendo eles: segmentação semântica e segmentação de instâncias \cite{He2020}, as quais foram descritas anteriormente. Baseado nessa abordagem, realiza-se a individualização de objetos e cenas, em que cada pixel das imagens passam a ter um \textit{label} de acordo com a classe do objeto em que o pixel se encontra, assim como um identificador que o diferenciará das demais instâncias mapeadas.
+A segmentação panóptica \cite{Kirillov2019a} é uma nova abordagem que caminha em busca da unificação dos métodos avançados de segmentações, sendo eles: segmentação semântica e segmentação de instâncias \cite{He2020}, as quais foram descritas anteriormente. Baseado nessa abordagem, realiza-se a individualização de objetos e cenas, em que cada pixel das imagens passam a ter um rótulo de acordo com a classe do objeto em que o pixel se encontra, assim como um identificador que o diferenciará das demais instâncias mapeadas.
 
 Dentre os objetos que podem ser diferenciados pela segmentação panóptica, duas categorias são nomeadas, portanto, o que as diferenciam, basicamente, é a determinação se o objeto é contável (como pessoa, carro, cachorro e afins), o qual  recebe a denominação de \textit{thing}, ou se o objeto é incontável e/ou amorfo (como céu, terrenos, paredes e semelhantes), o qual seria classificado como \textit{stuff} \cite{Kirillov2019a, Liu2019, Mohan2020}. Vale destacar que objetos pertencentes à classificação de \textit{stuff} não recebem um identificador, pelo fato de ser impossível contá-los ou distinguí-los.
 
@@ -14,14 +14,14 @@ Além disso, no trabalho desenvolvido por \cite{Kirillov2019a}, ficou claro que 
     \label{panoptic:table:1}
     \begin{tabular}{@{}l|lll@{}}
     \textbf{Cityscape} & PQ   & SQ   & RQ   \\ \hline
-    human              & $69,6^{\substack{+2,5\\-2,7}}$ & $84,1^{\substack{+0,8\\-0,8}}$ &  $82,0^{\substack{+2,7\\-2,9}}$ \\
-    machine            & 61,2 & 80,9 & 74,4 \vspace*{0,3cm}\\
+    humano              & $69,6^{\substack{+2,5\\-2,7}}$ & $84,1^{\substack{+0,8\\-0,8}}$ &  $82,0^{\substack{+2,7\\-2,9}}$ \\
+    máquina            & 61,2 & 80,9 & 74,4 \vspace*{0,3cm}\\
     \textbf{ADE20k}    & PQ   & SQ   & RQ   \\ \hline
-    human              & $67,6^{\substack{+2,0\\-2,0}}$ & $85,7^{\substack{+0,6\\-0,6}}$ & $78,6^{\substack{+2,1\\-2,1}}$ \\
-    machine            & 35,6 & 74,4 & 43,2 \vspace*{0,3cm}\\
+    humano              & $67,6^{\substack{+2,0\\-2,0}}$ & $85,7^{\substack{+0,6\\-0,6}}$ & $78,6^{\substack{+2,1\\-2,1}}$ \\
+    máquina            & 35,6 & 74,4 & 43,2 \vspace*{0,3cm}\\
     \textbf{Vistas}    & PQ   & SQ   & RQ   \\ \hline
-    human              & $57,7^{\substack{+1,9\\-2,0}}$ & $79,7^{\substack{+0,8\\-0,7}}$ & $71,6^{\substack{+2,2\\-2,3}}$ \\
-    machine            & 38,3 & 73,6 & 47,7
+    humano              & $57,7^{\substack{+1,9\\-2,0}}$ & $79,7^{\substack{+0,8\\-0,7}}$ & $71,6^{\substack{+2,2\\-2,3}}$ \\
+    máquina            & 38,3 & 73,6 & 47,7
     \end{tabular}
 
     \vspace*{1 cm}
@@ -59,7 +59,7 @@ Na Figura \ref{panoptic:fig:1} é possível observar as diferenciações realiza
     Fonte: retirado e adaptado de \cite{Kumar2019IntroductionTutorial}.
 \end{figure}
 
-Destarte, a segmentação panóptica caminha contribuindo para os avanços tecnológicos em relação ao entendimento de cenários, carros autônomos \cite{Liu2019} e outras situações em que todos os objetos possuem uma determinada relevância no contexto, como realizado em \cite{Brunger2020} que trabalha com a segmentação panóptica de porcos em chiqueiros.
+Destarte, a segmentação panóptica caminha contribuindo para os avanços tecnológicos em relação ao entendimento de cenários, carros autônomos \cite{Liu2019} e outras situações em que todos os objetos possuem uma determinada relevância no contexto, como realizado por \cite{Brunger2020} que trabalha com a segmentação panóptica de porcos em chiqueiros.
 
 Nas próximas seções, serão discutidos assuntos relacionados aos conjuntos de dados (Seção \ref{panoptic:dataset}), às arquiteturas (Seção \ref{panoptic:arch}) e às métricas (Seção \ref{panoptic:metrics}) utilizada para a realização de segmentação panóptica, principalmente, no trabalho desenvolvido por \cite{Kirillov2019a}.
 
@@ -149,14 +149,14 @@ Em relação às métricas disponíveis para a avaliação de segmentações pan
 
 A primeira das necessidades é cumprida apenas em segmentações que contam com técnicas de \textit{non-overlapping} (sem sobreposição) para que seja possível encontrar uma única segmentação, como \cite{Neubeck2006}, e possuem um valor de IoU superior ou igual à 50\% da área em relação ao \textit{ground truth}, sendo esse valor adequado como parâmetro de limiar, sem que ofereça falsas segmentações e consiga trabalhar tanto com objetos grandes quanto com objetos pequenos, segundo \cite{Kirillov2019a}.
 
-Depois, a segunda das necessidades para a determinação de PQ conta com fórmulas que sugerem a unificação de métricas de SQ e RQ. Além disso, para a determinação dessa formula, se faz necessário o uso de parâmetros que determinarão segmentações condizentes com o \textit{ground truth}, segmentações não encontradas em relação aos preditos e segmentações não encontradas em relação ao \textit{ground truth}, respectivamente, sendo representados por verdadeiro positivo (VP), falsos positivos (FP) e falsos negativos (FN). Logo, a fórmula para determinação de PQ \cite{Kirillov2019a}, em que $p$ representa os preditos e $g$ representa o \textit{ground truth}, pode ser expressa por:
+Depois, a segunda das necessidades para a determinação de PQ conta com fórmulas que sugerem a unificação de métricas de SQ e RQ. Além disso, para a determinação dessa fórmula, se faz necessário o uso de parâmetros que determinarão segmentações condizentes com o \textit{ground truth}, segmentações não encontradas em relação aos preditos e segmentações não encontradas em relação ao \textit{ground truth}, respectivamente, sendo representados por verdadeiro positivo (VP), falsos positivos (FP) e falsos negativos (FN). Logo, a fórmula para determinação de PQ \cite{Kirillov2019a}, em que $p$ representa os preditos e $g$ representa o \textit{ground truth}, pode ser expressa por:
 
 \begin{equation}
 \label{panoptic:eq:1}
     PQ = \frac{\sum _{(p,g) \in VP} IoU(p,g)}{|VP|+ \frac{1}{2}|FP| + \frac{1}{2}|FN|}.
 \end{equation}
 
-O que remete, também, a uma multiplicação de métrica de qualidade para segmentação por métrica de qualidade para reconhecimento, quando dividida pela quantidade de classificações demarcadas como VP, podendo ser representada por uma segunda fórmula (\ref{panoptic:eq:2}), como sugere Kirillov \textit{et al.} \cite{Kirillov2019a}, e descrita na Equação 30:
+O que remete, também, a uma multiplicação de métrica de qualidade para segmentação por métrica de qualidade para reconhecimento, quando dividida pela quantidade de classificações demarcadas como VP, podendo ser representada por uma segunda fórmula, como sugere Kirillov \textit{et al.} \cite{Kirillov2019a}, e descrita na Equação \ref{panoptic:eq:2}:
 
 \begin{equation}
 \label{panoptic:eq:2}
@@ -181,7 +181,7 @@ e
     \label{panoptic:eq:5}
     N_i = \underset{p \in S_i}{\sum} |p|.
 \end{equation}
-Nestas Equações \ref{panoptic:eq:3} a \ref{panoptic:eq:4}, $C$ está relacionada à quantidade de classes semânticas, $S'_i$ e $S_i$ são os valores de segmentação predita e de \textit{ground truth}, respectivamente, $N_i$ representa a quantidade de pixels de \textit{ground truth} dentro de $S'_i$, $Con_i$ é a classe coberta pela interação e, finalmente, $PC$ é o valor da métrica estabelecido pela média de $Cov_i$ sobre $C$ classes semânticas, segundo as definições de \cite{Yang2019}.
+Nestas Equações \ref{panoptic:eq:3} a \ref{panoptic:eq:4}, $C$ está relacionada à quantidade de classes semânticas, $S'_i$ e $S_i$ são os valores de segmentação predita e de \textit{ground truth}, respectivamente, $N_i$ representa a quantidade de pixels de \textit{ground truth} dentro de $S'_i$, $Cov_i$ é a classe coberta pela interação e, finalmente, $PC$ é o valor da métrica estabelecido pela média de $Cov_i$ sobre $C$ classes semânticas, segundo as definições de \cite{Yang2019}.
 
 
 \subsection{Considerações Finais do Capítulo}
@@ -228,7 +228,7 @@ Esses pontos podem ser observados a partir da Figura \ref{panoptic:fig:4}:
 
 Dessa forma, nas Tabelas \ref{conclusion:table:1} e \ref{conclusion:table:2}, é possível observar e comparar os métodos disponíveis para o trabalho com segmentações panópticas, destacando que os métodos foram realizadas nos conjuntos de dados COCO \cite{Lin2014} e Cityscape \cite{Cordts2016}, sendo estas os principais conjuntos de dados, como relatado na Seção \ref{panoptic:dataset}. Adicionalmente, foi gerada uma terceira tabela (Tabela \ref{conclusion:table:3}), que conta com trabalhos realizados no conjunto Mapillary Vistas \cite{Neuhold2017_ICCV}, a fim de que seja possível demonstrar a maior quantidade de trabalhos, redes neurais e métodos já disponíveis.
 
-Ainda, quanto as Tabelas \ref{conclusion:table:1}, \ref{conclusion:table:2} e \ref{conclusion:table:3}, vale citar que as mesmas são compostas pelos métodos desenvolvidos e sua referência, as redes bases, as métricas de qualidade $PQ$ e $PC$, expressas nas equações \ref{panoptic:eq:1} e \ref{panoptic:eq:3}, respectivamente, $RQ$ e $SQ$, assim como a aplicação da métrica de $PQ$ para \textit{things} e \textit{stuffs}.
+Ainda, quanto as Tabelas \ref{conclusion:table:1}, \ref{conclusion:table:2} e \ref{conclusion:table:3}, vale citar que as mesmas são compostas pelos métodos desenvolvidos e sua referência, as redes bases, as métricas de qualidade $PQ$ e $PC$, expressas nas Equações \ref{panoptic:eq:1} e \ref{panoptic:eq:3}, respectivamente, $RQ$ e $SQ$, assim como a aplicação da métrica de $PQ$ para \textit{things} e \textit{stuffs}.
 
 \begin{table}[H]
     \centering

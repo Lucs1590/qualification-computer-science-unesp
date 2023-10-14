@@ -95,7 +95,7 @@ Por conseguinte, nas demais seções deste capítulo serão apresentadas algumas
 
 Quanto às funções de ativação, destaca-se que na seção anterior foi apresentada uma função de ativação binária, todavia, existem outras funções de ativação que foram estudadas e são utilizadas para uma melhor adequação em contextos específicos.
 
-A função de ativação, como citado brevemente a priori, é calculada pelo neurônio e disseminada para os próximos neurônios.  Para essa Seção o valor calculado $\sum_{i = 1}^{N} w_ix_i +b$ (entrada da função de ativação) será representado por $Y'$, de modo que poderemos ver sua atuação, a seguir, nas funções de ativação limiar, Linear, Sigmóide, ReLU e Sofmax.
+A função de ativação, como citado brevemente a priori, é calculada pelo neurônio e disseminada para os próximos neurônios.  Para essa Seção o valor calculado $\sum_{i = 1}^{N} w_ix_i +b$ (entrada da função de ativação) será representado por $Y'$, de modo que poderemos ver sua atuação, a seguir, nas funções de ativação Limiar, Linear, Sigmóide, ReLU e Sofmax.
 
 
 \subsubsection{Função Limiar}
@@ -165,7 +165,7 @@ Normalmente, os passos realizados em uma época são os seguintes: 1) iniciaçã
 
 Além da seleção aleatória, vale citar que normalmente os pesos são iniciados de modo aleatório nas camadas, assim como os hiperparâmetros, que são definidos pelo usuário na etapa de inicialização, por exemplo, taxa de aprendizado.
 
-Nesta seção, será brevemente discorrido sobre: a) as funções de custo (Seção \ref{deep:cust}), que indicam o erro da rede em relação ao conjunto de treinamento, sobre as funções de otimização (Seção \ref{deep:optimization}), que auxiliam na convergência do modelo e, por fim, sobre o algoritmo \textit{backpropagation} (Seção \ref{deep:backprop}), que propaga o erro para as camadas internas da rede.
+Nesta seção, será brevemente discorrido sobre as funções de custo (Seção \ref{deep:cust}), que indicam o erro da rede em relação ao conjunto de treinamento, sobre as funções de otimização (Seção \ref{deep:optimization}), que auxiliam na convergência do modelo e, por fim, sobre o algoritmo \textit{backpropagation} (Seção \ref{deep:backprop}), que propaga o erro para as camadas internas da rede.
 
 
 \subsubsection{Função de Custo}
@@ -303,7 +303,7 @@ A partir da representação na Figura \ref{deep:fig:5} é possível exemplificar
     Fonte: retirado e adaptado de \cite{Goodfellow2016}.
 \end{figure}
 
-Alerta-se que em situações em que a função de custo de treinamento continua decrescente e a função de custo de teste começa a aumentar, é provavel que o modelo esteja iniciando uma circunstância de \textit{overfitting}, já que casos de \textit{overfitting} ocorrem quando ambas as funções de custo permanecem altas mesmo após muitas épocas.
+Alerta-se que em situações em que a função de custo de treinamento continua decrescente e a função de custo de teste começa a aumentar, é provavel que o modelo esteja iniciando uma circunstância de \textit{overfitting}, já que casos de \textit{underfitting} ocorrem quando ambas as funções de custo permanecem altas mesmo após muitas épocas.
 
 Sendo assim, \textit{underfitting} e \textit{overfitting}, quando presentes, devem ser corrigidos, embora os ajustes dos métodos à complexidade da situação ainda sejam feitos a partir de tentativa e erro e com o auxílio de gráficos \cite{Goodfellow2016}.
 
@@ -328,7 +328,7 @@ Um modelo indicando uma entrada, as camadas convolucionais (Seção \ref{deep:co
     Fonte: retirada e adaptado de \cite{Minaee2021DeepClassification}.
 \end{figure}
 
-Sendo assim, nas próximas seções fatores que compõem uma rede convolucional serão detalhados, como a camada convolucional (Seção \ref{deep:conv}), a camada de \textit{pooling} (Seção \ref{deep:pooling}), fator \textit{dropout} (Seção \ref{deep:dropout}) e a camada de saída (Seção \ref{deep:output}) da rede.
+Sendo assim, nas próximas seções, fatores que compõem uma rede convolucional serão detalhados, como a camada convolucional (Seção \ref{deep:conv}), a camada de \textit{pooling} (Seção \ref{deep:pooling}), fator \textit{dropout} (Seção \ref{deep:dropout}) e a camada de saída (Seção \ref{deep:output}) da rede.
 
 
 \subsubsection{Camada Convolucional}
